@@ -1,0 +1,28 @@
+ <!-- contenedor central -->
+ <div class="d-flex flex-row ">
+  <div class="col-12 item-align-center m-5 ">
+  <h1 class="text-center">OPTION SELECTED</h1>
+
+    <a href="#" class="btn btn-info fs-5 pt-0 m-2"><span class="fw-bolder">+</span>Añadir registro</a>
+    <table class=" table-success table-striped  col-12 text-center border">
+      <tr class="text-center">
+        <th class="col-1">ID {{list[0]}}</th>
+        <th class="col-1">nombre</th>
+        <th class="col-2">direccion</th>
+        <th class="col-2">pais</th>
+        <th class="col-2">accion</th>
+      </tr>
+      <tr *ngFor="let char of list | keyvalue" class="">
+        <td class="">{{char.key}}</td>
+        <td class="">{{char.key}}</td>
+        <td class="">{{listkeys.key}}</td>
+        <td class="">{{listkeys.key}}</td>
+        <td class=""><a class="btn btn-success ">Modificar </a> <a class="btn ms-3 btn-danger"> Eliminar </a></td>
+      </tr>
+
+
+    </table>
+
+
+  </div>
+</div>
