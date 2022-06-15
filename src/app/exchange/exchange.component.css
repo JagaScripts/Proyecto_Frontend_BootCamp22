@@ -10,7 +10,10 @@ body {
   border-radius: 12px;
 }
 
-
+#option{
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
 
 .fw-500 {
   font-weight: 500 !important;
@@ -69,4 +72,8 @@ body {
 .buttons {
   top: 36px;
   position: relative;
+}
+
+#flechas{
+  margin-top: 240px;
 }
