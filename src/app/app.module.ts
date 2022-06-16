@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IndexComponent } from './component/index/index/index.component';
-import { MenuComponent } from './component/menu/menu/menu.component';
 import { LoanComponent } from './component/loan/loan.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
@@ -22,8 +20,6 @@ import { BookcommentComponent } from './component/bookcomment/bookcomment.compon
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent,
-    MenuComponent,
     LoanComponent,
     SidebarComponent,
     NavbarComponent,
