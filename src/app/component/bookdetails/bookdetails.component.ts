@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-bookdetails',
   templateUrl: './bookdetails.component.html',
-  styleUrls: ['./bookdetails.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./bookdetails.component.css']
 })
 export class BookdetailsComponent implements OnInit {
 
@@ -14,3 +14,4 @@ export class BookdetailsComponent implements OnInit {
   }
 
 }
+
