@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+
 :root
 {
   --purple: #E91E63;
@@ -12,3 +12,22 @@
   --dark-primari-color: #C2185B;
   --light-primari-color: #F8BBD0;
 }
+
+#change {
+
+
+  background-color:  var(--light-primari-color);
+  color: var(--purple);
+  /* border-color: var(--pink2); */
+
+}
+
+#change:hover {
+
+  background-color: var(--dark-primari-color);
+  margin-left: 1px;
+  color: var(--white);
+
+}
+
+
