@@ -1,1 +1,71 @@
-<p>profileuser works!</p>
+
+<link src="profileuser.component.css">
+<div class="container-fluid">
+
+  <div class="card row flex-row p-4 featurette m-5 d-flex justify-content-center card">
+      <div class="col-9 col-sm-5 col-md-4 col-lg-3 order-lg-1 mt-2">
+          <img src="../../../assets/img/user.png" class="rounded-circle" width="200px" alt="">
+          <div class="m-4 ms-sm-4 m-sm-3 m-md-3 m-lg-2 m-xl-2">
+                  <h1 class="text-nowrap">Username</h1>
+          </div>
+      </div>
+      <div class="mx-5 col-lg-8 order-lg-2">
+          <h3 id="cat" class="mb-2">Email:</h3>
+          <div class="input-group mb-3">
+
+              <input type="text" class="form-control" placeholder="username@dominio.com" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button class="btn btn-outline-secondary" type="button" id="change">editar</button>
+          </div>
+          <h3 id="cat" class="mb-2" style="display:block">Edad:</h3>
+          <div class="input-group mb-3">
+
+              <input type="text" class="form-control" placeholder="Taitantos años" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button class="btn btn-outline-secondary" type="button" id="change">editar</button>
+          </div>
+          <h3 id="disp" style="display:block">Activo:</h3>
+          <div class="input-group mb-3 ">
+              <input type="text" id="activo" class="form-control" placeholder="Si / No" aria-label="Text input with checkbox">
+              <div class="input-group-text">
+                  <input class="form-check-input mt-0" type="checkbox"  value="" aria-label="Checkbox for following text input">
+              </div>
+          </div>
+          <h3 id="cat" class="mb-2" style="display:block">Password:</h3>
+          <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="*************" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button class="btn btn-outline-secondary" type="button" id="change">editar</button>
+          </div>
+          <h3 id="cat" class="mb-2" style="display:block">Rol:</h3>
+          <p class="lead">User</p>
+      </div>
+  </div>
+
+      <div class="row featurette  d-flex justify-content-center">
+
+          <div class="col-md-7">
+
+              <div class="headings d-flex justify-content-between align-items-center mb-3">
+                  <h4>Historial libros</h4>
+
+              </div>
+
+              <div class="card p-3">
+
+                  <div class="d-flex justify-content-between align-items-center">
+
+                      <div class="user d-flex flex-row align-items-center">
+
+                          <span><small class="font-weight-bold" id="author">Harry Potter and the Sorcers Stone</small> <small
+                                  class="font-weight-bold">J.K. Rowling</small></span>
+
+                      </div>
+                      <small>Estado</small>
+                  </div>
+
+              </div>
+
+          </div>
+
+  </div>
+
+</div>
+
