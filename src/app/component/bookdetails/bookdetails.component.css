@@ -143,16 +143,3 @@ body {
   cursor: pointer;
 
 }
-:root
-{
-  --purple: #E91E63;
-  --white: #ffff;
-  --white2: rgba(235, 225, 225, 0.404);
-  --grey: #f5f5f5;
-  --black1: #222;
-  --black2: #999;
-  --purple2: rgba(110, 5, 5, 0);
-  --pink2: #ff4081;
-  --dark-primari-color: #C2185B;
-  --light-primari-color: #F8BBD0;
-}
