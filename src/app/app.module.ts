@@ -19,6 +19,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { ExchangeComponent } from './component/exchange/exchange.component';
 import { BookcommentComponent } from './component/bookcomment/bookcomment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProfileadminComponent,
     FooterComponent,
     ExchangeComponent,
-    BookcommentComponent
+    BookcommentComponent,
+    SidebarandcontentComponent
   ],
   imports: [
     BrowserModule,
