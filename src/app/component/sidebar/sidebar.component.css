@@ -1,13 +1,13 @@
 #barralateral {
-  background-color: #EBF9F7;
+  background-color: var(--pink2);
   min-height: 100%;
   overflow: hidden;
   height: 100vh;
 
 }
-.margintop{
+/* .margintop{
   margin-top: 80px;
-}
+} */
 a {
   color: black;
   display: flex;

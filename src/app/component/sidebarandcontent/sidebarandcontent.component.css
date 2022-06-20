@@ -1,4 +1,4 @@
-/* #sidebarandcontent {
-  margin-top: 8vh;
-  /*background-color: #fff2f2!important; *//*
-} */
+#sidebarandcontent {
+  margin-top: 80px;
+  /* background-color: var(--pink2)!important; */
+}
