@@ -30,9 +30,13 @@
 }
 
 .container-fluid.componente{
-  padding-top: 98px;
+  /*padding-top: 98px;*/
   height: 100%;
   min-height: 100%;
   margin-bottom: 10%;
+
+  /*adri cambios */
+  /* height: 100vh;
+  min-height: 100vh; */
 }
 

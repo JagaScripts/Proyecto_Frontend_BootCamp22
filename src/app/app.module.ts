@@ -26,6 +26,7 @@ import { TableloanComponent } from './component/tableloan/tableloan.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
 import { TablebooksComponent } from './component/tablebooks/tablebooks.component';
+import { SidebarhomeComponent } from './component/sidebarhome/sidebarhome.component';
 
 
 
@@ -49,7 +50,8 @@ import { TablebooksComponent } from './component/tablebooks/tablebooks.component
     TablevalueComponent,
     TableloanComponent,
     SidebarandcontentComponent,
-    TablebooksComponent
+    TablebooksComponent,
+    SidebarhomeComponent
   ],
   imports: [
     BrowserModule,
