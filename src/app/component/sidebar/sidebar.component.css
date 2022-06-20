@@ -4,6 +4,8 @@
   overflow-x: none;
   /* overflow-y: none; */
   scrollbar-width: none;
+  margin-top: 35px!important;
+  padding-top: 35px!important;
 }
 
 .scrollarea {
