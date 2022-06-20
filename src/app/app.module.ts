@@ -16,7 +16,7 @@ import { ProfileadminComponent } from './component/profileadmin/profileadmin.com
 import { FooterComponent } from './component/footer/footer.component';
 import { ExchangeComponent } from './component/exchange/exchange.component';
 import { BookcommentComponent } from './component/bookcomment/bookcomment.component';
-import { TablevalueComponent } from './component/tablevalue/tablevalue.component';
+import { TablebooksComponent } from './component/tablebooks/tablebooks.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { TablevalueComponent } from './component/tablevalue/tablevalue.component
     FooterComponent,
     ExchangeComponent,
     BookcommentComponent,
-    TablevalueComponent
+    TablebooksComponent
   ],
   imports: [
     BrowserModule,
