@@ -16,6 +16,7 @@ import { ProfileadminComponent } from './component/profileadmin/profileadmin.com
 import { FooterComponent } from './component/footer/footer.component';
 import { ExchangeComponent } from './component/exchange/exchange.component';
 import { BookcommentComponent } from './component/bookcomment/bookcomment.component';
+import { TableexchangeComponent } from './component/tableexchange/tableexchange.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BookcommentComponent } from './component/bookcomment/bookcomment.compon
     ProfileadminComponent,
     FooterComponent,
     ExchangeComponent,
-    BookcommentComponent
+    BookcommentComponent,
+    TableexchangeComponent
   ],
   imports: [
     BrowserModule,
