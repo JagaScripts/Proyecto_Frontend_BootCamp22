@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
 
 
+import { TablebooksComponent } from './component/tablebooks/tablebooks.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SidebarandcontentComponent } from './component/sidebarandcontent/sideba
     BookcommentComponent,
     TablevalueComponent,
     TableexchangeComponent,
-    SidebarandcontentComponent
+    SidebarandcontentComponent,
+    TablebooksComponent
   ],
   imports: [
     BrowserModule,
