@@ -19,7 +19,6 @@ import { FooterComponent } from './component/footer/footer.component';
 import { ExchangeComponent } from './component/exchange/exchange.component';
 import { BookcommentComponent } from './component/bookcomment/bookcomment.component';
 import { TablevalueComponent } from './component/tablevalue/tablevalue.component';
-import { TableexchangeComponent } from './component/tableexchange/tableexchange.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
 
@@ -42,7 +41,6 @@ import { SidebarandcontentComponent } from './component/sidebarandcontent/sideba
     ExchangeComponent,
     BookcommentComponent,
     TablevalueComponent,
-    TableexchangeComponent,
     SidebarandcontentComponent
   ],
   imports: [
