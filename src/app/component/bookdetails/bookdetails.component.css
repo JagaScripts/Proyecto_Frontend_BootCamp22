@@ -1,4 +1,9 @@
 
+.container-fluid{
+  margin-top: 100px;
+  min-height: 100vh;
+}
+
 a {
   text-decoration: none;
 }
