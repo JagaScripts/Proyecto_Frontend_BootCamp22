@@ -9,7 +9,6 @@ import { LoanComponent } from './component/loan/loan.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ProfileuserComponent } from './component/profileuser/profileuser.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
-import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
 import { SigninComponent } from './component/signin/signin.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { ValueComponent } from './component/value/value.component';
@@ -24,7 +23,6 @@ const routes: Routes = [
   {path:'navbar',component: NavbarComponent},
   {path:'profileuser',component: ProfileuserComponent},
   {path:'sidebar',component: SidebarComponent},
-  {path:'sidebarandcontent',component: SidebarandcontentComponent},
   {path:'signin',component: SigninComponent},
   {path:'signup',component: SignupComponent},
   {path:'value',component: ValueComponent}
