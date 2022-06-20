@@ -1,5 +1,3 @@
-
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -27,8 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
 import { TablebooksComponent } from './component/tablebooks/tablebooks.component';
 import { SidebarhomeComponent } from './component/sidebarhome/sidebarhome.component';
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -51,17 +48,16 @@ import { SidebarhomeComponent } from './component/sidebarhome/sidebarhome.compon
     TableloanComponent,
     SidebarandcontentComponent,
     TablebooksComponent,
-    SidebarhomeComponent
+    SidebarhomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
+export class AppModule {}

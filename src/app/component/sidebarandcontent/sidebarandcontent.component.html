@@ -1,18 +1,29 @@
 <div  class="container-fluid">
   <div class="row" id="sidebarandcontent">
     <div class="col-2 col-sm-2 p-0">
-      <app-sidebar></app-sidebar>
+      <app-sidebar (cambiarContenidoSidebar)="cambiarContenidoSidebar($event)"></app-sidebar>
     </div>
 
-    <div class="col-10 col-sm-10" *ngIf="">
+    <div class="col-10 col-sm-10" *ngIf="valorSidebarSelected == 0">
       <!-- <app-profileuser></app-profileuser> -->
       <app-profileuser></app-profileuser>
     </div>
-    <div class="col-10 col-sm-10">
+    <div class="col-10 col-sm-10"  *ngIf="valorSidebarSelected == 1">
       <!-- <app-profileuser></app-profileuser> -->
-      <app-profileuser></app-profileuser>
+      <app-tablebooks></app-tablebooks>
     </div>
-    
+    <div class="col-10 col-sm-10"  *ngIf="valorSidebarSelected == 2">
+      <!-- <app-profileuser></app-profileuser> -->
+      <app-tableexchange></app-tableexchange>
+    </div>
+    <div class="col-10 col-sm-10"  *ngIf="valorSidebarSelected == 3">
+      <!-- <app-profileuser></app-profileuser> -->
+      <app-tableloan></app-tableloan>
+    </div>
+    <div class="col-10 col-sm-10"  *ngIf="valorSidebarSelected == 4">
+      <!-- <app-profileuser></app-profileuser> -->
+      <app-tablevalue></app-tablevalue>
+    </div>
     <!-- <div class="col overflow-hidden">
       <app-bookdetails></app-bookdetails>
     </div> -->
