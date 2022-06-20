@@ -1,5 +1,10 @@
 
 
+.container-fluid{
+  margin-top: 100px;
+  min-height: 100vh;
+}
+
 body {
 
   background-color: #f7f6f6;
