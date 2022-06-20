@@ -1,3 +1,5 @@
+
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,7 +18,16 @@ import { ProfileadminComponent } from './component/profileadmin/profileadmin.com
 import { FooterComponent } from './component/footer/footer.component';
 import { ExchangeComponent } from './component/exchange/exchange.component';
 import { BookcommentComponent } from './component/bookcomment/bookcomment.component';
+
 import { TableexchangeComponent } from './component/tableexchange/tableexchange.component';
+
+import { TablevalueComponent } from './component/tablevalue/tablevalue.component';
+import { TableloanComponent } from './component/tableloan/tableloan.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
+import { TablebooksComponent } from './component/tablebooks/tablebooks.component';
+
+
 
 @NgModule({
   declarations: [
@@ -34,13 +45,21 @@ import { TableexchangeComponent } from './component/tableexchange/tableexchange.
     FooterComponent,
     ExchangeComponent,
     BookcommentComponent,
-    TableexchangeComponent
+    TableexchangeComponent,
+    TablevalueComponent,
+    TableloanComponent,
+    SidebarandcontentComponent,
+    TablebooksComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
