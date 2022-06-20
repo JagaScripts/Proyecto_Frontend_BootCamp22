@@ -18,12 +18,10 @@ import { ProfileadminComponent } from './component/profileadmin/profileadmin.com
 import { FooterComponent } from './component/footer/footer.component';
 import { ExchangeComponent } from './component/exchange/exchange.component';
 import { BookcommentComponent } from './component/bookcomment/bookcomment.component';
-
+import { TablevalueComponent } from './component/tablevalue/tablevalue.component';
 import { TableloanComponent } from './component/tableloan/tableloan.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
-
-
 import { TablebooksComponent } from './component/tablebooks/tablebooks.component';
 
 
@@ -43,10 +41,10 @@ import { TablebooksComponent } from './component/tablebooks/tablebooks.component
     FooterComponent,
     ExchangeComponent,
     BookcommentComponent,
+    TablevalueComponent,
     TableloanComponent,
     SidebarandcontentComponent,
     TablebooksComponent
-
   ],
   imports: [
     BrowserModule,
