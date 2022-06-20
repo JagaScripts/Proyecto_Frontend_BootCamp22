@@ -12,7 +12,7 @@
 }
 }
 
-.b-example-divider {
+/* .b-example-divider {
   height: 3rem;
   background-color: rgba(0, 0, 0, .1);
   border: solid rgba(0, 0, 0, .15);
@@ -24,9 +24,9 @@
   flex-shrink: 0;
   width: 1.5rem;
   height: 100vh;
-}
+} */
 
-.bi {
+/* .bi {
   vertical-align: -.125em;
   fill: currentColor;
 }
@@ -46,7 +46,7 @@
   text-align: center;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-}
+} */
 .img-brand{
   width: 90px;
   height: 72px;
@@ -100,7 +100,7 @@
 .navbar ul li.hovered a::before{
   content: '';
   position: absolute;
-  top: -28px;
+  top: -14px;
   left: -50px;
   width: 50px;
   height: 50px;
@@ -114,7 +114,7 @@
 .navbar ul li.hovered a::after{
   content: '';
   position: absolute;
-  bottom: 50px;
+  bottom: 36px;
   right: -50px;
   width: 50px;
   height: 50px;

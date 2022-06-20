@@ -1,6 +1,7 @@
 #book-home{
   width: 18rem;
   /* background-color: #fff2f2!important; */
+  border: none;
 }
 img#book-img.shadow-lg{
   box-shadow: 0px 40px 24px -28px rgb(21 65 74 / 29%)!important;
