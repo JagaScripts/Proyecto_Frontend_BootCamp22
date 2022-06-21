@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="align-middle" *ngFor="let libro of libros; let counter=index">
+        <tr class="align-middle" *ngFor="let libro of libros; let counter=index; ">
           <td name="id" ngDefaultControl (click)="openDialog(libro.id,'id',counter)"  [(ngModel)]="libro.id">{{libro.id}}</td>
           <td name="autor" ngDefaultControl  [(ngModel)]="libro.autor" (click)="openDialog(libro.autor,'autor',counter)">{{libro.autor}}</td>
           <td>{{libro.titulo}}</td>
