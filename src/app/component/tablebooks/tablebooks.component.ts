@@ -115,7 +115,7 @@ export class TablebooksComponent implements OnInit {
       console.log(this.libros[position]['result.id']);
 
 
-    });
+  });
   }
 }
 
