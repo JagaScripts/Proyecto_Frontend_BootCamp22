@@ -34,3 +34,12 @@ span{
 .btn:hover{
   background-color: #F8BBd0;
 }
+
+.input-group-text{
+  background-color: var(--light-primari-color);
+  border-color: #6c757d;
+
+}
+.input-t-prestamos{
+  margin-right: 4px;
+}

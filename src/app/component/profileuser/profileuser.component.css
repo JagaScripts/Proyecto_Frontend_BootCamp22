@@ -33,10 +33,6 @@ a {
   font-size: 100px;
 }
 
-/* #rating {
-  margin-left: 80px;
-  padding-left: 18px;
-} */
 
 #tiny {
   padding-bottom: 3px;
@@ -52,16 +48,6 @@ span {
   margin-left: 2px;
 }
 
-#change {
-  background-color:  var(--light-primari-color);
-  color: var(--purple);
-}
-
-#change:hover {
-  background-color: var(--dark-primari-color);
-  margin-left: 1px;
-  color: var(--white);
-}
 
 body {
   background-color: #f7f6f6;
@@ -98,7 +84,7 @@ body {
   margin-top: 4px;
 }
 
-#activo{
+.input-t-prestamos{
   margin-right: .15em;
 }
 
@@ -136,29 +122,7 @@ body {
 }
 
 
-.icons i {
 
-  margin-left: 8px;
-}
-
-.reply {
-
-  margin-left: 12px;
-}
-
-.reply small {
-
-  color: #b7b4b4;
-
-}
-
-
-.reply small:hover {
-
-  color: green;
-  cursor: pointer;
-
-}
 /*
 #user-profile-img
 {
