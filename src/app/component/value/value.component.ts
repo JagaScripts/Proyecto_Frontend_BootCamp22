@@ -27,7 +27,7 @@ botoSubmit(){
   constructor() {}
 
   ngOnInit(): void {
-    this.starForm.setValue({rating: '4'});
+    // this.starForm.setValue({rating: '3'});
   }
   //recoger valor la valoracion
 
