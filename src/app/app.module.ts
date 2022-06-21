@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +26,10 @@ import { SidebarandcontentComponent } from './component/sidebarandcontent/sideba
 import { TablebooksComponent } from './component/tablebooks/tablebooks.component';
 import { SidebarhomeComponent } from './component/sidebarhome/sidebarhome.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './component/dialog/dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,13 +52,18 @@ import { HttpClientModule } from '@angular/common/http';
     SidebarandcontentComponent,
     TablebooksComponent,
     SidebarhomeComponent,
+    DialogComponent,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

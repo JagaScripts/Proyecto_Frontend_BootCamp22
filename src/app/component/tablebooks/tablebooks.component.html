@@ -1,7 +1,7 @@
 <div class="container-fluid justify-content-center">
 
   <h1 class="">Libros</h1>
-  <div class=" table-responsive ">
+  <!-- <div class=" table-responsive ">
 
 
     <table class="table table-danger table-striped table-hover">
@@ -86,9 +86,23 @@
         </tr>
       </tbody>
 
-
     </table>
 
+  </div> -->
+  <ol>
+    <li>
+      <mat-form-field appearance="fill">
+        <mat-label>What's your name?</mat-label>
+        <input matInput [(ngModel)]="name">
+      </mat-form-field>
+    </li>
+    <li>
+      <button mat-raised-button (click)="openDialog()">Pick one</button>
+    </li>
+    <li *ngIf="animal">
+      You chose: <i>{{animal}}</i>
+    </li>
+  </ol>
 
-  </div>
+
 </div>
