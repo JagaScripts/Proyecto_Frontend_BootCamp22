@@ -1,7 +1,7 @@
 <div class="container-fluid justify-content-center">
 
   <h1 class="">Libros</h1>
-  <!-- <div class=" table-responsive ">
+  <div class=" table-responsive ">
 
 
     <table class="table table-danger table-striped table-hover">
@@ -21,11 +21,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="align-middle">
-          <td >1</td>
-          <td>R. J. J Marketing</td>
-          <td>Cenicienta</td>
-          <td>3-542566-03</td>
+        <tr class="align-middle" *ngFor="let libro of libros">
+          <td name="id" ngDefaultControl (click)="openDialog(libro.id,'id',libro.id)"  [(ngModel)]="libro.id">{{libro.id}}</td>
+          <td name="autor" ngDefaultControl  [(ngModel)]="libro.autor" (click)="openDialog(libro.autor,'autor',libro.id)">{{libro.autor}}</td>
+          <td>{{libro.titulo}}</td>
+          <td>{{libro.isbn}}</td>
           <td>12</td>
           <td>Terror</td>
           <td>31</td>
@@ -42,53 +42,12 @@
             Editar</button> <button type="button" class="btn btn-danger me-2 w-100"><i
               class="bi bi-eraser-fill"></i>Remove</button></td>
         </tr>
-        <tr class="align-middle">
-          <td >1</td>
-          <td>R. J. J Marketing</td>
-          <td>Cenicienta</td>
-          <td>3-542566-03</td>
-          <td>12</td>
-          <td>Terror</td>
-          <td>31</td>
-          <td>img.png</td>
-          <td>Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-          </td>
-          <td>No Disponible</td>
-          <td><button type="button" class="btn btn-success me-2 mb-1 w-100 "><i class="bi bi-pencil-square"></i>
-              Editar</button> <button type="button" class="btn btn-danger me-2 w-100"><i
-                class="bi bi-eraser-fill"></i>Remove</button></td>
-        </tr>
-        <tr class="align-middle">
-          <td >1</td>
-          <td>R. J. J Marketing</td>
-          <td>Cenicienta</td>
-          <td>3-542566-03</td>
-          <td>12</td>
-          <td>Terror</td>
-          <td>31</td>
-          <td>img.png</td>
-          <td>Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-            Un mundo ideal por el bootcamp que tienes que trabajar con bootstrap y es una caca
-          </td>
-          <td>No Disponible</td>
-          <td><button type="button" class="btn btn-success me-2 mb-1 w-100 "><i class="bi bi-pencil-square"></i>
-              Editar</button> <button type="button" class="btn btn-danger me-2 w-100"><i
-                class="bi bi-eraser-fill"></i>Remove</button></td>
-        </tr>
+
       </tbody>
 
     </table>
 
-  </div> -->
+  </div>
   <ol>
     <li>
       <mat-form-field appearance="fill">
@@ -97,10 +56,10 @@
       </mat-form-field>
     </li>
     <li>
-      <button mat-raised-button (click)="openDialog()">Pick one</button>
+      <button mat-raised-button (click)="openDialog('','','')">Pick one</button>
     </li>
-    <li *ngIf="animal">
-      You chose: <i>{{animal}}</i>
+    <li *ngIf="autor">
+      You chose: <i>{{autor}}</i>
     </li>
   </ol>
 

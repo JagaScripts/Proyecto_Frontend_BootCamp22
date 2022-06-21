@@ -16,19 +16,16 @@ export class DialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-  ngOnInit(): void {
+  ) {
+    console.log(data.id +' <-->'+ data.data);
 
   }
+  ngOnInit(): void {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
   onYesClick(): void {
-
-
-    this.dialogRef.close({data: 'lalal'});
-
-
+    this.dialogRef.close();
   }
 }
