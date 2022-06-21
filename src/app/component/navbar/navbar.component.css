@@ -124,7 +124,7 @@
 .nav-item{
   vertical-align: middle;
 }
-.btn{
+/* .btn{
   background-color:  var(--light-primari-color);
   color: var(--purple);
 }
@@ -133,7 +133,7 @@
   background-color: var(--dark-primari-color);
     margin-left: 1px;
     color: var(--white);
-}
+} */
 
 input#search {
   background-color: var(--light-primari-color);
