@@ -125,6 +125,11 @@ body {
   box-shadow: none;
 }
 
+img#book-img.shadow-lg{
+  box-shadow: 0px 40px 24px -28px rgb(21 65 74 / 29%)!important;
+  /* width: 270px;
+  height: 395.05px; */
+}
 
 .icons i {
 
