@@ -12,20 +12,20 @@
   --light-primari-color: #F8BBD0;
 }
 
-#change {
+.button-t-prestamos {
 
 
-  background-color:  var(--light-primari-color);
-  color: var(--purple);
+  background-color:  var(--light-primari-color)!important;
+  color: var(--purple)!important;
   /* border-color: var(--pink2); */
 
 }
 
-#change:hover {
+.button-t-prestamos:hover {
 
-  background-color: var(--dark-primari-color);
-  margin-left: 1px;
-  color: var(--white);
+  background-color: var(--dark-primari-color)!important;
+  margin-left: 1px!important;
+  color: var(--white)!important;
 
 }
 
