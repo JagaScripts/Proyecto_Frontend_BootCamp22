@@ -17,11 +17,11 @@ a {
   transition: box-shadow 0.25s, background-color 0.25s;
 }
 
-/* a:hover, a:focus, a.selected {
+a:hover, a:focus, a.selected {
   cursor: pointer;
-  background-color: #fff;
-  color: var(--pink2)!important;
-} */
+
+
+}
 
 #barralateral ul li.hovered,
 #barralateral ul li:hover{
@@ -30,7 +30,9 @@ a {
 #barralateral ul li:hover a span ,
 #barralateral ul li.hovered a span,
 #barralateral ul li:hover a i ,
-#barralateral ul li.hovered a i{
+#barralateral ul li.hovered a i,
+#barralateral ul li.selected a span,
+#barralateral ul li.selected a i {
     color: var(--purple)!important;
 }
 #barralateral ul li{
