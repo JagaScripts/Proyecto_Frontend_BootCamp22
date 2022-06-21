@@ -17,7 +17,7 @@ a {
 #tiny{
   padding-bottom: 3px;
   width: 17px;
-} 
+}
 
 label{
   padding-bottom: 2px;
@@ -35,3 +35,11 @@ span{
 .btn:hover{
   background-color: #F8BBd0;
 }
+.input-t-prestamos{
+  margin-right: 4px;
+}
+.t-input-bg-email{
+  background-color: var(--light-primari-color);
+  color: var(--purple);
+}
+
