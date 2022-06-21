@@ -2,9 +2,9 @@
 
   <div class="card row flex-row p-4 featurette m-5 d-flex justify-content-center card">
     <div class="col-lg-3 order-lg-1 mt-2">
-      <img src="../../../assets/img/harry.jpg" class="card-img" width="200px" alt="">
+      <img src="../../../assets/img/harry.jpg" id="book-img" class="card-img rounded shadow-lg" alt="">
       <form [formGroup]="starForm" (ngSubmit)="botoSubmit();">
-        <div class="rating mt-3">
+        <div class="rating mt-3 justify-content-center align-content-center">
           <input type="radio" formControlName="rating" name="rating" value='5' id="5" [attr.disabled]="false"><label
             for="5">☆</label>
           <input type="radio" formControlName="rating" name="rating" value='4' id="4" [attr.disabled]="false"><label
