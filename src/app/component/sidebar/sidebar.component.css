@@ -17,11 +17,28 @@ a {
   transition: box-shadow 0.25s, background-color 0.25s;
 }
 
-a:hover, a:focus, a.selected {
-  color: black;
+/* a:hover, a:focus, a.selected {
   cursor: pointer;
   background-color: #fff;
-  box-shadow: 0px 2px 2px #3333;
+  color: var(--pink2)!important;
+} */
+
+#barralateral ul li.hovered,
+#barralateral ul li:hover{
+    background: var(--white);
+}
+#barralateral ul li:hover a span ,
+#barralateral ul li.hovered a span,
+#barralateral ul li:hover a i ,
+#barralateral ul li.hovered a i{
+    color: var(--purple)!important;
+}
+#barralateral ul li{
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
 }
 
 .bi {
@@ -34,7 +51,7 @@ i, span {
 }
 
 /*curve outside*/
-/* #barralateral ul li:hover a::before,
+#barralateral ul li:hover a::before,
 #barralateral ul li.hovered a::before{
     content: '';
     position: absolute;
@@ -59,4 +76,4 @@ i, span {
     border-radius: 50%;
     box-shadow: 35px -35px 0 10px var(--white);
     pointer-events: none;
-} */
+}
