@@ -94,25 +94,24 @@ export class TablebooksComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  openDialog(data: any,  key: string,id: string): void { // pasar el id por el constructor
+  openDialog(data: any,  key: string, position: number): void { // pasar el id por el constructor
 
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '550px',
      // data: {name: 'this.name', animal: 'this.animal'}, //valor enviado por dialog
 
 
-     data:{data,key},
+     data:{data,key,position},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
      // this.animal = result; //valor devuelto por dialog
-     let position = result.id;
-     this.libros[position][`${result.key}`] = result.data;
+     this.libros[result.position][`${result.key}`] = result.data;
 
      //id
-      console.log(result.data +'<-result->'+result.id);
-      console.log(this.libros[position]['result.id']);
+      // console.log(result.data + '<-result->' + result.id);
+      // console.log(this.libros[result.position][`${result.key}`]);
 
 
   });

@@ -21,9 +21,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="align-middle" *ngFor="let libro of libros">
-          <td name="id" ngDefaultControl (click)="openDialog(libro.id,'id',libro.id)"  [(ngModel)]="libro.id">{{libro.id}}</td>
-          <td name="autor" ngDefaultControl  [(ngModel)]="libro.autor" (click)="openDialog(libro.autor,'autor',libro.id)">{{libro.autor}}</td>
+        <tr class="align-middle" *ngFor="let libro of libros; let counter=index">
+          <td name="id" ngDefaultControl (click)="openDialog(libro.id,'id',counter)"  [(ngModel)]="libro.id">{{libro.id}}</td>
+          <td name="autor" ngDefaultControl  [(ngModel)]="libro.autor" (click)="openDialog(libro.autor,'autor',counter)">{{libro.autor}}</td>
           <td>{{libro.titulo}}</td>
           <td>{{libro.isbn}}</td>
           <td>12</td>
@@ -56,7 +56,7 @@
       </mat-form-field>
     </li>
     <li>
-      <button mat-raised-button (click)="openDialog('','','')">Pick one</button>
+      <button mat-raised-button (click)="openDialog('','',1)">Pick one</button>
     </li>
     <li *ngIf="autor">
       You chose: <i>{{autor}}</i>
