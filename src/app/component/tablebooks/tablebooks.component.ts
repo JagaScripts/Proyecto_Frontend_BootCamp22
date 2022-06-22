@@ -103,6 +103,7 @@ export class TablebooksComponent implements OnInit {
   autor!: string;
   libros: any[] = contstLibro;
   IsEditing = false;
+  idRow? : number;
 
   constructor(public dialog: MatDialog) {}
 
@@ -131,18 +132,25 @@ export class TablebooksComponent implements OnInit {
     }
   }
 
-  acceptEdit() {
+  acceptEdit(idRow: number) {
     this.enableEdit();
     /*Acciones si se acepta*/
     /*API.PUT*/
   }
-  cancelEdit() {
+  cancelEdit(idRow: number) {
     this.enableEdit();
     /*Acciones si se cancela*/
     /*Deshacer los cambios*/
   }
+  edit(idRow: number){
+    this.enableEdit();
+    this.setIdRow(idRow);
+  }
   enableEdit() {
     this.IsEditing = !this.IsEditing;
+  }
+  setIdRow(idRow: number){
+    this.idRow = idRow;
   }
   removeRow() {
     if (!this.IsEditing) {
