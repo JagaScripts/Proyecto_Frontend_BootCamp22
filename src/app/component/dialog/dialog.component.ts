@@ -13,22 +13,22 @@ import { DialogData } from '../tablebooks/tablebooks.component';
 //   styleUrls: ['./tablebooks.component.css']
 // })
 export class DialogComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-  ngOnInit(): void {
+  title: string = '';
 
+  constructor(public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
   }
+  ngOnInit(): void {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
   onYesClick(): void {
-
-
-    this.dialogRef.close({data: 'lalal'});
-
-
+    this.dialogRef.close();
+  }
+  addTitle(){
+    this.title = this.data.key;
+    
   }
 }

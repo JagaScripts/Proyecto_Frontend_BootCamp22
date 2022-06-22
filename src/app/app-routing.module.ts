@@ -29,8 +29,8 @@ const routes: Routes = [
   {path:'signup',component: SignupComponent},
   {path:'value',component: ValueComponent},
   {path:'sidebarandcontent', component: SidebarandcontentComponent},
-  {path:'sidebarhome', component: SidebarhomeComponent}
-
+  {path:'sidebarhome', component: SidebarhomeComponent},
+  {path:'', component: SidebarhomeComponent}
 ];
 
 @NgModule({

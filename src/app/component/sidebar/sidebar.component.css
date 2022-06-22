@@ -43,12 +43,13 @@ a:hover, a:focus, a.selected {
 }
 
 .bi {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: black;
 }
 
 i, span {
   color: var(--white)!important;
+  font-size: 1.1rem;
 }
 
 /*curve outside*/
