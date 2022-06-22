@@ -10,6 +10,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { Book } from 'src/app/models/book/book.model';
 import { DialogComponent } from '../dialog/dialog.component';
 
 export interface DialogData {
@@ -98,13 +99,10 @@ var contstLibro = [
   styleUrls: ['./tablebooks.component.css'],
 })
 export class TablebooksComponent implements OnInit {
-  animal!: string;
-  name!: any;
-  autor!: string;
   libros: any[] = contstLibro;
   IsEditing = false;
-  idRow? : number;
-
+  idRow?: number;
+  bookTemp = new Book();
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
@@ -123,6 +121,12 @@ export class TablebooksComponent implements OnInit {
         // this.animal = result; //valor devuelto por dialog
 
         this.libros[result.position][`${result.key}`] = result.data;
+        console.log('result.data -->'+result.data);
+
+        this.saveBookTemp(result.data, result.key);
+       // let book = new Book(result.data);
+        //console.log('autor ' + book.getAutor + ',edad ' + book.getEdad);
+
         //console.log(result.data+"<-->"+ result.key);
 
         //id
@@ -132,24 +136,72 @@ export class TablebooksComponent implements OnInit {
     }
   }
 
+  saveBookTemp(data: any, key: string) {
+    switch (key) {
+      case 'id':
+        this.bookTemp.setId(data);
+        break;
+      case 'autor':
+
+        this.bookTemp.setAutor(data);
+        break;
+      case 'titulo':
+        this.bookTemp.setTitulo(data);
+        break;
+      case 'isbn':
+        this.bookTemp.setIsbn(data);
+        break;
+      case 'edad':
+        this.bookTemp.setEdad(data);
+        console.log('despues'+this.bookTemp.getEdad());
+        break;
+      case 'categoria':
+        this.bookTemp.setCategoria(data);
+        break;
+      case 'cantidad_veces_reservado':
+        this.bookTemp.setCantidad_veces_reservado(data);
+        break;
+      case 'url_img':
+        this.bookTemp.setUrl_img(data);
+        break;
+      case 'descripcion':
+        this.bookTemp.setDescripcion(data);
+        break;
+      case 'disponible':
+        this.bookTemp.setDisponible(data);
+        break;
+      default:
+        break;
+    }
+  }
+  clearBookTemp() {
+    /**limpiar var bookTemp */
+    this.bookTemp.resetAll();
+  }
   acceptEdit(idRow: number) {
     this.enableEdit();
+    this.setIdRow(idRow);
     /*Acciones si se acepta*/
+    this.recorrerLibro();
+    this.clearBookTemp();
+
     /*API.PUT*/
   }
   cancelEdit(idRow: number) {
     this.enableEdit();
+    this.setIdRow(idRow);
     /*Acciones si se cancela*/
     /*Deshacer los cambios*/
+    this.clearBookTemp();
   }
-  edit(idRow: number){
+  clickEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
   }
   enableEdit() {
     this.IsEditing = !this.IsEditing;
   }
-  setIdRow(idRow: number){
+  setIdRow(idRow: number) {
     this.idRow = idRow;
   }
   removeRow() {
@@ -178,5 +230,14 @@ export class TablebooksComponent implements OnInit {
       default:
         return;
     }
+  }
+  recorrerLibro(){
+    console.log(this.bookTemp.getId());
+    console.log(this.bookTemp.getAutor());
+    console.log(this.bookTemp.getTitulo());
+    console.log(this.bookTemp.getIsbn());
+    console.log(this.bookTemp.getEdad());
+    console.log(this.bookTemp.getCategoria());
+
   }
 }

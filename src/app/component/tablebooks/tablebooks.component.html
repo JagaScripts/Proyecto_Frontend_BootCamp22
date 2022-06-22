@@ -48,12 +48,12 @@
           <td class="col-1">
 
             <div *ngIf="IsEditing == false "> <!--btn editar normal-->
-              <button type="button" class="btn btn-success me-2 mb-1 w-100 " (click)="edit(counter)"><i
+              <button type="button" class="btn btn-success me-2 mb-1 w-100 " (click)="clickEdit(counter)"><i
                   class="bi bi-pencil-square"></i>Editar</button>
             </div>
 
             <div *ngIf="IsEditing == true  && counter != idRow"><!-- btn editar seleccionado pero no coincide el id-->
-              <button type="button" class="btn btn-success me-2 mb-1 w-100" disabled  (click)="edit(counter)"><i
+              <button type="button" class="btn btn-success me-2 mb-1 w-100" disabled  (click)="clickEdit(counter)"><i
                   class="bi bi-pencil-square"></i>Editar</button>
             </div>
 
