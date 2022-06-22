@@ -1,13 +1,22 @@
 
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>{{data.key | uppercase}}</h1>
+<hr>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
   <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.data">
+    <mat-label>valor: </mat-label>
+    <div *ngIf="data.key == 'descripcion'">
+      <textarea class="form-control w-100" matInput [(ngModel)]="data.data" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+  </div>
+
+  <div *ngIf="data.key != 'descripcion'">
+    <input class="w-100" matInput [(ngModel)]="data.data">
+  </div>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button  [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+<hr>
+<div mat-dialog-actions class="modal-footer">
+  <button class="btn btn-primary me-3" mat-button  [mat-dialog-close]="data" cdkFocusInitial>Guardar cambios</button>
+  <button class="btn btn-secondary " mat-button (click)="onNoClick()">Cancelar</button>
+
 </div>
+

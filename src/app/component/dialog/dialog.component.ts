@@ -13,8 +13,9 @@ import { DialogData } from '../tablebooks/tablebooks.component';
 //   styleUrls: ['./tablebooks.component.css']
 // })
 export class DialogComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
+  title: string = '';
+
+  constructor(public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
@@ -25,5 +26,9 @@ export class DialogComponent implements OnInit {
   }
   onYesClick(): void {
     this.dialogRef.close();
+  }
+  addTitle(){
+    this.title = this.data.key;
+    
   }
 }
