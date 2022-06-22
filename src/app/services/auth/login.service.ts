@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError, Subject } from 'rxjs';
+import { Token } from 'src/app/models/token/token.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 
 const baseUrl = 'https://api-alquiler-de-libros-2022.herokuapp.com/';
@@ -17,10 +18,10 @@ export class LoginService {
     this.user$ = new Subject();
   }
 
-  login(usuario: Usuario): Observable<Usuario> {
+  login(usuario: Usuario): Observable<Token> {
     this.user = usuario;
     this.user$.next(this.user);
-    return this.httpClient.post<Usuario>(`${baseUrl}/login`, usuario).pipe(
+    return this.httpClient.post<Token>(`${baseUrl}/login`, usuario).pipe(
       catchError(this.handleError)
     )
   }

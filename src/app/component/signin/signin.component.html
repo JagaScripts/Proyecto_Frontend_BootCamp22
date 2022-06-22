@@ -15,20 +15,20 @@
                                       <label>Usuario<span class="text-danger">*</span></label>
                                       <div class="input-group">
                                           <div class="input-group-text"><i class="bi input-t-prestamos"><img src="../../../assets/img/user.png" id="tiny" alt=""></i></div>
-                                          <input type="text" class="form-control" placeholder="Introducir Usuario">
+                                          <input type="text" class="form-control" id="username" placeholder="Introducir Usuario" required [(ngModel)]="user.username" name="username">
                                       </div>
                                   </div>
                                   <div class="col-12">
                                       <label>Contraseña<span class="text-danger">*</span></label>
                                       <div class="input-group">
                                           <div class="input-group-text"><i class="bi input-t-prestamos"><img src="../../../assets/img/padlock.png" id="tiny" alt=""></i></div>
-                                          <input type="text" class="form-control" placeholder="Introducir Contraseña">
+                                          <input type="text" class="form-control"  id="password" placeholder="Introducir Contraseña" required [(ngModel)]="user.password" name="password">
                                       </div>
                                   </div>
                                   <div class="col-lg-9">
                                       <button type="submit"
                                           class="btn px-4 text-white me-5 button-t-prestamos">Acceder</button>
-                                          <button type="submit"
+                                          <button type="submit" (click)="sigIn()"
                                           class="btn px-4 text-white ml-2 button-t-prestamos">Registrarse</button>
                                   </div>
                               </form>
@@ -47,6 +47,10 @@
               </div>
           </div>
       </div>
+  </div>
+  <div *ngIf="submitted">
+    <h4>Bienvenido {{user.username}}</h4>
+    <h4>Tu token {{token.token}}</h4>
   </div>
 </div>
 
