@@ -16,12 +16,19 @@ export class SigninComponent implements OnInit {
 
   submitted: boolean = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService) {
+    this.user = {
+      username: '',
+      password: ''
+    }
+  }
 
   ngOnInit(): void {
   }
 
   sigIn(): void {
+    console.log("Se ha pulsado el botón");
+
     this.loginService.login(this.user)
     .subscribe(
       {

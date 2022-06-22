@@ -21,7 +21,7 @@ export class LoginService {
   login(usuario: Usuario): Observable<Token> {
     this.user = usuario;
     this.user$.next(this.user);
-    return this.httpClient.post<Token>(`${baseUrl}/login`, usuario).pipe(
+    return this.httpClient.post<Token>(`${baseUrl}login`, usuario).pipe(
       catchError(this.handleError)
     )
   }

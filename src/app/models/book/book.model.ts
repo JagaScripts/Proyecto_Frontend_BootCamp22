@@ -11,7 +11,7 @@ export class Book {
   private url_img: string;
   private descripcion: string;
   private disponible: string;
-  private usuario: Usuario = new Usuario();
+  private usuario!: Usuario;
 
   constructor(data?: any) {
     this.id = data?.id;
