@@ -1,2 +1,5 @@
-export class Usuario {
+export interface Usuario {
+  username: string;
+  password: string;
+
 }
