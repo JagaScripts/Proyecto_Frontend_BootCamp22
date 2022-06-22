@@ -119,10 +119,10 @@ export class TablebooksComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed');
         // this.animal = result; //valor devuelto por dialog
 
         this.libros[result.position][`${result.key}`] = result.data;
+        //console.log(result.data+"<-->"+ result.key);
 
         //id
         // console.log(result.data + '<-result->' + result.id);
