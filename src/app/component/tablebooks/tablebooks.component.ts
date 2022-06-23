@@ -14,85 +14,7 @@ import { Book } from 'src/app/models/book/book.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { DialogComponent } from '../dialog/dialog.component';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-  autor: string;
-}
-
-var contstLibro = [
-  {
-    id: 1,
-    autor: 'J K Rowling',
-    titulo: 'Todas esas cosas que te dire mñn',
-    isbn: '0-7645-2641-1',
-    edad: 6,
-    categoria: 'Terror',
-    cantidad_veces_reservado: 0,
-    url_img: '../../../assets/img/harry.jpg',
-    descripcion: 'simulacion de descripcion larga',
-    disponible: '1',
-    usuario: {
-      id: 1,
-      username: 'pepe',
-      email: 'pepe@gmail.com',
-      password: '$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP.',
-      role: 'GUESS',
-      edad: '2022-01-12',
-      url_imagen: '/imagnes/usuario',
-      activo: '1',
-      enabled: true,
-      authorities: [
-        {
-          authority: 'GUESS',
-        },
-      ],
-      accountNonExpired: true,
-      accountNonLocked: true,
-      credentialsNonExpired: true,
-    },
-    editorial: {
-      id: 31,
-      nombre: 'Nordicos',
-    },
-  },
-  {
-    id: 11,
-    autor: 'Arturo Perez',
-    titulo: 'El camino del fuego',
-    isbn: '0-7645-2641-2',
-    edad: 18,
-    categoria: 'Ficcion',
-    cantidad_veces_reservado: 0,
-    url_img: '../../../assets/img/harry.jpg',
-    descripcion:
-      'simulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion larga',
-    disponible: '1',
-    usuario: {
-      id: 11,
-      username: 'marc',
-      email: 'marc@gmail.com',
-      password: '$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP.',
-      role: 'ADMIN',
-      edad: '2022-01-12',
-      url_imagen: '/imagnes/usuario',
-      activo: '1',
-      enabled: true,
-      authorities: [
-        {
-          authority: 'ADMIN',
-        },
-      ],
-      accountNonExpired: true,
-      accountNonLocked: true,
-      credentialsNonExpired: true,
-    },
-    editorial: {
-      id: 31,
-      nombre: 'Nordicos',
-    },
-  },
-];
+export interface DialogData {}
 
 @Component({
   selector: 'app-tablebooks',
@@ -100,55 +22,63 @@ var contstLibro = [
   styleUrls: ['./tablebooks.component.css'],
 })
 export class TablebooksComponent implements OnInit {
-  libros: any[] = contstLibro;
+  libros: any = []; // = contstLibro;
+  librosCopia: any = [];
   IsEditing = false;
   idRow?: number;
+  dialogClosed?: number; //0 cancelado; 1 aceptado
   bookTemp = new Book();
-  constructor(
-    public dialog: MatDialog,
-    private bookService: BookService) {}
+  libroString: any;
+  constructor(public dialog: MatDialog, private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.bookService.list()
-    .subscribe(
-      {
-        next: (result: any) => {
-          this.libros = result;
-        },
-        error: (resultError: Error) => {
-          console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
-        }
-      }
-    )
+    this.bookService.list().subscribe({
+      next: (result: any) => {
+        this.libroString = JSON.stringify(result);
+        this.libros = result;
+        this.librosCopia =  JSON.parse(this.libroString);
+        //[...this.libros]// Object.assign({}, this.libros);//this.libros.copy();
+      },
+      error: (resultError: Error) => {
+        console.log(
+          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+        );
+      },
+    });
   }
 
   openDialog(data: any, key: string, position: number): void {
     // pasar el id por el constructor
-    if (this.IsEditing) {
+
+    if (this.IsEditing && position == this.idRow) {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '550px',
-        // data: {name: 'this.name', animal: 'this.animal'}, //valor enviado por dialog
-
         data: { data, key, position },
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        // this.animal = result; //valor devuelto por dialog
-
         this.libros[result.position][`${result.key}`] = result.data;
-        console.log('result.data -->'+result.data);
-
+        console.log('result.data -->' + result.data);
         this.saveBookTemp(result.data, result.key);
-       // let book = new Book(result.data);
-        //console.log('autor ' + book.getAutor + ',edad ' + book.getEdad);
-
-        //console.log(result.data+"<-->"+ result.key);
-
-        //id
-        // console.log(result.data + '<-result->' + result.id);
-        // console.log(this.libros[result.position][`${result.key}`]);
       });
     }
+  }
+
+  revertChangesOnRow(idRow: number) {
+    this.printObject(this.libros[idRow]);
+    console.log('copia');
+    this.printObject(this.librosCopia[idRow]);
+
+    this.libroString = JSON.stringify(this.librosCopia[idRow]);
+    this.libros[idRow] = JSON.parse(this.libroString);
+
+    this.printObject(this.libros[idRow]);
+    console.log('copia');
+    this.printObject(this.librosCopia[idRow]);
+    //  console.log('pasa por revert');
+  }
+  printObject(object: Object) {
+    console.log(Object.values(object));
   }
 
   saveBookTemp(data: any, key: string) {
@@ -157,7 +87,6 @@ export class TablebooksComponent implements OnInit {
         this.bookTemp.setId(data);
         break;
       case 'autor':
-
         this.bookTemp.setAutor(data);
         break;
       case 'titulo':
@@ -168,7 +97,6 @@ export class TablebooksComponent implements OnInit {
         break;
       case 'edad':
         this.bookTemp.setEdad(data);
-        console.log('despues'+this.bookTemp.getEdad());
         break;
       case 'categoria':
         this.bookTemp.setCategoria(data);
@@ -207,7 +135,8 @@ export class TablebooksComponent implements OnInit {
     this.setIdRow(idRow);
     /*Acciones si se cancela*/
     /*Deshacer los cambios*/
-    this.clearBookTemp();
+    this.revertChangesOnRow(idRow);
+    // this.clearBookTemp();
   }
   clickEdit(idRow: number) {
     this.enableEdit();
@@ -226,13 +155,17 @@ export class TablebooksComponent implements OnInit {
   }
 
   controlDescription(text: string, tipo: number) {
-    switch (tipo) {
-      case 1: // para descripciones
-        return text.substring(0, 50) + ' ...';
-      case 2: //para titulos
-        return text.substring(0, 10) + ' ...';
-      default:
-        return;
+    if (text != null) {
+      switch (tipo) {
+        case 1: // para descripciones
+          return text.substring(0, 50) + ' ...';
+        case 2: //para titulos
+          return text.substring(0, 10) + ' ...';
+        default:
+          return '';
+      }
+    } else {
+      return '';
     }
   }
 
@@ -246,13 +179,12 @@ export class TablebooksComponent implements OnInit {
         return;
     }
   }
-  recorrerLibro(){
+  recorrerLibro() {
     console.log(this.bookTemp.getId());
     console.log(this.bookTemp.getAutor());
     console.log(this.bookTemp.getTitulo());
     console.log(this.bookTemp.getIsbn());
     console.log(this.bookTemp.getEdad());
     console.log(this.bookTemp.getCategoria());
-
   }
 }
