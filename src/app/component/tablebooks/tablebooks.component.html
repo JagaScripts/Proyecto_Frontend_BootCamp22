@@ -1,0 +1,102 @@
+<div class="container-fluid justify-content-center">
+
+  <h1 class="">Libros</h1>
+  <div ></div>
+  <div class=" table-responsive ">
+
+
+    <table class="table table-danger table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Autor</th>
+          <th>Tiulo</th>
+          <th>Isbn</th>
+          <th>Edad</th>
+          <th>Categoria</th>
+          <th>C.Reservado</th>
+          <th>Url_Imagen</th>
+          <th>Descripcion</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="align-middle" *ngFor="let libro of libros; let counter=index; ">
+          <td class="col-1" name="id" ngDefaultControl (click)="openDialog(libro.id,'id',counter)"
+            [(ngModel)]="libro.id">{{libro.id}}</td>
+          <td class="col-1" name="autor" ngDefaultControl [(ngModel)]="libro.autor"
+            (click)="openDialog(libro.autor,'autor',counter)">{{libro.autor}}</td>
+          <td class="col-1" name="titulo" ngDefaultControl [(ngModel)]="libro.titulo"
+            (click)="openDialog(libro.titulo,'titulo',counter)">{{controlDescription(libro.titulo,2)}}</td>
+          <td class="col-1" name="isbn" ngDefaultControl [(ngModel)]="libro.isbn"
+            (click)="openDialog(libro.isbn,'isbn',counter)">{{libro.isbn}}</td>
+          <td class="col-1" name="edad" ngDefaultControl [(ngModel)]="libro.edad"
+            (click)="openDialog(libro.edad,'edad',counter)">{{libro.edad}}</td>
+          <td class="col-1" name="categoria" ngDefaultControl [(ngModel)]="libro.categoria"
+            (click)="openDialog(libro.categoria,'categoria',counter)">{{libro.categoria}}</td>
+          <td class="col-1" name="cantidad_veces_reservado" ngDefaultControl
+            [(ngModel)]="libro.cantidad_veces_reservado"
+            (click)="openDialog(libro.cantidad_veces_reservado,'cantidad_veces_reservado',counter)">
+            {{libro.cantidad_veces_reservado}}</td>
+          <td class="col-1" name="url_img" ngDefaultControl [(ngModel)]="libro.url_img"
+            (click)="openDialog(libro.url_img,'url_img',counter)"><img src="{{libro.url_img}}" width="50px"></td>
+          <td class="col-1" name="descripcion" ngDefaultControl [(ngModel)]="libro.descripcion"
+            (click)="openDialog(libro.descripcion,'descripcion',counter)">{{controlDescription(libro.descripcion,1)}}
+          </td>
+          <td class="col-1" name="disponible" ngDefaultControl [(ngModel)]="libro.disponible"
+            (click)="openDialog(libro.disponible,'disponible',counter)">{{controlDisponibilidad(libro.disponible)}}</td>
+          <td class="col-1">
+
+            <div *ngIf="IsEditing == false "> <!--btn editar normal-->
+              <button type="button" class="btn btn-success me-2 mb-1 w-100 " (click)="clickEdit(counter)"><i
+                  class="bi bi-pencil-square"></i>Editar</button>
+            </div>
+
+            <div *ngIf="IsEditing == true  && counter != idRow"><!-- btn editar seleccionado pero no coincide el id-->
+              <button type="button" class="btn btn-success me-2 mb-1 w-100" disabled  (click)="clickEdit(counter)"><i
+                  class="bi bi-pencil-square"></i>Editar</button>
+            </div>
+
+
+            <div *ngIf="IsEditing == true && counter == idRow"><!--btn editar seleccionado con el mismo id-->
+              <button #imgElement type="button" class="btn btn-success  mb-1 w-50" (click)="acceptEdit(counter)"><i
+                  class="bi bi-check-lg"></i></button>
+              <button type="button" class="btn btn-danger  mb-1 w-50" (click)="cancelEdit(counter)"><i
+                  class="bi bi-x-lg"></i></button>
+            </div>
+
+            <div *ngIf="IsEditing == false "><!--btn remove normal-->
+              <button type="button" class="btn btn-danger me-2 w-100"><i class="bi bi-eraser-fill"></i>Remove</button>
+            </div>
+            <div *ngIf="IsEditing == true && counter != idRow" ><!-- editado pulsado pero no coincide-->
+              <button type="button" class="btn btn-danger me-2 w-100" disabled><i class="bi bi-eraser-fill"></i>Remove</button>
+            </div>
+            <div *ngIf="IsEditing == true && counter == idRow" ><!-- editado pulsado coincide-->
+              <button type="button" class="btn btn-danger me-2 w-100" disabled><i class="bi bi-eraser-fill"></i>Remove</button>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+  <!-- <ol>
+  <li>
+    <mat-form-field appearance="fill">
+      <mat-label>What's your name?</mat-label>
+      <input matInput [(ngModel)]="name">
+    </mat-form-field>
+  </li>
+  <li>
+    <button mat-raised-button (click)="openDialog('','',1)">Pick one</button>
+  </li>
+  <li *ngIf="autor">
+    You chose: <i>{{autor}}</i>
+  </li>
+</ol> -->
+
+
+</div>
