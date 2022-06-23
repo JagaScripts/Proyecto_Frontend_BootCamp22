@@ -34,9 +34,10 @@ export class TablebooksComponent implements OnInit {
   ngOnInit(): void {
     this.bookService.list().subscribe({
       next: (result: any) => {
-        this.libroString = JSON.stringify(result);
         this.libros = result;
-        this.librosCopia =  JSON.parse(this.libroString);
+       // this.libroString = JSON.stringify(result);
+        //this.librosCopia =  JSON.parse(this.libroString);
+        this.librosCopia =  JSON.parse(JSON.stringify(result));
         //[...this.libros]// Object.assign({}, this.libros);//this.libros.copy();
       },
       error: (resultError: Error) => {
@@ -65,17 +66,11 @@ export class TablebooksComponent implements OnInit {
   }
 
   revertChangesOnRow(idRow: number) {
-    this.printObject(this.libros[idRow]);
-    console.log('copia');
-    this.printObject(this.librosCopia[idRow]);
+   // this.libroString = JSON.stringify(this.librosCopia[idRow]);
+   // this.libros[idRow] = JSON.parse(this.libroString);
 
-    this.libroString = JSON.stringify(this.librosCopia[idRow]);
-    this.libros[idRow] = JSON.parse(this.libroString);
+    this.libros[idRow] = JSON.parse(JSON.stringify(this.librosCopia[idRow]));
 
-    this.printObject(this.libros[idRow]);
-    console.log('copia');
-    this.printObject(this.librosCopia[idRow]);
-    //  console.log('pasa por revert');
   }
   printObject(object: Object) {
     console.log(Object.values(object));
@@ -125,6 +120,7 @@ export class TablebooksComponent implements OnInit {
     this.enableEdit();
     this.setIdRow(idRow);
     /*Acciones si se acepta*/
+    this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
     this.recorrerLibro();
     this.clearBookTemp();
 
