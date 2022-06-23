@@ -3,6 +3,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Observable } from 'rxjs';
 
 const TOKEN_HEADER_KEY = `Authorization`;
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
 
