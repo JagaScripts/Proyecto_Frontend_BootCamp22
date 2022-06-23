@@ -23,6 +23,15 @@ export class AuthInterceptor implements HttpInterceptor{
       console.log(request.url + " petición");
       return request;
     }
+    //forma alternativa de añadir el token falta testear
+    // if (token) {
+    //   request = request.clone({
+    //     setHeaders: {
+    //       TOKEN_HEADER_KEY: `Bearer ${token}`
+    //     },
+    //   });
+    //   return request;
+    // }
     return request;
   }
 }
