@@ -48,10 +48,9 @@ export class TablebooksComponent implements OnInit {
     });
   }
 
-  openDialog(data: any, key: string, position: number): void {
+  openDialog(data?: any, key?: string, position?: number): void {
     // pasar el id por el constructor
-
-    if (this.IsEditing && position == this.idRow) {
+    if (this.IsEditing && position == this.idRow) { //editar
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '550px',
         data: { data, key, position },
@@ -61,6 +60,12 @@ export class TablebooksComponent implements OnInit {
         this.libros[result.position][`${result.key}`] = result.data;
         console.log('result.data -->' + result.data);
         this.saveBookTemp(result.data, result.key);
+      });
+    }
+    else{//crear
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '550px',
+        data: { data, key, position },
       });
     }
   }
