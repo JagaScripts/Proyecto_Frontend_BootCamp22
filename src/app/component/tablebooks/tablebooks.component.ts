@@ -103,9 +103,12 @@ export class TablebooksComponent implements OnInit {
   IsEditing = false;
   idRow?: number;
   bookTemp = new Book();
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.libros =
+  }
 
   openDialog(data: any, key: string, position: number): void {
     // pasar el id por el constructor
