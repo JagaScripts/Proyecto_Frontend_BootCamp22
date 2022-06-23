@@ -11,6 +11,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Book } from 'src/app/models/book/book.model';
+import { BookService } from 'src/app/services/book/book.service';
 import { DialogComponent } from '../dialog/dialog.component';
 
 export interface DialogData {
@@ -104,10 +105,21 @@ export class TablebooksComponent implements OnInit {
   idRow?: number;
   bookTemp = new Book();
   constructor(
-    public dialog: MatDialog) {}
+    public dialog: MatDialog,
+    private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.libros =
+    this.bookService.list()
+    .subscribe(
+      {
+        next: (result: any) => {
+          this.libros = result;
+        },
+        error: (resultError: Error) => {
+          console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
+        }
+      }
+    )
   }
 
   openDialog(data: any, key: string, position: number): void {
