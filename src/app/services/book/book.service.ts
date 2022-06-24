@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Book } from 'src/app/models/book/book.model';
 
-const baseUrlLibro = 'https://api-alquiler-de-libros-2022.herokuapp.com/api/libro';
+const BASEURLLIBRO = 'https://api-alquiler-de-libros-2022.herokuapp.com/api/libro';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +13,26 @@ export class BookService {
   constructor(private httpClient: HttpClient) { }
 
   list(): Observable<any[]> {
-    return this.httpClient.get<any[]>(`${baseUrlLibro}`).pipe(
+    return this.httpClient.get<any[]>(`${BASEURLLIBRO}`).pipe(
       catchError(this.handleError)
     );
   }
 
   getById(id: string){
-    return this.httpClient.get<any[]>(`${baseUrlLibro}/${id}`).pipe(
+    return this.httpClient.get<Book>(`${BASEURLLIBRO}/${id}`).pipe(
       catchError(this.handleError));
   }
 
   add(data: Book){
-    return this.httpClient.post<Book>(`${baseUrlLibro}`,data).pipe(catchError(this.handleError));
+    return this.httpClient.post<Book>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
+  }
+
+  update(id: any,data: any){
+    return this.httpClient.put<Book>(`${BASEURLLIBRO}/${id}`,data).pipe(catchError(this.handleError));
   }
 
   delete(id:any){
-    return this.httpClient.delete<Book>(`${baseUrlLibro}/${id}`,id).pipe(catchError(this.handleError));
+    return this.httpClient.delete<Book>(`${BASEURLLIBRO}/${id}`).pipe(catchError(this.handleError));
   }
     // Handle API errors
     handleError(error: HttpErrorResponse) {
