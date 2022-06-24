@@ -14,7 +14,8 @@ export class NavbarComponent implements OnInit {
 
   user!: User;
   // role!: Rol;
-  logState!: string;
+  logAvailable: string = 'Sign In';
+  isLoggedIn: boolean = false;
 
   constructor(private router:Router, private loginService: LoginService, private rolService: RolService) { }
 
@@ -24,6 +25,8 @@ export class NavbarComponent implements OnInit {
       {
         next: (result: User) => {
           this.user = result;
+          this.isLoggedIn = true;
+          this.logAvailable = 'Sign Out';
         },
         error: (resultError: Error) => {
             console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
@@ -35,7 +38,8 @@ export class NavbarComponent implements OnInit {
       {
         next: (result: Rol) => {
           // this.role = result;
-          this.logState = 'Sign Out';
+
+
         },
         error: (resultError: Error) => {
             console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
@@ -44,12 +48,14 @@ export class NavbarComponent implements OnInit {
     );
 
   }
+
   logout(): void {
     window.sessionStorage.clear();
-    this.user.username = '';
+    // this.user.username = '';
     // this.role = Rol;
-    this.logState = 'Sign In';
-    this.router.navigate(['/login']);
+    this.logAvailable = 'Sign In';
+    this.isLoggedIn = false;
+    this.router.navigate(['/signin']);
   }
 
 }
