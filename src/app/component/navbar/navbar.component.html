@@ -13,10 +13,13 @@
           <a class="nav-link text-center " aria-current="page" routerLink="/sidebarhome">Home</a>
         </li>
         <li class="nav-item title">
-          <a class="nav-link text-center" routerLink="/signin">signIn</a>
+          <a class="nav-link text-center text-nowrap"*ngIf="isLoggedIn===false" routerLink="/signin">{{logAvailable}}</a>
         </li>
         <li class="nav-item title">
-          <a class="nav-link text-center" routerLink="/signup">signUp</a>
+          <a class="nav-link text-center text-nowrap" (click)="logout()" *ngIf="isLoggedIn===true">{{logAvailable}}</a>
+        </li>
+        <li class="nav-item title">
+          <a class="nav-link text-center text-nowrap"  routerLink="/signup">Sign Up</a>
         </li>
         <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/sidebarandcontent">Perfil</a>
