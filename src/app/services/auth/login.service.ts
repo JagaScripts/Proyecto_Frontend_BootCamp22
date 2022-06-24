@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError, Subject, pipe } from 'rxjs';
 import { Token } from 'src/app/models/token/token.model';
+import { User } from 'src/app/models/user/user.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 
 const baseUrl = 'https://api-alquiler-de-libros-2022.herokuapp.com/';
@@ -11,14 +12,14 @@ const baseUrl = 'https://api-alquiler-de-libros-2022.herokuapp.com/';
 })
 export class LoginService {
 
-  private user!: Usuario;
-  private user$!: Subject<Usuario>;
+  private user!: User;
+  private user$!: Subject<User>;
 
   constructor(private httpClient: HttpClient) {
     this.user$ = new Subject();
   }
 
-  login(usuario: Usuario): Observable<Token> {
+  login(usuario: User): Observable<Token> {
     this.user = usuario;
     this.user$.next(this.user);
     return this.httpClient.post<Token>(`${baseUrl}login`, usuario).pipe(
@@ -50,7 +51,7 @@ export class LoginService {
       'Something bad happened; please try again later.');
   };
 
-  getUser$(): Observable<Usuario>{
+  getUser$(): Observable<User>{
     return this.user$.asObservable();
   }
 
