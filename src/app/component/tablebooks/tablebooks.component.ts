@@ -101,25 +101,33 @@ var contstLibro = [
 })
 export class TablebooksComponent implements OnInit {
   libros: any[] = contstLibro;
+  testlibro: any = {};
   IsEditing = false;
   idRow?: number;
   bookTemp = new Book();
-  constructor(
-    public dialog: MatDialog,
-    private bookService: BookService) {}
+  constructor(public dialog: MatDialog, private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.bookService.list()
-    .subscribe(
-      {
-        next: (result: any) => {
-          this.libros = result;
-        },
-        error: (resultError: Error) => {
-          console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
-        }
-      }
-    )
+    this.bookService.list().subscribe({
+      next: (result: any) => {
+        this.libros = result;
+      },
+      error: (resultError: Error) => {
+        console.log(
+          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+        );
+      },
+    });
+    this.bookService.getById('3').subscribe({
+      next: (result: any) => {
+        this.testlibro = result;
+      },
+      error: (resultError: Error) => {
+        console.log( `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+        );
+      },
+    });
+    
   }
 
   openDialog(data: any, key: string, position: number): void {
@@ -136,10 +144,10 @@ export class TablebooksComponent implements OnInit {
         // this.animal = result; //valor devuelto por dialog
 
         this.libros[result.position][`${result.key}`] = result.data;
-        console.log('result.data -->'+result.data);
+        console.log('result.data -->' + result.data);
 
         this.saveBookTemp(result.data, result.key);
-       // let book = new Book(result.data);
+        // let book = new Book(result.data);
         //console.log('autor ' + book.getAutor + ',edad ' + book.getEdad);
 
         //console.log(result.data+"<-->"+ result.key);
@@ -157,7 +165,6 @@ export class TablebooksComponent implements OnInit {
         this.bookTemp.setId(data);
         break;
       case 'autor':
-
         this.bookTemp.setAutor(data);
         break;
       case 'titulo':
@@ -168,7 +175,7 @@ export class TablebooksComponent implements OnInit {
         break;
       case 'edad':
         this.bookTemp.setEdad(data);
-        console.log('despues'+this.bookTemp.getEdad());
+        console.log('despues' + this.bookTemp.getEdad());
         break;
       case 'categoria':
         this.bookTemp.setCategoria(data);
@@ -246,13 +253,12 @@ export class TablebooksComponent implements OnInit {
         return;
     }
   }
-  recorrerLibro(){
+  recorrerLibro() {
     console.log(this.bookTemp.getId());
     console.log(this.bookTemp.getAutor());
     console.log(this.bookTemp.getTitulo());
     console.log(this.bookTemp.getIsbn());
     console.log(this.bookTemp.getEdad());
     console.log(this.bookTemp.getCategoria());
-
   }
 }

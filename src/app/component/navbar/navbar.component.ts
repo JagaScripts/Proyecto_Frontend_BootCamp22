@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Rol } from 'src/app/models/rol/rol.model';
+import { Rol } from 'src/app/models/enum/rol/rol.model';
 import { User } from 'src/app/models/user/user.model';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { RolService } from 'src/app/services/auth/rol.service';

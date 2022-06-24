@@ -18,6 +18,18 @@ export class BookService {
     );
   }
 
+  getById(id: string){
+    return this.httpClient.get<any[]>(`${baseUrlLibro}/${id}`).pipe(
+      catchError(this.handleError));
+  }
+
+  add(data: Book){
+    return this.httpClient.post<Book>(`${baseUrlLibro}`,data).pipe(catchError(this.handleError));
+  }
+
+  delete(id:any){
+    return this.httpClient.delete<Book>(`${baseUrlLibro}/${id}`,id).pipe(catchError(this.handleError));
+  }
     // Handle API errors
     handleError(error: HttpErrorResponse) {
       if (error.error instanceof ErrorEvent) {
