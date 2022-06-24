@@ -12,6 +12,7 @@ import {
 } from '@angular/material/dialog';
 import { Book } from 'src/app/models/book/book.model';
 import { BookService } from 'src/app/services/book/book.service';
+import { DialogbookComponent } from '../add/dialogbook/dialogbook.component';
 import { DialogComponent } from '../dialog/dialog.component';
 
 export interface DialogData {}
@@ -27,7 +28,7 @@ export class TablebooksComponent implements OnInit {
   IsEditing = false;
   idRow?: number;
   dialogClosed?: number; //0 cancelado; 1 aceptado
-  bookTemp = new Book();
+  bookTemp!:Book;
   libroString: any;
   constructor(public dialog: MatDialog, private bookService: BookService) {}
 
@@ -35,9 +36,9 @@ export class TablebooksComponent implements OnInit {
     this.bookService.list().subscribe({
       next: (result: any) => {
         this.libros = result;
-       // this.libroString = JSON.stringify(result);
+        // this.libroString = JSON.stringify(result);
         //this.librosCopia =  JSON.parse(this.libroString);
-        this.librosCopia =  JSON.parse(JSON.stringify(result));
+        this.librosCopia = JSON.parse(JSON.stringify(result));
         //[...this.libros]// Object.assign({}, this.libros);//this.libros.copy();
       },
       error: (resultError: Error) => {
@@ -50,83 +51,65 @@ export class TablebooksComponent implements OnInit {
 
   openDialog(data?: any, key?: string, position?: number): void {
     // pasar el id por el constructor
-    if (this.IsEditing && position == this.idRow) { //editar
+    if (this.IsEditing && position == this.idRow) {
+      //editar
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '550px',
         data: { data, key, position },
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        this.libros[result.position][`${result.key}`] = result.data;
-        console.log('result.data -->' + result.data);
-        this.saveBookTemp(result.data, result.key);
-      });
-    }
-    else{//crear
-      const dialogRef = this.dialog.open(DialogComponent, {
-        width: '550px',
-        data: { data, key, position },
+        if (result != null) {
+          this.libros[result.position][`${result.key}`] = result.data;
+          console.log('result.data -->' + result.data);
+        
+        }
       });
     }
   }
+  openDialogNewEntry(data?: any): void {
+    //crear
+    const dialogRef = this.dialog.open(DialogbookComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: { data },
+    });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result != null) {
+
+          console.log(result);
+         // console.log(result.data);
+          //console.log(Object.values(result));
+          //console.log(Object.values(result.data));
+         // console.log(result.data.autor);
+         // console.log(result.autor);
+
+
+      }});
+
+  }
 
   revertChangesOnRow(idRow: number) {
-   // this.libroString = JSON.stringify(this.librosCopia[idRow]);
-   // this.libros[idRow] = JSON.parse(this.libroString);
+    // this.libroString = JSON.stringify(this.librosCopia[idRow]);
+    // this.libros[idRow] = JSON.parse(this.libroString);
 
     this.libros[idRow] = JSON.parse(JSON.stringify(this.librosCopia[idRow]));
-
   }
   printObject(object: Object) {
     console.log(Object.values(object));
   }
 
-  saveBookTemp(data: any, key: string) {
-    switch (key) {
-      case 'id':
-        this.bookTemp.setId(data);
-        break;
-      case 'autor':
-        this.bookTemp.setAutor(data);
-        break;
-      case 'titulo':
-        this.bookTemp.setTitulo(data);
-        break;
-      case 'isbn':
-        this.bookTemp.setIsbn(data);
-        break;
-      case 'edad':
-        this.bookTemp.setEdad(data);
-        break;
-      case 'categoria':
-        this.bookTemp.setCategoria(data);
-        break;
-      case 'cantidad_veces_reservado':
-        this.bookTemp.setCantidad_veces_reservado(data);
-        break;
-      case 'url_img':
-        this.bookTemp.setUrl_img(data);
-        break;
-      case 'descripcion':
-        this.bookTemp.setDescripcion(data);
-        break;
-      case 'disponible':
-        this.bookTemp.setDisponible(data);
-        break;
-      default:
-        break;
-    }
-  }
+
   clearBookTemp() {
     /**limpiar var bookTemp */
-    this.bookTemp.resetAll();
   }
   acceptEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
     /*Acciones si se acepta*/
     this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
-    this.recorrerLibro();
+
     this.clearBookTemp();
 
     /*API.PUT*/
@@ -180,12 +163,5 @@ export class TablebooksComponent implements OnInit {
         return;
     }
   }
-  recorrerLibro() {
-    console.log(this.bookTemp.getId());
-    console.log(this.bookTemp.getAutor());
-    console.log(this.bookTemp.getTitulo());
-    console.log(this.bookTemp.getIsbn());
-    console.log(this.bookTemp.getEdad());
-    console.log(this.bookTemp.getCategoria());
-  }
+
 }

@@ -21,7 +21,9 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {}
 
   onNoClick(): void {
-    this.dialogRef.close();
+    //data: { data, key, position },
+
+    this.dialogRef.close(null);
   }
   onYesClick(): void {
     this.dialogRef.close();

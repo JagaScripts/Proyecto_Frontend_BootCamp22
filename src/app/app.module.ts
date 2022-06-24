@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './component/dialog/dialog.component';
+import { DialogbookComponent } from './component/add/dialogbook/dialogbook.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { DialogComponent } from './component/dialog/dialog.component';
     TablebooksComponent,
     SidebarhomeComponent,
     DialogComponent,
+    DialogbookComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [
