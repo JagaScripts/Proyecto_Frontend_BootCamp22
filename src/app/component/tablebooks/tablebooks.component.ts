@@ -23,6 +23,7 @@ export interface DialogData {}
   styleUrls: ['./tablebooks.component.css'],
 })
 export class TablebooksComponent implements OnInit {
+
   libros: any = []; // = contstLibro;
   librosCopia: any = [];
   IsEditing = false;
@@ -36,10 +37,12 @@ export class TablebooksComponent implements OnInit {
     this.bookService.list().subscribe({
       next: (result: any) => {
         this.libros = result;
+
         // this.libroString = JSON.stringify(result);
         //this.librosCopia =  JSON.parse(this.libroString);
         this.librosCopia = JSON.parse(JSON.stringify(result));
         //[...this.libros]// Object.assign({}, this.libros);//this.libros.copy();
+
       },
       error: (resultError: Error) => {
         console.log(
@@ -75,6 +78,7 @@ export class TablebooksComponent implements OnInit {
       data: { data },
     });
 
+
       dialogRef.afterClosed().subscribe((result) => {
         if (result != null) {
 
@@ -84,7 +88,6 @@ export class TablebooksComponent implements OnInit {
           //console.log(Object.values(result.data));
          // console.log(result.data.autor);
          // console.log(result.autor);
-
 
       }});
 
@@ -100,7 +103,6 @@ export class TablebooksComponent implements OnInit {
     console.log(Object.values(object));
   }
 
-
   clearBookTemp() {
     /**limpiar var bookTemp */
   }
@@ -108,8 +110,8 @@ export class TablebooksComponent implements OnInit {
     this.enableEdit();
     this.setIdRow(idRow);
     /*Acciones si se acepta*/
-    this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
 
+    this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
     this.clearBookTemp();
 
     /*API.PUT*/
@@ -132,9 +134,20 @@ export class TablebooksComponent implements OnInit {
   setIdRow(idRow: number) {
     this.idRow = idRow;
   }
-  removeRow() {
+  removeRow(id:number) {
     if (!this.IsEditing) {
       /**Borrar row **/
+      this.bookService.delete(id).subscribe({
+        next: (result: any) => {
+          this.testlibro = result;
+          console.log(Object.values(result));
+        },
+        error: (resultError: Error) => {
+          console.log(
+            `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+          );
+        },
+      });
     }
   }
 
@@ -154,14 +167,13 @@ export class TablebooksComponent implements OnInit {
   }
 
   controlDisponibilidad(disponibilidad: string) {
-    switch (disponibilidad) {
-      case '1':
-        return 'Disponible';
-      case '0':
-        return 'No Disponible';
-      default:
-        return;
-    }
+    if (disponibilidad != null) {
+      switch (disponibilidad) {
+        case '1':
+          return 'Disponible';
+      }
+    } return 'No Disponible';
   }
+
 
 }

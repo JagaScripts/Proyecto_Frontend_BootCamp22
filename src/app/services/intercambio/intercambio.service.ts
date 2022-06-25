@@ -1,38 +1,37 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Book } from 'src/app/models/book/book.model';
+import { Intercambio } from 'src/app/models/intercambio/intercambio.model';
 
-const BASEURLLIBRO = 'https://api-alquiler-de-libros-2022.herokuapp.com/api/libro';
-//const BASEURLLIBRO = 'http://localhost:8181/api/libro';
+const BASEURLLIBRO = 'https://api-alquiler-de-libros-2022.herokuapp.com/api/intercambio';
 @Injectable({
   providedIn: 'root'
 })
-export class BookService {
+export class IntercambioService {
 
   constructor(private httpClient: HttpClient) { }
 
   list(): Observable<any[]> {
-    return this.httpClient.get<any[]>(`${BASEURLLIBRO}`).pipe(
+    return this.httpClient.get<Intercambio[]>(`${BASEURLLIBRO}`).pipe(
       catchError(this.handleError)
     );
   }
 
   getById(id: string){
-    return this.httpClient.get<Book>(`${BASEURLLIBRO}/${id}`).pipe(
+    return this.httpClient.get<Intercambio>(`${BASEURLLIBRO}/${id}`).pipe(
       catchError(this.handleError));
   }
 
-  add(data: Book){
-    return this.httpClient.post<Book>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
+  add(data: Intercambio){
+    return this.httpClient.post<Intercambio>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
   }
 
   update(id: any,data: any){
-    return this.httpClient.put<Book>(`${BASEURLLIBRO}/${id}`,data).pipe(catchError(this.handleError));
+    return this.httpClient.put<Intercambio>(`${BASEURLLIBRO}/${id}`,data).pipe(catchError(this.handleError));
   }
 
   delete(id:any){
-    return this.httpClient.delete<Book>(`${BASEURLLIBRO}/${id}`).pipe(catchError(this.handleError));
+    return this.httpClient.delete<Intercambio>(`${BASEURLLIBRO}/${id}`).pipe(catchError(this.handleError));
   }
     // Handle API errors
     handleError(error: HttpErrorResponse) {
