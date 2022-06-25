@@ -101,25 +101,24 @@ var contstLibro = [
 })
 export class TablebooksComponent implements OnInit {
   libros: any[] = contstLibro;
+  testlibro: any = {};
   IsEditing = false;
   idRow?: number;
-  bookTemp = new Book();
-  constructor(
-    public dialog: MatDialog,
-    private bookService: BookService) {}
+  bookTemp!: Book;
+  constructor(public dialog: MatDialog, private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.bookService.list()
-    .subscribe(
-      {
-        next: (result: any) => {
-          this.libros = result;
-        },
-        error: (resultError: Error) => {
-          console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
-        }
-      }
-    )
+    this.bookService.list().subscribe({
+      next: (result: any) => {
+        this.libros = result;
+      },
+      error: (resultError: Error) => {
+        console.log(
+          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+        );
+      },
+    });
+
   }
 
   openDialog(data: any, key: string, position: number): void {
@@ -136,10 +135,9 @@ export class TablebooksComponent implements OnInit {
         // this.animal = result; //valor devuelto por dialog
 
         this.libros[result.position][`${result.key}`] = result.data;
-        console.log('result.data -->'+result.data);
+        console.log('result.data -->' + result.data);
 
-        this.saveBookTemp(result.data, result.key);
-       // let book = new Book(result.data);
+        // let book = new Book(result.data);
         //console.log('autor ' + book.getAutor + ',edad ' + book.getEdad);
 
         //console.log(result.data+"<-->"+ result.key);
@@ -151,53 +149,13 @@ export class TablebooksComponent implements OnInit {
     }
   }
 
-  saveBookTemp(data: any, key: string) {
-    switch (key) {
-      case 'id':
-        this.bookTemp.setId(data);
-        break;
-      case 'autor':
-
-        this.bookTemp.setAutor(data);
-        break;
-      case 'titulo':
-        this.bookTemp.setTitulo(data);
-        break;
-      case 'isbn':
-        this.bookTemp.setIsbn(data);
-        break;
-      case 'edad':
-        this.bookTemp.setEdad(data);
-        console.log('despues'+this.bookTemp.getEdad());
-        break;
-      case 'categoria':
-        this.bookTemp.setCategoria(data);
-        break;
-      case 'cantidad_veces_reservado':
-        this.bookTemp.setCantidad_veces_reservado(data);
-        break;
-      case 'url_img':
-        this.bookTemp.setUrl_img(data);
-        break;
-      case 'descripcion':
-        this.bookTemp.setDescripcion(data);
-        break;
-      case 'disponible':
-        this.bookTemp.setDisponible(data);
-        break;
-      default:
-        break;
-    }
-  }
   clearBookTemp() {
     /**limpiar var bookTemp */
-    this.bookTemp.resetAll();
   }
   acceptEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
     /*Acciones si se acepta*/
-    this.recorrerLibro();
     this.clearBookTemp();
 
     /*API.PUT*/
@@ -219,40 +177,46 @@ export class TablebooksComponent implements OnInit {
   setIdRow(idRow: number) {
     this.idRow = idRow;
   }
-  removeRow() {
+  removeRow(id:number) {
     if (!this.IsEditing) {
       /**Borrar row **/
+      this.bookService.delete(id).subscribe({
+        next: (result: any) => {
+          this.testlibro = result;
+          console.log(Object.values(result));
+        },
+        error: (resultError: Error) => {
+          console.log(
+            `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+          );
+        },
+      });
     }
   }
 
   controlDescription(text: string, tipo: number) {
-    switch (tipo) {
-      case 1: // para descripciones
-        return text.substring(0, 50) + ' ...';
-      case 2: //para titulos
-        return text.substring(0, 10) + ' ...';
-      default:
-        return;
+    if (text != null) {
+      switch (tipo) {
+        case 1: // para descripciones
+          return text.substring(0, 50) + ' ...';
+        case 2: //para titulos
+          return text.substring(0, 10) + ' ...';
+        default:
+          return '';
+      }
+    } else {
+      return '';
     }
   }
 
   controlDisponibilidad(disponibilidad: string) {
-    switch (disponibilidad) {
-      case '1':
-        return 'Disponible';
-      case '0':
-        return 'No Disponible';
-      default:
-        return;
-    }
+    if (disponibilidad != null) {
+      switch (disponibilidad) {
+        case '1':
+          return 'Disponible';
+      }
+    } return 'No Disponible';
   }
-  recorrerLibro(){
-    console.log(this.bookTemp.getId());
-    console.log(this.bookTemp.getAutor());
-    console.log(this.bookTemp.getTitulo());
-    console.log(this.bookTemp.getIsbn());
-    console.log(this.bookTemp.getEdad());
-    console.log(this.bookTemp.getCategoria());
 
-  }
+
 }

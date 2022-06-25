@@ -6,7 +6,7 @@ import { User } from 'src/app/models/user/user.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 
 const baseUrl = 'https://api-alquiler-de-libros-2022.herokuapp.com/';
-
+//const baseUrl = 'http://localhost:8181/';
 @Injectable({
   providedIn: 'root'
 })

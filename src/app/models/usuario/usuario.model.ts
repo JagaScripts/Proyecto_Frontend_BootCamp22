@@ -1,4 +1,4 @@
-import { Rol } from "../rol/rol.model";
+import { Rol } from "../enum/rol/rol.model";
 
 export interface Usuario {
   username: string;

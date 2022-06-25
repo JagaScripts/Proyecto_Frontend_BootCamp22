@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Rol } from 'src/app/models/rol/rol.model';
+import { Rol } from 'src/app/models/enum/rol/rol.model';
 
 @Injectable({
   providedIn: 'root'
