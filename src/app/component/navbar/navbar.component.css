@@ -144,9 +144,22 @@ input#search {
   background-image: url(../../../assets/img/search-s.png);
   background-repeat: no-repeat;
   background-position: 97% 50%;
+  height: 100%;
 }
 .bg-light, .p-5, .rounded
 {
   min-height: 75rem;
   padding-top: 4.5rem;
+}
+
+.boton-navbar{
+  height: 100%;
+  margin-top: 1rem!important;
+}
+.mt-3 {
+  margin-top: 1.2rem!important;
+}
+
+.signin-prestamo{
+  margin-left: 10px;
 }

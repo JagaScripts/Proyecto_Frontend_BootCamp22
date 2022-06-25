@@ -31,6 +31,7 @@ export class TablebooksComponent implements OnInit {
   dialogClosed?: number; //0 cancelado; 1 aceptado
   bookTemp!:Book;
   libroString: any;
+  testlibro: any;
   constructor(public dialog: MatDialog, private bookService: BookService) {}
 
   ngOnInit(): void {
@@ -65,7 +66,7 @@ export class TablebooksComponent implements OnInit {
         if (result != null) {
           this.libros[result.position][`${result.key}`] = result.data;
           console.log('result.data -->' + result.data);
-        
+
         }
       });
     }
