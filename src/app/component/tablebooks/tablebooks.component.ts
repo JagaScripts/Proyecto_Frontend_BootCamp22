@@ -118,17 +118,7 @@ export class TablebooksComponent implements OnInit {
         );
       },
     });
-    this.bookService.delete('31').subscribe({
-      next: (result: any) => {
-        this.testlibro = result;
-        console.log(Object.values(result));
-      },
-      error: (resultError: Error) => {
-        console.log(
-          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
-        );
-      },
-    });
+
   }
 
   openDialog(data: any, key: string, position: number): void {
@@ -187,9 +177,20 @@ export class TablebooksComponent implements OnInit {
   setIdRow(idRow: number) {
     this.idRow = idRow;
   }
-  removeRow() {
+  removeRow(id:number) {
     if (!this.IsEditing) {
       /**Borrar row **/
+      this.bookService.delete(id).subscribe({
+        next: (result: any) => {
+          this.testlibro = result;
+          console.log(Object.values(result));
+        },
+        error: (resultError: Error) => {
+          console.log(
+            `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+          );
+        },
+      });
     }
   }
 
@@ -216,4 +217,6 @@ export class TablebooksComponent implements OnInit {
       }
     } return 'No Disponible';
   }
+
+
 }
