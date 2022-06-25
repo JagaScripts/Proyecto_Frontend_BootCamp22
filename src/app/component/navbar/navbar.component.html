@@ -47,9 +47,9 @@
       <form class="d-flex" role="search">
         <ul class="navbar-nav me-auto mb-md-0 align-bottom">
         <li class="nav-item title signin-prestamo">
-          <a class="nav-link text-center text-nowrap"*ngIf="isLoggedIn===false" routerLink="/signin">{{logAvailable}}</a>
+          <a class="nav-link text-center text-nowrap" *ngIf="isLoggedIn===false" routerLink="/signin">{{logAvailable}}</a>
         </li>
-        <li class="nav-item title signin-prestamo">
+        <li class="nav-item title signin-prestamo me-2">
           <a class="nav-link text-center text-nowrap" (click)="logout()" *ngIf="isLoggedIn===true">{{logAvailable}}</a>
         </li>
         </ul>

@@ -40,6 +40,10 @@ export class SigninComponent implements OnInit {
           console.log(`getItem ${window.sessionStorage.getItem("auth-token")}`);
 
           window.sessionStorage.setItem("auth-username", this.user.username);
+          this.user = {
+            username: '',
+            password: ''
+          }
         },
         error: (resultError: Error) => {
           console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
