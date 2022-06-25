@@ -42,7 +42,6 @@ export class TablebooksComponent implements OnInit {
         //this.librosCopia =  JSON.parse(this.libroString);
         this.librosCopia = JSON.parse(JSON.stringify(result));
         //[...this.libros]// Object.assign({}, this.libros);//this.libros.copy();
-
       },
       error: (resultError: Error) => {
         console.log(
@@ -65,7 +64,7 @@ export class TablebooksComponent implements OnInit {
         if (result != null) {
           this.libros[result.position][`${result.key}`] = result.data;
           console.log('result.data -->' + result.data);
-        
+
         }
       });
     }
@@ -139,10 +138,12 @@ export class TablebooksComponent implements OnInit {
       /**Borrar row **/
       this.bookService.delete(id).subscribe({
         next: (result: any) => {
-          this.testlibro = result;
-          console.log(Object.values(result));
+          console.log('delete ok');
+
         },
         error: (resultError: Error) => {
+          console.log('error result');
+
           console.log(
             `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
           );

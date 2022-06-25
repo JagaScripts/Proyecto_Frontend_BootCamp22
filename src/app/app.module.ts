@@ -28,6 +28,9 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { DialogbookComponent } from './component/add/dialogbook/dialogbook.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,8 +64,10 @@ import { DialogbookComponent } from './component/add/dialogbook/dialogbook.compo
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
 
-    MatDialogModule
   ],
   providers: [
     {

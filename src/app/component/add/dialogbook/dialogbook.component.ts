@@ -5,6 +5,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Book } from 'src/app/models/book/book.model';
+import { Rol } from 'src/app/models/enum/rol/rol.model';
 import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
@@ -17,7 +18,7 @@ export class DialogbookComponent implements OnInit {
     id: 0,
     cantidad_veces_reservado: 0,
     url_img: '',
-    usuario: { username: 'jose', password: 'password' },
+    usuario: { id:0,username: '', password: '',email:'',role:Rol.ADMIN, edad:new Date('##/##/####') ,url_imagen:'img',activo: '0'},
     autor: '',
     titulo: '',
     isbn: '',
