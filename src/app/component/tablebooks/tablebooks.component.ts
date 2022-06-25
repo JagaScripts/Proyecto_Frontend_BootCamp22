@@ -15,7 +15,6 @@ import { Book } from 'src/app/models/book/book.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { DialogbookComponent } from '../add/dialogbook/dialogbook.component';
 import { DialogComponent } from '../dialog/dialog.component';
-import { HtmlComponent } from '../toast/toastbook/html/html.component';
 
 export interface DialogData {}
 
@@ -72,15 +71,17 @@ export class TablebooksComponent implements OnInit {
       });
     }
   }
-  openSnackBar() {
-    this._snackBar.openFromComponent(HtmlComponent, {
-      duration: this.durationInSeconds * 1000,
-      panelClass: ['css-snackbar']
-    });
-  }
+
+  opensSnackBar(message: string, action: string) {
+      this._snackBar.open(message, action, {duration: this.durationInSeconds * 1000,
+        panelClass: ['css-snackbar']
+      });
+    }
   openDialogNewEntry(data?: any): void {
     //crear
-    this.openSnackBar();
+
+
+
 
     const dialogRef = this.dialog.open(DialogbookComponent, {
       width: 'auto',
@@ -111,7 +112,6 @@ export class TablebooksComponent implements OnInit {
   printObject(object: Object) {
     console.log(Object.values(object));
   }
-
   clearBookTemp() {
     /**limpiar var bookTemp */
   }
@@ -136,6 +136,8 @@ export class TablebooksComponent implements OnInit {
   clickEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
+    //this.openSnackBar();
+    this.opensSnackBar('Delete','');
   }
   enableEdit() {
     this.IsEditing = !this.IsEditing;
