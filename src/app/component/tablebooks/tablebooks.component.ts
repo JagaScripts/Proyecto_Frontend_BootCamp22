@@ -12,87 +12,10 @@ import {
 } from '@angular/material/dialog';
 import { Book } from 'src/app/models/book/book.model';
 import { BookService } from 'src/app/services/book/book.service';
+import { DialogbookComponent } from '../add/dialogbook/dialogbook.component';
 import { DialogComponent } from '../dialog/dialog.component';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-  autor: string;
-}
-
-var contstLibro = [
-  {
-    id: 1,
-    autor: 'J K Rowling',
-    titulo: 'Todas esas cosas que te dire mñn',
-    isbn: '0-7645-2641-1',
-    edad: 6,
-    categoria: 'Terror',
-    cantidad_veces_reservado: 0,
-    url_img: '../../../assets/img/harry.jpg',
-    descripcion: 'simulacion de descripcion larga',
-    disponible: '1',
-    usuario: {
-      id: 1,
-      username: 'pepe',
-      email: 'pepe@gmail.com',
-      password: '$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP.',
-      role: 'GUESS',
-      edad: '2022-01-12',
-      url_imagen: '/imagnes/usuario',
-      activo: '1',
-      enabled: true,
-      authorities: [
-        {
-          authority: 'GUESS',
-        },
-      ],
-      accountNonExpired: true,
-      accountNonLocked: true,
-      credentialsNonExpired: true,
-    },
-    editorial: {
-      id: 31,
-      nombre: 'Nordicos',
-    },
-  },
-  {
-    id: 11,
-    autor: 'Arturo Perez',
-    titulo: 'El camino del fuego',
-    isbn: '0-7645-2641-2',
-    edad: 18,
-    categoria: 'Ficcion',
-    cantidad_veces_reservado: 0,
-    url_img: '../../../assets/img/harry.jpg',
-    descripcion:
-      'simulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion larga',
-    disponible: '1',
-    usuario: {
-      id: 11,
-      username: 'marc',
-      email: 'marc@gmail.com',
-      password: '$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP.',
-      role: 'ADMIN',
-      edad: '2022-01-12',
-      url_imagen: '/imagnes/usuario',
-      activo: '1',
-      enabled: true,
-      authorities: [
-        {
-          authority: 'ADMIN',
-        },
-      ],
-      accountNonExpired: true,
-      accountNonLocked: true,
-      credentialsNonExpired: true,
-    },
-    editorial: {
-      id: 31,
-      nombre: 'Nordicos',
-    },
-  },
-];
+export interface DialogData {}
 
 @Component({
   selector: 'app-tablebooks',
@@ -100,17 +23,26 @@ var contstLibro = [
   styleUrls: ['./tablebooks.component.css'],
 })
 export class TablebooksComponent implements OnInit {
-  libros: any[] = contstLibro;
-  testlibro: any = {};
+
+  libros: any = []; // = contstLibro;
+  librosCopia: any = [];
   IsEditing = false;
   idRow?: number;
-  bookTemp!: Book;
+  dialogClosed?: number; //0 cancelado; 1 aceptado
+  bookTemp!:Book;
+  libroString: any;
   constructor(public dialog: MatDialog, private bookService: BookService) {}
 
   ngOnInit(): void {
     this.bookService.list().subscribe({
       next: (result: any) => {
         this.libros = result;
+
+        // this.libroString = JSON.stringify(result);
+        //this.librosCopia =  JSON.parse(this.libroString);
+        this.librosCopia = JSON.parse(JSON.stringify(result));
+        //[...this.libros]// Object.assign({}, this.libros);//this.libros.copy();
+
       },
       error: (resultError: Error) => {
         console.log(
@@ -118,35 +50,57 @@ export class TablebooksComponent implements OnInit {
         );
       },
     });
-
   }
 
-  openDialog(data: any, key: string, position: number): void {
+  openDialog(data?: any, key?: string, position?: number): void {
     // pasar el id por el constructor
-    if (this.IsEditing) {
+    if (this.IsEditing && position == this.idRow) {
+      //editar
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '550px',
-        // data: {name: 'this.name', animal: 'this.animal'}, //valor enviado por dialog
-
         data: { data, key, position },
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        // this.animal = result; //valor devuelto por dialog
-
-        this.libros[result.position][`${result.key}`] = result.data;
-        console.log('result.data -->' + result.data);
-
-        // let book = new Book(result.data);
-        //console.log('autor ' + book.getAutor + ',edad ' + book.getEdad);
-
-        //console.log(result.data+"<-->"+ result.key);
-
-        //id
-        // console.log(result.data + '<-result->' + result.id);
-        // console.log(this.libros[result.position][`${result.key}`]);
+        if (result != null) {
+          this.libros[result.position][`${result.key}`] = result.data;
+          console.log('result.data -->' + result.data);
+        
+        }
       });
     }
+  }
+  openDialogNewEntry(data?: any): void {
+    //crear
+    const dialogRef = this.dialog.open(DialogbookComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: { data },
+    });
+
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result != null) {
+
+          console.log(result);
+         // console.log(result.data);
+          //console.log(Object.values(result));
+          //console.log(Object.values(result.data));
+         // console.log(result.data.autor);
+         // console.log(result.autor);
+
+      }});
+
+  }
+
+  revertChangesOnRow(idRow: number) {
+    // this.libroString = JSON.stringify(this.librosCopia[idRow]);
+    // this.libros[idRow] = JSON.parse(this.libroString);
+
+    this.libros[idRow] = JSON.parse(JSON.stringify(this.librosCopia[idRow]));
+  }
+  printObject(object: Object) {
+    console.log(Object.values(object));
   }
 
   clearBookTemp() {
@@ -156,6 +110,8 @@ export class TablebooksComponent implements OnInit {
     this.enableEdit();
     this.setIdRow(idRow);
     /*Acciones si se acepta*/
+
+    this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
     this.clearBookTemp();
 
     /*API.PUT*/
@@ -165,7 +121,8 @@ export class TablebooksComponent implements OnInit {
     this.setIdRow(idRow);
     /*Acciones si se cancela*/
     /*Deshacer los cambios*/
-    this.clearBookTemp();
+    this.revertChangesOnRow(idRow);
+    // this.clearBookTemp();
   }
   clickEdit(idRow: number) {
     this.enableEdit();
