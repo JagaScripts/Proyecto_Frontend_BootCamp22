@@ -36,6 +36,7 @@ export class TablebooksComponent implements OnInit {
   durationInSeconds = 5;
   constructor(private _snackBar: MatSnackBar,public dialog: MatDialog, private bookService: BookService) {}
 
+
   ngOnInit(): void {
     this.bookService.list().subscribe({
       next: (result: any) => {
