@@ -31,6 +31,7 @@ import { DialogbookComponent } from './component/add/dialogbook/dialogbook.compo
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { ModalfilaborradaComponent } from './component/add/modalfilaborrada/modalfilaborrada.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     TablebooksComponent,
     SidebarhomeComponent,
     DialogComponent,
-    DialogbookComponent
+    DialogbookComponent,
+    ModalfilaborradaComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [

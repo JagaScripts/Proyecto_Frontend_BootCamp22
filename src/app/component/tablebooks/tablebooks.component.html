@@ -85,7 +85,7 @@
 
               <div *ngIf="IsEditing == false ">
                 <!--btn remove normal-->
-                <button type="button" class="btn btn-labeled btn-danger me-2 w-100" (click)="removeRow(libro.id)"><span
+                <button type="button" class="btn btn-labeled btn-danger me-2 w-100" (click)="openDialogBorrarRow(libro.id)"><span
                     class="btn-label  me-2"><i class="bi bi-eraser-fill"></i></span>Borrar</button>
               </div>
               <div *ngIf="IsEditing == true && counter != idRow">

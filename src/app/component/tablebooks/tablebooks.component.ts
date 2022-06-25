@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Book } from 'src/app/models/book/book.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { DialogbookComponent } from '../add/dialogbook/dialogbook.component';
+import { ModalfilaborradaComponent } from '../add/modalfilaborrada/modalfilaborrada.component';
 import { DialogComponent } from '../dialog/dialog.component';
 
 export interface DialogData {}
@@ -24,17 +25,20 @@ export interface DialogData {}
   styleUrls: ['./tablebooks.component.css'],
 })
 export class TablebooksComponent implements OnInit {
-
+  aceptModalBorrar: boolean = false;
   libros: any = []; // = contstLibro;
   librosCopia: any = [];
   IsEditing = false;
   idRow?: number;
   dialogClosed?: number; //0 cancelado; 1 aceptado
-  bookTemp!:Book;
+  bookTemp!: Book;
   libroString: any;
   durationInSeconds = 5;
-  constructor(private _snackBar: MatSnackBar,public dialog: MatDialog, private bookService: BookService) {}
-
+  constructor(
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private bookService: BookService
+  ) {}
 
   ngOnInit(): void {
     this.bookService.list().subscribe({
@@ -54,6 +58,10 @@ export class TablebooksComponent implements OnInit {
     });
   }
 
+
+  /**DIALOGS**/
+
+  /** Dialog editar fila*/
   openDialog(data?: any, key?: string, position?: number): void {
     // pasar el id por el constructor
     if (this.IsEditing && position == this.idRow) {
@@ -67,22 +75,29 @@ export class TablebooksComponent implements OnInit {
         if (result != null) {
           this.libros[result.position][`${result.key}`] = result.data;
           console.log('result.data -->' + result.data);
-
         }
       });
     }
   }
+  /**Dialog borrar fila */
+  openDialogBorrarRow(id: number): void {
+    const dialogRef = this.dialog.open(ModalfilaborradaComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: {},
+    });
 
-  opensSnackBar(message: string, action: string) {
-      this._snackBar.open(message, action, {duration: this.durationInSeconds * 1000,
-        panelClass: ['css-snackbar']
-      });
-    }
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result+' <-- resultDialogBorrarROw');
+        if (result) {
+          this.removeRow(id);
+        }
+    });
+  }
+
+  /**Dialog añadir una fila */
   openDialogNewEntry(data?: any): void {
     //crear
-
-
-
 
     const dialogRef = this.dialog.open(DialogbookComponent, {
       width: 'auto',
@@ -90,42 +105,36 @@ export class TablebooksComponent implements OnInit {
       data: { data },
     });
 
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result != null) {
-
-          console.log(result);
-         // console.log(result.data);
-          //console.log(Object.values(result));
-          //console.log(Object.values(result.data));
-         // console.log(result.data.autor);
-         // console.log(result.autor);
-
-      }});
-
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != null) {
+        console.log(result);
+      }
+    });
   }
 
-  revertChangesOnRow(idRow: number) {
-    // this.libroString = JSON.stringify(this.librosCopia[idRow]);
-    // this.libros[idRow] = JSON.parse(this.libroString);
+  /**TOAST */
+  opensSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: this.durationInSeconds * 1000,
+      panelClass: ['css-snackbar'],
+    });
+  }
 
-    this.libros[idRow] = JSON.parse(JSON.stringify(this.librosCopia[idRow]));
+  /**ACCIONES PULSAR BOTONES */
+  clickEdit(idRow: number) {
+    this.enableEdit();
+    this.setIdRow(idRow);
+    //this.openSnackBar();
   }
-  printObject(object: Object) {
-    console.log(Object.values(object));
-  }
-  clearBookTemp() {
-    /**limpiar var bookTemp */
-  }
+
   acceptEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
     /*Acciones si se acepta*/
-
     this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
-    this.clearBookTemp();
-
     /*API.PUT*/
   }
+
   cancelEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
@@ -134,37 +143,32 @@ export class TablebooksComponent implements OnInit {
     this.revertChangesOnRow(idRow);
     // this.clearBookTemp();
   }
-  clickEdit(idRow: number) {
-    this.enableEdit();
-    this.setIdRow(idRow);
-    //this.openSnackBar();
-    this.opensSnackBar('Delete','');
-  }
-  enableEdit() {
-    this.IsEditing = !this.IsEditing;
-  }
-  setIdRow(idRow: number) {
-    this.idRow = idRow;
-  }
-  removeRow(id:number) {
+
+
+
+
+
+
+  removeRow(id: number) {
     if (!this.IsEditing) {
       /**Borrar row **/
-      this.bookService.delete(id).subscribe({
-        next: (result: any) => {
-          console.log('delete ok');
-          this._snackBar.open('message');
-        },
-        error: (resultError: Error) => {
-          console.log('error result');
-          this._snackBar.open('no msg');
-          console.log(
-            `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
-          );
-        },
-      });
-    }
+        this.bookService.delete(id).subscribe({
+          next: (result: any) => {
+            console.log('delete ok');
+            this.opensSnackBar('Borrado libro ' + id, 'Ok');
+          },
+          error: (resultError: Error) => {
+            console.log('error result');
+            this._snackBar.open('Error delete');
+            console.log(
+              `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+            );
+          },
+        });
+      }
   }
 
+  /**CONTROL VALORES TABLA */
   controlDescription(text: string, tipo: number) {
     if (text != null) {
       switch (tipo) {
@@ -186,8 +190,24 @@ export class TablebooksComponent implements OnInit {
         case '1':
           return 'Disponible';
       }
-    } return 'No Disponible';
+    }
+    return 'No Disponible';
   }
 
+  setIdRow(idRow: number) {
+    this.idRow = idRow;
+  }
+
+  revertChangesOnRow(idRow: number) {
+    this.libros[idRow] = JSON.parse(JSON.stringify(this.librosCopia[idRow]));
+ }
+
+  printObject(object: Object) {
+    console.log(Object.values(object));
+  }
+
+  enableEdit() {
+    this.IsEditing = !this.IsEditing;
+  }
 
 }
