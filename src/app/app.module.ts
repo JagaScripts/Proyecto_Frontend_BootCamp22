@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoanComponent } from './component/loan/loan.component';
@@ -16,20 +15,24 @@ import { ProfileadminComponent } from './component/profileadmin/profileadmin.com
 import { FooterComponent } from './component/footer/footer.component';
 import { ExchangeComponent } from './component/exchange/exchange.component';
 import { BookcommentComponent } from './component/bookcomment/bookcomment.component';
-
 import { TableexchangeComponent } from './component/tableexchange/tableexchange.component';
-
 import { TablevalueComponent } from './component/tablevalue/tablevalue.component';
 import { TableloanComponent } from './component/tableloan/tableloan.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarandcontentComponent } from './component/sidebarandcontent/sidebarandcontent.component';
 import { TablebooksComponent } from './component/tablebooks/tablebooks.component';
 import { SidebarhomeComponent } from './component/sidebarhome/sidebarhome.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { AuthInterceptor } from './helpers/auth.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './component/dialog/dialog.component';
+import { DialogbookComponent } from './component/add/dialogbook/dialogbook.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { ToastbookComponent } from './component/toast/toastbook/toastbook.component';
+import { HtmlComponent } from './component/toast/toastbook/html/html.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +56,9 @@ import { DialogComponent } from './component/dialog/dialog.component';
     TablebooksComponent,
     SidebarhomeComponent,
     DialogComponent,
+    DialogbookComponent,
+    ToastbookComponent,
+    HtmlComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [
@@ -62,10 +68,19 @@ import { DialogComponent } from './component/dialog/dialog.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatSnackBarModule
 
-    MatDialogModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -10,88 +10,14 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Book } from 'src/app/models/book/book.model';
+import { BookService } from 'src/app/services/book/book.service';
+import { DialogbookComponent } from '../add/dialogbook/dialogbook.component';
 import { DialogComponent } from '../dialog/dialog.component';
+import { HtmlComponent } from '../toast/toastbook/html/html.component';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-  autor: string;
-}
-
-var contstLibro = [
-  {
-    id: 1,
-    autor: 'J K Rowling',
-    titulo: 'Todas esas cosas que te dire mñn',
-    isbn: '0-7645-2641-1',
-    edad: 6,
-    categoria: 'Terror',
-    cantidad_veces_reservado: 0,
-    url_img: '../../../assets/img/harry.jpg',
-    descripcion: 'simulacion de descripcion larga',
-    disponible: '1',
-    usuario: {
-      id: 1,
-      username: 'pepe',
-      email: 'pepe@gmail.com',
-      password: '$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP.',
-      role: 'GUESS',
-      edad: '2022-01-12',
-      url_imagen: '/imagnes/usuario',
-      activo: '1',
-      enabled: true,
-      authorities: [
-        {
-          authority: 'GUESS',
-        },
-      ],
-      accountNonExpired: true,
-      accountNonLocked: true,
-      credentialsNonExpired: true,
-    },
-    editorial: {
-      id: 31,
-      nombre: 'Nordicos',
-    },
-  },
-  {
-    id: 11,
-    autor: 'Arturo Perez',
-    titulo: 'El camino del fuego',
-    isbn: '0-7645-2641-2',
-    edad: 18,
-    categoria: 'Ficcion',
-    cantidad_veces_reservado: 0,
-    url_img: '../../../assets/img/harry.jpg',
-    descripcion:
-      'simulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion largasimulacion de descripcion larga',
-    disponible: '1',
-    usuario: {
-      id: 11,
-      username: 'marc',
-      email: 'marc@gmail.com',
-      password: '$2a$10$XURPShQNCsLjp1ESc2laoObo9QZDhxz73hJPaEv7/cBha4pk0AgP.',
-      role: 'ADMIN',
-      edad: '2022-01-12',
-      url_imagen: '/imagnes/usuario',
-      activo: '1',
-      enabled: true,
-      authorities: [
-        {
-          authority: 'ADMIN',
-        },
-      ],
-      accountNonExpired: true,
-      accountNonLocked: true,
-      credentialsNonExpired: true,
-    },
-    editorial: {
-      id: 31,
-      nombre: 'Nordicos',
-    },
-  },
-];
+export interface DialogData {}
 
 @Component({
   selector: 'app-tablebooks',
@@ -99,90 +25,103 @@ var contstLibro = [
   styleUrls: ['./tablebooks.component.css'],
 })
 export class TablebooksComponent implements OnInit {
-  libros: any[] = contstLibro;
+
+  libros: any = []; // = contstLibro;
+  librosCopia: any = [];
   IsEditing = false;
   idRow?: number;
-  bookTemp = new Book();
-  constructor(public dialog: MatDialog) {}
+  dialogClosed?: number; //0 cancelado; 1 aceptado
+  bookTemp!:Book;
+  libroString: any;
+  durationInSeconds = 5;
+  constructor(private _snackBar: MatSnackBar,public dialog: MatDialog, private bookService: BookService) {}
 
-  ngOnInit(): void {}
 
-  openDialog(data: any, key: string, position: number): void {
+  ngOnInit(): void {
+    this.bookService.list().subscribe({
+      next: (result: any) => {
+        this.libros = result;
+
+        // this.libroString = JSON.stringify(result);
+        //this.librosCopia =  JSON.parse(this.libroString);
+        this.librosCopia = JSON.parse(JSON.stringify(result));
+        //[...this.libros]// Object.assign({}, this.libros);//this.libros.copy();
+      },
+      error: (resultError: Error) => {
+        console.log(
+          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+        );
+      },
+    });
+  }
+
+  openDialog(data?: any, key?: string, position?: number): void {
     // pasar el id por el constructor
-    if (this.IsEditing) {
+    if (this.IsEditing && position == this.idRow) {
+      //editar
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '550px',
-        // data: {name: 'this.name', animal: 'this.animal'}, //valor enviado por dialog
-
         data: { data, key, position },
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        // this.animal = result; //valor devuelto por dialog
+        if (result != null) {
+          this.libros[result.position][`${result.key}`] = result.data;
+          console.log('result.data -->' + result.data);
 
-        this.libros[result.position][`${result.key}`] = result.data;
-        console.log('result.data -->'+result.data);
-
-        this.saveBookTemp(result.data, result.key);
-       // let book = new Book(result.data);
-        //console.log('autor ' + book.getAutor + ',edad ' + book.getEdad);
-
-        //console.log(result.data+"<-->"+ result.key);
-
-        //id
-        // console.log(result.data + '<-result->' + result.id);
-        // console.log(this.libros[result.position][`${result.key}`]);
+        }
       });
     }
   }
-
-  saveBookTemp(data: any, key: string) {
-    switch (key) {
-      case 'id':
-        this.bookTemp.setId(data);
-        break;
-      case 'autor':
-
-        this.bookTemp.setAutor(data);
-        break;
-      case 'titulo':
-        this.bookTemp.setTitulo(data);
-        break;
-      case 'isbn':
-        this.bookTemp.setIsbn(data);
-        break;
-      case 'edad':
-        this.bookTemp.setEdad(data);
-        console.log('despues'+this.bookTemp.getEdad());
-        break;
-      case 'categoria':
-        this.bookTemp.setCategoria(data);
-        break;
-      case 'cantidad_veces_reservado':
-        this.bookTemp.setCantidad_veces_reservado(data);
-        break;
-      case 'url_img':
-        this.bookTemp.setUrl_img(data);
-        break;
-      case 'descripcion':
-        this.bookTemp.setDescripcion(data);
-        break;
-      case 'disponible':
-        this.bookTemp.setDisponible(data);
-        break;
-      default:
-        break;
-    }
+  openSnackBar() {
+    this._snackBar.openFromComponent(HtmlComponent, {
+      duration: this.durationInSeconds * 1000,
+      panelClass: ['css-snackbar']
+    });
   }
+  openDialogNewEntry(data?: any): void {
+    //crear
+    this.openSnackBar();
+
+    const dialogRef = this.dialog.open(DialogbookComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: { data },
+    });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result != null) {
+
+          console.log(result);
+         // console.log(result.data);
+          //console.log(Object.values(result));
+          //console.log(Object.values(result.data));
+         // console.log(result.data.autor);
+         // console.log(result.autor);
+
+      }});
+
+  }
+
+  revertChangesOnRow(idRow: number) {
+    // this.libroString = JSON.stringify(this.librosCopia[idRow]);
+    // this.libros[idRow] = JSON.parse(this.libroString);
+
+    this.libros[idRow] = JSON.parse(JSON.stringify(this.librosCopia[idRow]));
+  }
+  printObject(object: Object) {
+    console.log(Object.values(object));
+  }
+
   clearBookTemp() {
     /**limpiar var bookTemp */
-    this.bookTemp.resetAll();
   }
   acceptEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
     /*Acciones si se acepta*/
-    this.recorrerLibro();
+
+    this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
     this.clearBookTemp();
 
     /*API.PUT*/
@@ -192,7 +131,8 @@ export class TablebooksComponent implements OnInit {
     this.setIdRow(idRow);
     /*Acciones si se cancela*/
     /*Deshacer los cambios*/
-    this.clearBookTemp();
+    this.revertChangesOnRow(idRow);
+    // this.clearBookTemp();
   }
   clickEdit(idRow: number) {
     this.enableEdit();
@@ -204,40 +144,48 @@ export class TablebooksComponent implements OnInit {
   setIdRow(idRow: number) {
     this.idRow = idRow;
   }
-  removeRow() {
+  removeRow(id:number) {
     if (!this.IsEditing) {
       /**Borrar row **/
+      this.bookService.delete(id).subscribe({
+        next: (result: any) => {
+          console.log('delete ok');
+          this._snackBar.open('message');
+        },
+        error: (resultError: Error) => {
+          console.log('error result');
+          this._snackBar.open('no msg');
+          console.log(
+            `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+          );
+        },
+      });
     }
   }
 
   controlDescription(text: string, tipo: number) {
-    switch (tipo) {
-      case 1: // para descripciones
-        return text.substring(0, 50) + ' ...';
-      case 2: //para titulos
-        return text.substring(0, 10) + ' ...';
-      default:
-        return;
+    if (text != null) {
+      switch (tipo) {
+        case 1: // para descripciones
+          return text.substring(0, 50) + ' ...';
+        case 2: //para titulos
+          return text.substring(0, 10) + ' ...';
+        default:
+          return '';
+      }
+    } else {
+      return '';
     }
   }
 
   controlDisponibilidad(disponibilidad: string) {
-    switch (disponibilidad) {
-      case '1':
-        return 'Disponible';
-      case '0':
-        return 'No Disponible';
-      default:
-        return;
-    }
+    if (disponibilidad != null) {
+      switch (disponibilidad) {
+        case '1':
+          return 'Disponible';
+      }
+    } return 'No Disponible';
   }
-  recorrerLibro(){
-    console.log(this.bookTemp.getId());
-    console.log(this.bookTemp.getAutor());
-    console.log(this.bookTemp.getTitulo());
-    console.log(this.bookTemp.getIsbn());
-    console.log(this.bookTemp.getEdad());
-    console.log(this.bookTemp.getCategoria());
 
-  }
+
 }

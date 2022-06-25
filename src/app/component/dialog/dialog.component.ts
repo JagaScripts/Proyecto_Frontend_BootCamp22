@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../tablebooks/tablebooks.component';
 
 @Component({
   selector: 'app-dialog',
@@ -22,13 +21,15 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {}
 
   onNoClick(): void {
-    this.dialogRef.close();
+    //data: { data, key, position },
+
+    this.dialogRef.close(null);
   }
   onYesClick(): void {
     this.dialogRef.close();
   }
   addTitle(){
     this.title = this.data.key;
-    
+
   }
 }

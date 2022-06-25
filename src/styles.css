@@ -1,4 +1,10 @@
-
+.css-snackbar {
+  background: #ff56be;
+  z-index:2000 !important;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
 :root
 {
   --purple: #E91E63;
