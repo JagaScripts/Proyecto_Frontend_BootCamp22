@@ -20,7 +20,7 @@ export class DialogbookComponent implements OnInit {
     id: 0,
     cantidad_veces_reservado: 0,
     url_img: '',
-    usuario: { username: '', password: '', email: '' , role: Rol.ADMIN , edad: new Date(), url_imagen: '', activo: true },
+    usuario: {id:0, username: '', password: '', email: '' , role: Rol.ADMIN , edad: new Date(), url_imagen: '', activo: '1' },
     autor: '',
     titulo: '',
     isbn: '',
