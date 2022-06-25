@@ -121,12 +121,14 @@ export class TablebooksComponent implements OnInit {
   }
 
   /**ACCIONES PULSAR BOTONES */
+
+  /*Pulsar boton editar*/
   clickEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
     //this.openSnackBar();
   }
-
+  /**Aceptar los cambios */
   acceptEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
@@ -134,7 +136,7 @@ export class TablebooksComponent implements OnInit {
     this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
     /*API.PUT*/
   }
-
+  /**Cancelar los cambios */
   cancelEdit(idRow: number) {
     this.enableEdit();
     this.setIdRow(idRow);
@@ -144,11 +146,9 @@ export class TablebooksComponent implements OnInit {
     // this.clearBookTemp();
   }
 
+  /**CRUD  */
 
-
-
-
-
+  /**Borrar */
   removeRow(id: number) {
     if (!this.IsEditing) {
       /**Borrar row **/
