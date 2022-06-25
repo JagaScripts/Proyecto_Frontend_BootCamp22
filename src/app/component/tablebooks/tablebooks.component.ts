@@ -10,10 +10,12 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Book } from 'src/app/models/book/book.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { DialogbookComponent } from '../add/dialogbook/dialogbook.component';
 import { DialogComponent } from '../dialog/dialog.component';
+import { HtmlComponent } from '../toast/toastbook/html/html.component';
 
 export interface DialogData {}
 
@@ -31,7 +33,8 @@ export class TablebooksComponent implements OnInit {
   dialogClosed?: number; //0 cancelado; 1 aceptado
   bookTemp!:Book;
   libroString: any;
-  constructor(public dialog: MatDialog, private bookService: BookService) {}
+  durationInSeconds = 5;
+  constructor(private _snackBar: MatSnackBar,public dialog: MatDialog, private bookService: BookService) {}
 
   ngOnInit(): void {
     this.bookService.list().subscribe({
@@ -69,14 +72,21 @@ export class TablebooksComponent implements OnInit {
       });
     }
   }
+  openSnackBar() {
+    this._snackBar.openFromComponent(HtmlComponent, {
+      duration: this.durationInSeconds * 1000,
+      panelClass: ['css-snackbar']
+    });
+  }
   openDialogNewEntry(data?: any): void {
     //crear
+    this.openSnackBar();
+
     const dialogRef = this.dialog.open(DialogbookComponent, {
       width: 'auto',
       height: 'auto',
       data: { data },
     });
-
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result != null) {
@@ -139,11 +149,11 @@ export class TablebooksComponent implements OnInit {
       this.bookService.delete(id).subscribe({
         next: (result: any) => {
           console.log('delete ok');
-
+          this._snackBar.open('message');
         },
         error: (resultError: Error) => {
           console.log('error result');
-
+          this._snackBar.open('no msg');
           console.log(
             `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
           );
