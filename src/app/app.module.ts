@@ -28,6 +28,11 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { DialogbookComponent } from './component/add/dialogbook/dialogbook.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { ToastbookComponent } from './component/toast/toastbook/toastbook.component';
+import { HtmlComponent } from './component/toast/toastbook/html/html.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +57,8 @@ import { DialogbookComponent } from './component/add/dialogbook/dialogbook.compo
     SidebarhomeComponent,
     DialogComponent,
     DialogbookComponent,
+    ToastbookComponent,
+    HtmlComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [
@@ -61,8 +68,11 @@ import { DialogbookComponent } from './component/add/dialogbook/dialogbook.compo
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatSnackBarModule
 
-    MatDialogModule
   ],
   providers: [
     {

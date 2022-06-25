@@ -5,7 +5,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Book } from 'src/app/models/book/book.model';
-import { Rol } from "../../../models/enum/rol/rol.model";
+
+import { Rol } from 'src/app/models/enum/rol/rol.model';
+import { DialogComponent } from '../../dialog/dialog.component';
+
 
 @Component({
   selector: 'app-dialogbook',

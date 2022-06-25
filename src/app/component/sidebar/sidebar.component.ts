@@ -8,18 +8,18 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
-  valorSidebar = 0;
+  valorSidebar = '0';
 
   @Output() cambiarContenidoSidebar = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
 
-  darValor(value: number ){
+  darValor(value: string ){
     this.valorSidebar = value;
   }
 
-  sendMessage(value:number) {
+  sendMessage(value:string) {
     this.darValor(value)
     this.cambiarContenidoSidebar.emit(this.valorSidebar)
   }
