@@ -8,6 +8,8 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { EditorialService } from 'src/app/services/editorial/editorial.service';
+import { Editorial } from 'src/app/models/editorial/editorial.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dialogbook',
@@ -36,7 +38,7 @@ export class DialogbookComponent implements OnInit {
     categoria: '',
     disponible: '',
     descripcion: '',
-    editorial: {id:0, nombre:''}
+    editorial: { id: 0, nombre: '' },
   };
 
   pushedAutor = 0;
@@ -49,25 +51,20 @@ export class DialogbookComponent implements OnInit {
   pushedEditorial = 0;
 
   editoriales: any = [];
+  addNombreEditorial: string = '';
+
+  durationInSeconds = 5;
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogbookComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private editorialService: EditorialService
+    private editorialService: EditorialService,
+    private _snackBar: MatSnackBar
   ) {}
   libros: any = [];
   ngOnInit(): void {
-    this.editorialService.list().subscribe({
-      next:(result: any) => {
-        this.editoriales = result;
-      },error:(resultError: Error) => {
-        console.log(
-          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
-        );
-      }
-    });
+    this.listEditorial();
   }
-
 
   onNoClick(): void {
     //data: { data, key, position },
@@ -79,7 +76,6 @@ export class DialogbookComponent implements OnInit {
 
     this.dialogRef.close(this.newEntry);
   }
-
 
   controlForm(
     value: string,
@@ -141,20 +137,59 @@ export class DialogbookComponent implements OnInit {
       case 'editorial':
         this.pushedEditorial++;
         break;
-        case 'descripcion':
-          this.pushedDescripcion++;
+      case 'descripcion':
+        this.pushedDescripcion++;
         break;
       default:
         break;
-
-
     }
-      console.log(this.pushedAutor);
+    console.log(this.pushedAutor);
   }
 
-  addEditorial(){
-    this.editorialService.add
+  controlAddEditorial(data: string) {
+    let editorial = {
+      nombre: data,
+    };
+    console.log(editorial.nombre + ' <--');
 
+    if (editorial.nombre != '') {
+      this.addEditorial(editorial);
+      console.log('dentro if');
+    }
   }
 
+  addEditorial(data: any) {
+    this.editorialService.add(data).subscribe({
+      next: (result: any) => {
+        console.log(result + 'addEditorial');
+        this.opensSnackBar(data.nombre + ' añadido!', 'Ok');
+        this.listEditorial();
+        
+      },
+      error: (resultError: Error) => {
+        console.log(resultError);
+      },
+    });
+  }
+
+  /**TOAST */
+  opensSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: this.durationInSeconds * 1000,
+      panelClass: ['css-snackbar'],
+    });
+  }
+
+  listEditorial(){
+    this.editorialService.list().subscribe({
+      next: (result: any) => {
+        this.editoriales = result;
+      },
+      error: (resultError: Error) => {
+        console.log(
+          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+        );
+      },
+    });
+  }
 }

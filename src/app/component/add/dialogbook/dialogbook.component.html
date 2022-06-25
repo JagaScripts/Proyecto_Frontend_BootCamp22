@@ -149,24 +149,18 @@
                           <label for="form_name">Crear Editorial *</label>
                           <input id="form_name" type="text" name="name" class="form-control"
                             placeholder="Porfavor introduce un autor*" required="required"
-                            data-error="Firstname is required." [(ngModel)]="newEntry.autor"
-                            (focusout)="pushed1Time('autor')">
-                          <div *ngIf="!controlForm(newEntry.autor, true) && pushedAutor != 0 ">
-                            <div class="alert alert-danger p-2 mt-1" role="alert">
-                              Campo obligatorio
-                            </div>
-                          </div>
+                            data-error="Firstname is required." [(ngModel)]="addNombreEditorial">
                         </div>
-
 
                       </div>
                       <div class="col-md-1 text-center ">
                         <label for="form_message">Añadir</label>
-                        <button class="btn btn-info form-control"><i class="bi bi-bookmark-plus"></i></button>
+                        <button class="btn btn-info form-control" (click)="controlAddEditorial(addNombreEditorial)"><i class="bi bi-bookmark-plus"></i></button>
                       </div>
                     </div>
 
                     <div class="row">
+
                       <div class="col-md-12">
                         <div class="form-group">
                           <label for="form_message">Descripción *</label>
