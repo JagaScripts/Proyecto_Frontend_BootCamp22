@@ -112,8 +112,8 @@
                             data-error="Please specify your need." [(ngModel)]="newEntry.disponible"
                             (focusout)="pushed1Time('disponible')">
                             <option value="" selected disabled>--Selecciona una opcion--</option>
-                            <option>Disponible</option>
-                            <option>No Disponible</option>
+                            <option value="1">Disponible</option>
+                            <option value="0">No Disponible</option>
 
                           </select>
                           <div *ngIf="!controlForm(newEntry.disponible, true) && pushedDisponible != 0 ">

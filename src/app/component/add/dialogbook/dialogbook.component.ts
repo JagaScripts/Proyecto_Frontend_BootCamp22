@@ -52,10 +52,10 @@ export class DialogbookComponent implements OnInit {
   pushedDescripcion = 0;
   pushedEditorial = 0;
 
-  usuarioLogged!: Usuario;
+  usuarioLoggedo!: Usuario;
   editoriales: any = [];
   addNombreEditorial: string = '';
-
+  libros: any = [];
   durationInSeconds = 5;
   constructor(
     public dialog: MatDialog,
@@ -65,7 +65,8 @@ export class DialogbookComponent implements OnInit {
     private usuarioService: UsuarioService,
     private _snackBar: MatSnackBar
   ) {}
-  libros: any = [];
+
+
   ngOnInit(): void {
     this.listEditorial();
     this.buscarUsuarioLogged();
@@ -79,9 +80,10 @@ export class DialogbookComponent implements OnInit {
   onYesClick(): void {
     //al cerrar con guardarCambios, envia los datos de newEntry
     this.getEditorialFromForm();
+    console.log(this.usuarioLoggedo);
 
-    if(this.usuarioLogged != null){
-      this.newEntry.usuario = this.usuarioLogged;
+    if(this.usuarioLoggedo != null){
+      //this.newEntry.usuario = this.usuarioLoggedo;
       this.dialogRef.close(this.newEntry);
     }
 
@@ -178,8 +180,16 @@ buscarUsuarioLogged() {
   this.usuarioService
     .getByUsername(`${window.sessionStorage.getItem('auth-username')}`)
     .subscribe({
-      next: (result: any) => {
-        this.usuarioLogged = result;
+      next: (result: Usuario) => {
+        this.usuarioLoggedo = result;
+         this.newEntry.usuario.id = this.usuarioLoggedo.id;
+         this.newEntry.usuario.username = this.usuarioLoggedo.username;
+         this.newEntry.usuario.password = this.usuarioLoggedo.password;
+         this.newEntry.usuario.email = this.usuarioLoggedo.email;
+         this.newEntry.usuario.role= this.usuarioLoggedo.role;
+         this.newEntry.usuario.edad = this.usuarioLoggedo.edad;
+         this.newEntry.usuario.url_imagen = this.usuarioLoggedo.url_imagen;
+         this.newEntry.usuario.activo = this.usuarioLoggedo.activo;
       },
       error: (error: Error) => {
         console.log('Error, usuario no encontrado');

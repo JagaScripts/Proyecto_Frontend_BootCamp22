@@ -48,25 +48,8 @@ export class TablebooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarUsuarioLogged();
-
-    this.bookService.list().subscribe({
-      next: (result: any) => {
-        // this.libros = result;
-        this.historialLibrosUsuario(result);
-        // this.libroString = JSON.stringify(result);
-        //this.librosCopia =  JSON.parse(this.libroString);
-        this.librosCopia = JSON.parse(JSON.stringify(result));
-        //[...this.libros]// Object.assign({}, this.libros);//this.libros.copy();
-
-      },
-      error: (resultError: Error) => {
-        console.log(
-          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
-        );
-      },
-    });
+    this.listBooks();
   }
-
 
   /**DIALOGS**/
 
@@ -128,6 +111,8 @@ export class TablebooksComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result != null) {
+        this.addNewBook(result);
+        this.listBooks();
         console.log(result);
       }
     });
@@ -168,7 +153,31 @@ export class TablebooksComponent implements OnInit {
   }
 
   /**CRUD  */
-
+  listBooks(){
+    this.bookService.list().subscribe({
+      next: (result: any) => {
+        // this.libros = result;
+        this.historialLibrosUsuario(result);
+        this.librosCopia = JSON.parse(JSON.stringify(this.libros));
+      },
+      error: (resultError: Error) => {
+        console.log(
+          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+        );
+      },
+    });
+  }
+  /**AÑADIR LIBRO */
+  addNewBook(data: Book) {
+    this.bookService.add(data).subscribe({
+      next: (result: any) => {
+        this.opensSnackBar('Libro ' + data.autor + ' añadido', '');
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
   /**BORRAR UN LIBRO */
   removeRow(id: number) {
     if (!this.IsEditing) {
@@ -188,7 +197,7 @@ export class TablebooksComponent implements OnInit {
       });
     }
   }
-/**BUSCAR LIBROS DE USUARIO LOGEADO */
+  /**BUSCAR LIBROS DE USUARIO LOGEADO */
   historialLibrosUsuario(result: any) {
     let historialLibrosPropietario = [];
 
@@ -207,7 +216,7 @@ export class TablebooksComponent implements OnInit {
     }
   }
 
-/**BuSCAR USUARIO LOGEADo */
+  /**BuSCAR USUARIO LOGEADo */
   buscarUsuarioLogged() {
     this.usuarioService
       .getByUsername(`${window.sessionStorage.getItem('auth-username')}`)
@@ -263,4 +272,8 @@ export class TablebooksComponent implements OnInit {
   enableEdit() {
     this.IsEditing = !this.IsEditing;
   }
+
+  refresh(): void {
+    window.location.reload();
+}
 }
