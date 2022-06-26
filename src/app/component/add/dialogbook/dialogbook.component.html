@@ -197,6 +197,7 @@
 </div>
 
 <div mat-dialog-actions class="modal-footer">
-  <button class="btn btn-primary me-3" mat-button (click)="onYesClick()" cdkFocusInitial>Guardar cambios</button>
+  <button  *ngIf="controlDefinitivo() else btndisabled" class="btn btn-primary me-3" mat-button (click)="onYesClick()" cdkFocusInitial>Guardar cambios</button>
+  <ng-template #btndisabled> <button disabled class="btn btn-primary me-3" mat-button (click)="onYesClick()" cdkFocusInitial>Guardar cambios</button></ng-template>
   <button class="btn btn-secondary " mat-button (click)="onNoClick()">Cancelar</button>
 </div>

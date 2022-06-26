@@ -10,6 +10,8 @@ import {
 import { EditorialService } from 'src/app/services/editorial/editorial.service';
 import { Editorial } from 'src/app/models/editorial/editorial.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { Usuario } from 'src/app/models/usuario/usuario.model';
 
 @Component({
   selector: 'app-dialogbook',
@@ -50,6 +52,7 @@ export class DialogbookComponent implements OnInit {
   pushedDescripcion = 0;
   pushedEditorial = 0;
 
+  usuarioLogged!: Usuario;
   editoriales: any = [];
   addNombreEditorial: string = '';
 
@@ -59,11 +62,13 @@ export class DialogbookComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogbookComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private editorialService: EditorialService,
+    private usuarioService: UsuarioService,
     private _snackBar: MatSnackBar
   ) {}
   libros: any = [];
   ngOnInit(): void {
     this.listEditorial();
+    this.buscarUsuarioLogged();
   }
 
   onNoClick(): void {
@@ -73,10 +78,40 @@ export class DialogbookComponent implements OnInit {
   }
   onYesClick(): void {
     //al cerrar con guardarCambios, envia los datos de newEntry
+    this.getEditorialFromForm();
 
-    this.dialogRef.close(this.newEntry);
+    if(this.usuarioLogged != null){
+      this.newEntry.usuario = this.usuarioLogged;
+      this.dialogRef.close(this.newEntry);
+    }
+
   }
+  getEditorialFromForm(){ //busca la editorial seleccionada por el user i la iguala para tener el id
+    for (let index = 0; index < this.editoriales.length; index++) {
+      const element = this.editoriales[index];
+      if(element.nombre === this.newEntry.editorial.nombre){
+        this.newEntry.editorial = element;
+      }
 
+    }
+
+  }
+  controlDefinitivo(): boolean {
+    let result = true;
+    if (
+      !this.controlForm(this.newEntry.autor, true) ||
+      !this.controlForm(this.newEntry.titulo, true) ||
+      !this.controlForm(this.newEntry.isbn, true) ||
+      !this.controlForm(this.newEntry.categoria, true) ||
+      !this.controlForm(this.newEntry.disponible, true) ||
+      !this.controlForm(this.newEntry.editorial.nombre, true) ||
+      !this.controlForm(this.newEntry.descripcion, true)
+    ) {
+      result = false;
+    }
+
+    return result;
+  }
   controlForm(
     value: string,
     controlEmpty: boolean,
@@ -106,12 +141,70 @@ export class DialogbookComponent implements OnInit {
         result = false;
       }
     }
-    console.log(result);
+    //console.log(result);
 
     return result;
   }
   isNum(val: any) {
     return isNaN(val);
+  }
+
+  controlAddEditorial(data: string) {
+    let editorial = {
+      nombre: data,
+    };
+    console.log(editorial.nombre + ' <--');
+
+    if (editorial.nombre != '') {
+      this.addEditorial(editorial);
+      console.log('dentro if');
+    }
+  }
+
+  addEditorial(data: any) {
+    this.editorialService.add(data).subscribe({
+      next: (result: any) => {
+        console.log(result + 'addEditorial');
+        this.opensSnackBar(data.nombre + ' añadido!', 'Ok');
+        this.listEditorial();
+      },
+      error: (resultError: Error) => {
+        console.log(resultError);
+      },
+    });
+  }
+/**BuSCAR USUARIO LOGEADo */
+buscarUsuarioLogged() {
+  this.usuarioService
+    .getByUsername(`${window.sessionStorage.getItem('auth-username')}`)
+    .subscribe({
+      next: (result: any) => {
+        this.usuarioLogged = result;
+      },
+      error: (error: Error) => {
+        console.log('Error, usuario no encontrado');
+      },
+    });
+}
+  /**TOAST */
+  opensSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: this.durationInSeconds * 1000,
+      panelClass: ['css-snackbar'],
+    });
+  }
+
+  listEditorial() {
+    this.editorialService.list().subscribe({
+      next: (result: any) => {
+        this.editoriales = result;
+      },
+      error: (resultError: Error) => {
+        console.log(
+          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+        );
+      },
+    });
   }
 
   pushed1Time(key: string) {
@@ -143,53 +236,6 @@ export class DialogbookComponent implements OnInit {
       default:
         break;
     }
-    console.log(this.pushedAutor);
-  }
-
-  controlAddEditorial(data: string) {
-    let editorial = {
-      nombre: data,
-    };
-    console.log(editorial.nombre + ' <--');
-
-    if (editorial.nombre != '') {
-      this.addEditorial(editorial);
-      console.log('dentro if');
-    }
-  }
-
-  addEditorial(data: any) {
-    this.editorialService.add(data).subscribe({
-      next: (result: any) => {
-        console.log(result + 'addEditorial');
-        this.opensSnackBar(data.nombre + ' añadido!', 'Ok');
-        this.listEditorial();
-        
-      },
-      error: (resultError: Error) => {
-        console.log(resultError);
-      },
-    });
-  }
-
-  /**TOAST */
-  opensSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: this.durationInSeconds * 1000,
-      panelClass: ['css-snackbar'],
-    });
-  }
-
-  listEditorial(){
-    this.editorialService.list().subscribe({
-      next: (result: any) => {
-        this.editoriales = result;
-      },
-      error: (resultError: Error) => {
-        console.log(
-          `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
-        );
-      },
-    });
+    //console.log(this.pushedAutor);
   }
 }

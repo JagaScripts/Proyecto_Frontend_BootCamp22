@@ -67,23 +67,7 @@ export class TablebooksComponent implements OnInit {
     });
   }
 
-  historialLibrosUsuario(result: any) {
-    let historialLibrosPropietario = [];
 
-    for (let index = 0; index < result.length; index++) {
-      const element: Book = result[index];
-      // console.log(this.libros[index]);
-      if (element.usuario.username != null) {
-        if (element.usuario.username === this.usuarioLogged.username) {
-          historialLibrosPropietario.push(element);
-        }
-      }
-    }
-
-    if (historialLibrosPropietario != null) {
-      this.libros = historialLibrosPropietario;
-    }
-  }
   /**DIALOGS**/
 
   /** Dialog editar fila*/
@@ -185,7 +169,7 @@ export class TablebooksComponent implements OnInit {
 
   /**CRUD  */
 
-  /**Borrar */
+  /**BORRAR UN LIBRO */
   removeRow(id: number) {
     if (!this.IsEditing) {
       /**Borrar row **/
@@ -204,7 +188,26 @@ export class TablebooksComponent implements OnInit {
       });
     }
   }
+/**BUSCAR LIBROS DE USUARIO LOGEADO */
+  historialLibrosUsuario(result: any) {
+    let historialLibrosPropietario = [];
 
+    for (let index = 0; index < result.length; index++) {
+      const element: Book = result[index];
+      // console.log(this.libros[index]);
+      if (element.usuario.username != null) {
+        if (element.usuario.username === this.usuarioLogged.username) {
+          historialLibrosPropietario.push(element);
+        }
+      }
+    }
+
+    if (historialLibrosPropietario != null) {
+      this.libros = historialLibrosPropietario;
+    }
+  }
+
+/**BuSCAR USUARIO LOGEADo */
   buscarUsuarioLogged() {
     this.usuarioService
       .getByUsername(`${window.sessionStorage.getItem('auth-username')}`)
