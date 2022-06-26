@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { Book } from 'src/app/models/book/book.model';
 import { Valoracion } from 'src/app/models/valoracion/valoracion.model';
 
 const BASEURLLIBRO = 'https://api-alquiler-de-libros-2022.herokuapp.com/api/valoracion';
@@ -15,6 +16,18 @@ export class ValoracionService {
 
   list(): Observable<any[]> {
     return this.httpClient.get<Valoracion[]>(`${BASEURLLIBRO}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  listByBook(libro: Book): Observable<any[]> {
+    // console.log(libro);
+    // console.log(`${BASEURLLIBRO}/libro`);
+    const bookId = {
+      id: libro.id,
+    };
+
+    return this.httpClient.post<Valoracion[]>(`${BASEURLLIBRO}/libro`, bookId).pipe(
       catchError(this.handleError)
     );
   }

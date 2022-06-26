@@ -6,6 +6,9 @@ import { User } from 'src/app/models/user/user.model';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { BookService } from 'src/app/services/book/book.service';
 import { ValoracionService } from 'src/app/services/valoracion/valoracion.service';
+import { Valoracion } from 'src/app/models/valoracion/valoracion.model';
+import { Estrellas } from 'src/app/models/enum/estrellas/estrellas.model';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +21,10 @@ export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
   guess: User;
   libros!: Book[];
+
+  starForm = new FormGroup({
+    rating: new FormControl()
+  });
 
   constructor(private bookService: BookService,
               private loginService: LoginService,
@@ -53,7 +60,7 @@ export class HomeComponent implements OnInit {
     this.loginGuess();
   }
 
-  loginGuess(){
+  loginGuess(): void{
     this.loginService.login(this.guess)
     .subscribe(
       {
@@ -68,12 +75,13 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  listBooks(){
+  listBooks(): void{
     this.bookService.list()
         .subscribe(
           {
             next: (libros: Book[]) => {
               this.libros = libros;
+              this.setValorationBooks(this.libros);
             },
             error: (resultError: Error) => {
               console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
@@ -82,4 +90,48 @@ export class HomeComponent implements OnInit {
     );
   }
 
+
+
+  listValorationByLibro(libro: Book): void{
+    this.valoracionService.listByBook(libro)
+        .subscribe(
+          {
+            next: (valoraciones: Valoracion[]) => {
+              console.log(valoraciones);
+
+              this.setAverageValoration(valoraciones);
+            },
+            error: (resultError: Error) => {
+              console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
+            }
+          }
+    );
+  }
+
+  setAverageValoration(valoraciones: Valoracion[]): void{
+    let avgStars = 0;
+    if (Array.isArray(valoraciones) && !valoraciones.length) {
+
+        valoraciones.forEach(function (valoracion) {
+        avgStars += valoracion.valorar.estrellas;
+
+      });
+      avgStars = Math.round(avgStars /= valoraciones.length);
+    }
+    this.starForm.setValue({rating: avgStars.toString()});
+  }
+
+  setValorationBooks(libros: Book[]): void{
+
+    for (let index = 0; index < libros.length; index++) {
+      const libro = libros[index];
+      this.listValorationByLibro(libro);
+
+    }
+
+
+  }
+
 }
+
+
