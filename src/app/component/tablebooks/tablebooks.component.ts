@@ -13,6 +13,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Book } from 'src/app/models/book/book.model';
 import { BookService } from 'src/app/services/book/book.service';
+import { EditorialService } from 'src/app/services/editorial/editorial.service';
 import { DialogbookComponent } from '../add/dialogbook/dialogbook.component';
 import { ModalfilaborradaComponent } from '../add/modalfilaborrada/modalfilaborrada.component';
 import { DialogComponent } from '../dialog/dialog.component';
@@ -58,12 +59,12 @@ export class TablebooksComponent implements OnInit {
     });
   }
 
-
   /**DIALOGS**/
 
   /** Dialog editar fila*/
   openDialog(data?: any, key?: string, position?: number): void {
     // pasar el id por el constructor
+
     if (this.IsEditing && position == this.idRow) {
       //editar
       const dialogRef = this.dialog.open(DialogComponent, {
@@ -71,12 +72,24 @@ export class TablebooksComponent implements OnInit {
         data: { data, key, position },
       });
 
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result != null) {
-          this.libros[result.position][`${result.key}`] = result.data;
-          console.log('result.data -->' + result.data);
-        }
-      });
+      if (key == 'editorial') {
+        console.log('dentro editorial');
+        dialogRef.afterClosed().subscribe((result) => {
+
+          if (result != null) {
+            this.libros[result.position][`${result.key}`].nombre = result.data;
+            console.log('result.editorial 2-->' + result.data);
+          }
+        });
+      } else {
+        console.log('fuera editorial');
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result != null) {
+            this.libros[result.position][`${result.key}`] = result.data;
+            console.log('result.data -->' + result.data);
+          }
+        });
+      }
     }
   }
   /**Dialog borrar fila */
@@ -88,10 +101,10 @@ export class TablebooksComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result+' <-- resultDialogBorrarROw');
-        if (result) {
-          this.removeRow(id);
-        }
+      console.log(result + ' <-- resultDialogBorrarROw');
+      if (result) {
+        this.removeRow(id);
+      }
     });
   }
 
@@ -152,20 +165,20 @@ export class TablebooksComponent implements OnInit {
   removeRow(id: number) {
     if (!this.IsEditing) {
       /**Borrar row **/
-        this.bookService.delete(id).subscribe({
-          next: (result: any) => {
-            console.log('delete ok');
-            this.opensSnackBar('Borrado libro ' + id, 'Ok');
-          },
-          error: (resultError: Error) => {
-            console.log('error result');
-            this._snackBar.open('Error delete');
-            console.log(
-              `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
-            );
-          },
-        });
-      }
+      this.bookService.delete(id).subscribe({
+        next: (result: any) => {
+          console.log('delete ok');
+          this.opensSnackBar('Borrado libro ' + id, 'Ok');
+        },
+        error: (resultError: Error) => {
+          console.log('error result');
+          this._snackBar.open('Error delete');
+          console.log(
+            `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
+          );
+        },
+      });
+    }
   }
 
   /**CONTROL VALORES TABLA */
@@ -200,7 +213,7 @@ export class TablebooksComponent implements OnInit {
 
   revertChangesOnRow(idRow: number) {
     this.libros[idRow] = JSON.parse(JSON.stringify(this.librosCopia[idRow]));
- }
+  }
 
   printObject(object: Object) {
     console.log(Object.values(object));
@@ -209,5 +222,4 @@ export class TablebooksComponent implements OnInit {
   enableEdit() {
     this.IsEditing = !this.IsEditing;
   }
-
 }

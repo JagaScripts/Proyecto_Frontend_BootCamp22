@@ -29,6 +29,7 @@
             <th>Url_Imagen</th>
             <th>Descripcion</th>
             <th>Estado</th>
+            <th>Editorial</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -58,8 +59,11 @@
             <td class="col-1" name="disponible" ngDefaultControl [(ngModel)]="libro.disponible"
               (click)="openDialog(libro.disponible,'disponible',counter)">{{controlDisponibilidad(libro.disponible)}}
             </td>
-            <td class="col-1">
+            <td class="col-1" name="editorial" ngDefaultControl [(ngModel)]="libro.editorial.nombre"
+            (click)="openDialog(libro.editorial.nombre,'editorial',counter)">{{libro.editorial.nombre}}
+          </td>
 
+            <td class="col-1">
               <div *ngIf="IsEditing == false ">
                 <!--btn editar normal-->
                 <button type="button" class="btn btn-labeled btn-success mb-1 w-100" (click)="clickEdit(counter)"><span
