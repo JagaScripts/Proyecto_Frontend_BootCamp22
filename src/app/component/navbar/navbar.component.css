@@ -1,3 +1,6 @@
+.index{
+  z-index: 1000;
+}
 .bd-placeholder-img {
   /* font-size: 1.125rem; */
   font-size: 9rem;

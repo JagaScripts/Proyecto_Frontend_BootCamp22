@@ -27,8 +27,26 @@ export class BookService {
     return this.httpClient.post<Book>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
   }
 
-  update(id: any,data: any){
-    return this.httpClient.put<Book>(`${BASEURLLIBRO}/${id}`,data).pipe(catchError(this.handleError));
+  update(id: any,data: Book){
+    const updatelibro = {
+      id: data.id,
+      autor: data.autor,
+      titulo: data.titulo,
+      isbn: data.isbn,
+      edad: data.edad,
+      categoria: data.categoria,
+      cantidad_veces_reservado: data.cantidad_veces_reservado,
+      url_img: data.url_img,
+      descripcion: data.descripcion,
+      disponible:data.disponible,
+      editorial: {
+        id:data.editorial.id,
+        nombre:data.editorial.nombre
+      }
+    };
+
+
+    return this.httpClient.put<Book>(`${BASEURLLIBRO}/${id}`,updatelibro).pipe(catchError(this.handleError));
   }
 
   delete(id:any){
@@ -39,9 +57,8 @@ export class BookService {
       if (error.error instanceof ErrorEvent) {
         console.log('An error occurred:', error.error.message);
       } else {
-        console.log(
-          `Backend returned code ${error.status}, ` +
-          `body was: ${error.error}`);
+       // console.log(          `Backend returned code ${error.status}, ` +`body was: ${error.error}`);
+       console.log(error.status);
       }
       return throwError(
         'Something bad happened; please try again later.');

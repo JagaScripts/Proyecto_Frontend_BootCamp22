@@ -56,7 +56,7 @@
               (click)="openDialog(libro.cantidad_veces_reservado,'cantidad_veces_reservado',counter)">
               {{libro.cantidad_veces_reservado}}</td>
             <td class="col-1" name="url_img" ngDefaultControl [(ngModel)]="libro.url_img"
-              (click)="openDialog(libro.url_img,'url_img',counter)"><img src="{{libro.url_img}}" width="50px"></td>
+              (click)="openDialog(libro.url_img,'url_img',counter)"><div *ngIf="libro.url_img !== '' else noimg"><img src="{{libro.url_img}}" width="50px"></div><ng-template #noimg><img src="../../../assets/img/noimg.png"  width="70px"></ng-template></td>
             <td class="col-1" name="descripcion" ngDefaultControl [(ngModel)]="libro.descripcion"
               (click)="openDialog(libro.descripcion,'descripcion',counter)">{{controlDescription(libro.descripcion,1)}}
             </td>
@@ -84,7 +84,7 @@
 
               <div *ngIf="IsEditing == true && counter == idRow">
                 <!--btn editar seleccionado con el mismo id-->
-                <button #imgElement type="button" class="btn btn-success  mb-1 w-50" (click)="acceptEdit(counter)"><i
+                <button #imgElement type="button" class="btn btn-success  mb-1 w-50" (click)="acceptEdit(counter, libro.id)"><i
                     class="bi bi-check-lg"></i></button>
                 <button type="button" class="btn btn-danger  mb-1 w-50" (click)="cancelEdit(counter)"><i
                     class="bi bi-x-lg"></i></button>

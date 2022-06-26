@@ -45,11 +45,13 @@ export class UsuarioService {
       if (error.error instanceof ErrorEvent) {
         console.log('An error occurred:', error.error.message);
       } else {
-        console.log(
-          `Backend returned code ${error.status}, ` +
-          `body was: ${error.error}`);
+        //console.log(`Backend returned code ${error.status}, ` +`body was: ${error.error}`);
+        console.log(error.status);
+
       }
       return throwError(
         'Something bad happened; please try again later.');
     };
+
+ 
 }

@@ -12,6 +12,7 @@ import {
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Book } from 'src/app/models/book/book.model';
+import { Rol } from 'src/app/models/enum/rol/rol.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { EditorialService } from 'src/app/services/editorial/editorial.service';
@@ -135,11 +136,13 @@ export class TablebooksComponent implements OnInit {
     //this.openSnackBar();
   }
   /**Aceptar los cambios */
-  acceptEdit(idRow: number) {
+  acceptEdit(idRow: number, idlibro: number) {
     this.enableEdit();
     this.setIdRow(idRow);
     /*Acciones si se acepta*/
     this.librosCopia[idRow] = JSON.parse(JSON.stringify(this.libros[idRow]));
+
+    this.updateBook(idlibro, this.libros[idRow]);
     /*API.PUT*/
   }
   /**Cancelar los cambios */
@@ -153,14 +156,28 @@ export class TablebooksComponent implements OnInit {
   }
 
   /**CRUD  */
-  listBooks(){
+  /**PUT BOOKs */
+  updateBook(id: number, data: Book) {
+    console.log(data);
+   // data.usuario = this.userTemp;
+    this.bookService.update(id, data).subscribe({
+      next: (result: any) => {
+        this.opensSnackBar('Libro id ' + data.id + ' editado', '');
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
+  /**GET ALL BOOKS */
+  listBooks() {
     this.bookService.list().subscribe({
       next: (result: any) => {
         // this.libros = result;
         this.historialLibrosUsuario(result);
         this.librosCopia = JSON.parse(JSON.stringify(this.libros));
       },
-      error: (resultError: Error) => {
+      error: (resultError: any) => {
         console.log(
           `Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`
         );
@@ -200,14 +217,17 @@ export class TablebooksComponent implements OnInit {
   /**BUSCAR LIBROS DE USUARIO LOGEADO */
   historialLibrosUsuario(result: any) {
     let historialLibrosPropietario = [];
+  //  console.log(result);
 
     for (let index = 0; index < result.length; index++) {
       const element: Book = result[index];
-      // console.log(this.libros[index]);
-      if (element.usuario.username != null) {
-        if (element.usuario.username === this.usuarioLogged.username) {
+     // console.log('ele '+element.usuario.username);
+      if (element.usuario != null) {
+        if (element.usuario.username == this.usuarioLogged.username) {
           historialLibrosPropietario.push(element);
         }
+      }else{
+        this._snackBar.open('Warning: Libros sin dueño','Ok');
       }
     }
 
@@ -221,9 +241,10 @@ export class TablebooksComponent implements OnInit {
     this.usuarioService
       .getByUsername(`${window.sessionStorage.getItem('auth-username')}`)
       .subscribe({
-        next: (result: any) => {
+        next: (result: Usuario) => {
+          console.log('usuario logueado: ' + result.username);
           this.usuarioLogged = result;
-          console.log('usuario logueado: ' + this.usuarioLogged.username);
+          console.log(this.usuarioLogged);
         },
         error: (error: Error) => {
           console.log('Error, usuario no encontrado');
@@ -275,5 +296,5 @@ export class TablebooksComponent implements OnInit {
 
   refresh(): void {
     window.location.reload();
-}
+  }
 }
