@@ -15,6 +15,8 @@ export class SigninComponent implements OnInit {
 
   user!: User;
 
+  sigInFail = false;
+
   submitted: boolean = false;
 
   constructor(private loginService: LoginService) {
@@ -38,14 +40,16 @@ export class SigninComponent implements OnInit {
           this.submitted = true
           window.sessionStorage.setItem("auth-token", this.token.token);
           console.log(`getItem ${window.sessionStorage.getItem("auth-token")}`);
-
           window.sessionStorage.setItem("auth-username", this.user.username);
+          this.sigInFail = false;
         },
         error: (resultError: Error) => {
+         this.sigInFail = true;
           console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
         }
       }
     )
   }
+
 
 }
