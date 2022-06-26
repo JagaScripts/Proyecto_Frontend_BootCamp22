@@ -92,14 +92,14 @@ export class HomeComponent implements OnInit {
 
 
 
-  listValorationByLibro(libro: Book): void{
+  listValorationByLibro(libro: Book, numreroLibro: number): void{
     this.valoracionService.listByBook(libro)
         .subscribe(
           {
             next: (valoraciones: Valoracion[]) => {
               console.log(valoraciones);
 
-              this.setAverageValoration(valoraciones);
+              this.setAverageValoration(valoraciones, numreroLibro);
             },
             error: (resultError: Error) => {
               console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
@@ -108,24 +108,38 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  setAverageValoration(valoraciones: Valoracion[]): void{
+  setAverageValoration(valoraciones: Valoracion[], numreroLibro: number): void{
     let avgStars = 0;
-    if (Array.isArray(valoraciones) && !valoraciones.length) {
+    // console.log(Array.isArray(valoraciones) && !valoraciones.length);
+    // console.log(!valoraciones.length);
+    // console.log(Array.isArray(valoraciones));
+
+    if (!(Array.isArray(valoraciones) && !valoraciones.length)) {
 
         valoraciones.forEach(function (valoracion) {
-        avgStars += valoracion.valorar.estrellas;
+          // console.log(Estrellas[valoracion.valorar.estrellas] + " estrellas");
+
+        avgStars += Number(Estrellas[valoracion.valorar.estrellas]);
 
       });
+      // console.log(avgStars + " avg");
+      // // console.log((avgStars /= valoraciones.length) + " avg /= ");
+      // console.log(Math.round(avgStars /= valoraciones.length));
+
       avgStars = Math.round(avgStars /= valoraciones.length);
+      console.log(`${avgStars}`);
+      console.log("valor radio " + this.starForm.get(`rating`)?.value);
+
+      this.starForm.setValue({ "rating": avgStars.toString() });
     }
-    this.starForm.setValue({rating: avgStars.toString()});
+
   }
 
   setValorationBooks(libros: Book[]): void{
 
     for (let index = 0; index < libros.length; index++) {
       const libro = libros[index];
-      this.listValorationByLibro(libro);
+      this.listValorationByLibro(libro, index);
 
     }
 
