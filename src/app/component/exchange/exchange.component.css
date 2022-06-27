@@ -1,12 +1,11 @@
 
 .container-fluid{
-  margin-top: 100px;
-  min-height: 100vh;
+/*  margin-top: 100px;
+ min-height: 100vh;*/
 }
 
 
 body {
-  margin-top: 80px;
   background-color: #f7f6f6;
 
 }
@@ -26,7 +25,6 @@ img#book-img.shadow-lg{
 
 #option{
   margin-bottom: 0px;
-  margin-top: 30px;
 }
 
 .fw-500 {
@@ -89,5 +87,10 @@ img#book-img.shadow-lg{
 }
 
 #flechas{
+  /*margin-top: 240px;*/
+}
+.btn{
+  width: 80px;
+  height: 80px;
   margin-top: 240px;
 }

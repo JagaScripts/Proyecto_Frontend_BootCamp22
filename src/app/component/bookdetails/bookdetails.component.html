@@ -2,7 +2,9 @@
 
   <div class="card row flex-row p-4 featurette m-5 d-flex justify-content-center card">
     <div class="col-lg-3 order-lg-1 mt-2">
-      <img src="{{libro.url_img}}" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px">
+      <div >
+      <img src="{{libro.url_img}}" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px" >
+    </div>
       <form [formGroup]="starForm" (ngSubmit)="botoSubmit();">
         <div class="rating mt-3 justify-content-center align-content-center">
           <input type="radio" formControlName="rating" name="rating" value='5' id="5" [attr.disabled]="false"><label
@@ -44,13 +46,13 @@
       <div class="col-md-2 d-flex">
 
         <div *ngIf="libro.disponible == 1; else disabledDisponible" class="d-flex">
-          <button type="submit" class="btn px-4 button-t-prestamos me-2">Intercambiar</button>
+          <button type="submit" class="btn px-4 button-t-prestamos me-2" (click)="openDialogIntercambiar(libro)">Intercambiar</button>
           <button type="submit" class="btn px-4 button-t-prestamos">Reservar</button>
         </div>
         <ng-template #disabledDisponible>
           <div class="d-flex">
-            <button type="submit" disabled class="btn px-4 button-t-prestamos me-2">Intercambiar</button>
-            <button type="submit" disabled class="btn px-4 button-t-prestamos">Reservar</button>
+            <button type="submit" disabled class="btn px-4 button-t-prestamos me-2" >Intercambiar</button>
+            <button type="submit" disabled class="btn px-4 button-t-prestamos" >Reservar</button>
           </div>
         </ng-template>
       </div>
@@ -85,7 +87,7 @@
               <span><small class="col-md-2 font-weight-bold" id="author">{{valoracion.usuario.username}}: </small>
                 <small class="font-weight-bold ">{{valoracion.valorar.comentario}}</small></span>
             </div>
-            <small class="col-md-2"><!--{{difBetweenDate(valoracion.valorar,counter)}}--> {{difBetweenDate(valoracion.valorar.fecha)}}</small>
+            <small class="col-md-2"><!--{{difBetweenDate(valoracion.valorar,counter)}}-->  {{difBetweenDate(valoracion.valorar.fecha)}}</small>
           </div>
         </div>
       </div>

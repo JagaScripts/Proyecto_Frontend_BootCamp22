@@ -32,6 +32,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { ModalfilaborradaComponent } from './component/add/modalfilaborrada/modalfilaborrada.component';
+import { DialogintercambiarsolicitudComponent } from './component/add/dialogintercambiarsolicitud/dialogintercambiarsolicitud.component';
+import { DialogintercambiargestionComponent } from './component/add/dialogintercambiargestion/dialogintercambiargestion.component';
+import { DialogreservasolicitudComponent } from './component/add/dialogreservasolicitud/dialogreservasolicitud.component';
+import { DialogreservagestionComponent } from './component/add/dialogreservagestion/dialogreservagestion.component';
+import { DialogvalorarComponent } from './component/add/dialogvalorar/dialogvalorar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +62,11 @@ import { ModalfilaborradaComponent } from './component/add/modalfilaborrada/moda
     DialogComponent,
     DialogbookComponent,
     ModalfilaborradaComponent,
+    DialogintercambiarsolicitudComponent,
+    DialogintercambiargestionComponent,
+    DialogreservasolicitudComponent,
+    DialogreservagestionComponent,
+    DialogvalorarComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [
