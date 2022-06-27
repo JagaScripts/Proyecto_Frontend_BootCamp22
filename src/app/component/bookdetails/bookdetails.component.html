@@ -56,9 +56,12 @@
       </div>
       <span>
         <h4>Descripción:</h4>
-        <p *ngIf="libro.descripcion != ''; else nodescripcion" style="border:2px; border-style:solid; border-color:#F8BBd0; padding: 1em; text-align: justify;">
+        <p *ngIf="libro.descripcion != ''; else nodescripcion"
+          style="border:2px; border-style:solid; border-color:#F8BBd0; padding: 1em; text-align: justify;">
           {{libro.descripcion}}</p>
-        <ng-template #nodescripcion><p> Descripcion no disponible</p></ng-template>
+        <ng-template #nodescripcion>
+          <p> Descripcion no disponible</p>
+        </ng-template>
       </span>
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn px-4 button-t-prestamos">Valorar</button>
@@ -66,7 +69,7 @@
     </div>
   </div>
 
-  <div class="row featurette  d-flex justify-content-center">
+  <div class="row featurette  d-flex justify-content-center" *ngIf="allValorar != null">
 
     <div class="col-md-7 mb-4">
 
@@ -74,35 +77,19 @@
         <h5>Sección de comentarios</h5>
       </div>
 
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
+      <!-- NG FOR-->
+      <div *ngFor="let valoracion of allValoracion; let counter=index; ">
+        <div class="card p-3 mt-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="col-md-8 user d-flex flex-row align-items-center">
+              <span><small class="col-md-2 font-weight-bold" id="author">{{valoracion.usuario.username}}: </small>
+                <small class="font-weight-bold ">{{valoracion.valorar.comentario}}</small></span>
+            </div>
+            <small class="col-md-2"><!--{{difBetweenDate(valoracion.valorar,counter)}}--> {{difBetweenDate(valoracion.valorar.fecha)}}</small>
           </div>
-          <small class="col-md-2">2 days ago</small>
         </div>
       </div>
 
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recasdasdasomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
     </div>
 
   </div>

@@ -5,7 +5,6 @@ import { Valoracion } from 'src/app/models/valoracion/valoracion.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { ValoracionService } from 'src/app/services/valoracion/valoracion.service';
 import { ValorarService } from 'src/app/services/valorar/valorar.service';
-
 @Component({
   selector: 'app-bookdetails',
   templateUrl: './bookdetails.component.html',
@@ -90,15 +89,26 @@ export class BookdetailsComponent implements OnInit {
     })
   }
   getAllValorar(){
-    this.serviceValorar.list().subscribe({
-      next:(result:any) =>{
+    // this.serviceValorar.list().subscribe({
+    //   next:(result:any) =>{
+    //     this.allValorar = result;
+    //     console.log('a');
+    //     console.log(this.allValorar);
 
-      },
-      error:(error:any) =>{
-        console.log(error+ ' :valorar');
+    //   },
+    //   error:(error:any) =>{
+    //     console.log(error+ ' :valorar');
 
-      }
-    })
+    //   }
+    // })
+  }
+
+  difBetweenDate(date: Date): string {
+    console.log('DATE');
+    let v = new Date(date);
+    let text = v.getMonth()+'-'+v.getDay() +'-'+v.getFullYear();
+    return text;
+
   }
 
   getValueLibroDisponible(dispponible: string): string {
