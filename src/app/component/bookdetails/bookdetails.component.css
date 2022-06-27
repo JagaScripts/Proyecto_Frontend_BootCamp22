@@ -1,0 +1,202 @@
+
+.container-fluid{
+  margin-top: 100px;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card {
+  border: none;
+  box-shadow: 5px 6px 6px 9px #e9ecef;
+  border-radius: 12px;
+}
+
+
+#cat {
+  font-size: 20px;
+  margin: 0px;
+}
+
+#disp {
+  font-size: 20px;
+}
+
+#author {
+  color: #c2185cde;
+}
+
+#isbn {
+  margin-left: 100px;
+}
+
+.form-right i {
+  font-size: 100px;
+}
+
+/* #rating {
+  margin-left: 80px;
+  padding-left: 18px;
+} */
+
+#tiny {
+  padding-bottom: 3px;
+  width: 17px;
+}
+
+label {
+  padding-bottom: 2px;
+  font-size: 18px;
+}
+
+span {
+  margin-left: 2px;
+}
+
+/* #change {
+  background-color: #FF4081;
+  margin-left: 1px;
+}
+#change:hover {
+  background-color: #F8BBd0;
+} */
+
+#change {
+
+
+  background-color:  var(--light-primari-color);
+  color: var(--purple);
+  /* border-color: var(--pink2); */
+
+}
+
+#change:hover {
+
+  background-color: var(--dark-primari-color);
+  margin-left: 1px;
+  color: var(--white);
+
+}
+
+
+body {
+  background-color: #f7f6f6
+}
+
+.card {
+  border: none;
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  border-radius: 4px;
+}
+
+
+.badge {
+
+  padding: 7px;
+  padding-right: 9px;
+  padding-left: 16px;
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+}
+
+.user-img {
+
+  margin-top: 4px;
+}
+
+.check-icon {
+
+  font-size: 17px;
+  color: #c3bfbf;
+  top: 1px;
+  position: relative;
+  margin-left: 3px;
+}
+
+.form-check-input {
+  margin-top: 6px;
+  margin-left: -24px !important;
+  cursor: pointer;
+}
+
+
+.form-check-input:focus {
+  box-shadow: none;
+}
+
+img#book-img.shadow-lg{
+  box-shadow: 0px 40px 24px -28px rgb(21 65 74 / 29%)!important;
+  /* width: 270px;
+  height: 395.05px; */
+}
+
+.icons i {
+
+  margin-left: 8px;
+}
+
+.reply {
+
+  margin-left: 12px;
+}
+
+.reply small {
+
+  color: #b7b4b4;
+
+}
+
+
+.reply small:hover {
+
+  color: green;
+  cursor: pointer;
+
+}
+
+.rate {
+
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+
+}
+
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center
+}
+
+.rating>input {
+  display: none
+}
+
+.rating>label {
+  position: relative;
+  width: 1em;
+  font-size: 30px;
+  font-weight: 300;
+  color: #FFD600;
+  cursor: pointer
+}
+
+.rating>label::before {
+  content: "\2605";
+  position: absolute;
+  opacity: 0
+}
+
+/* .rating>label:hover:before,
+.rating>label:hover~label:before {
+  opacity: 1 !important
+} */
+
+.rating>input:checked~label:before {
+  opacity: 1
+}
+
+/* .rating:hover>input:checked~label:before {
+  opacity: 0.4
+} */

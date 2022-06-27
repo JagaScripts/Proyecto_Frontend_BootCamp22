@@ -1,0 +1,55 @@
+.container-fluid{
+  margin-top: 100px;
+}
+
+.book-home-t-prestamos{
+  width: 18rem;
+  /* background-color: #fff2f2!important; */
+  border: none;
+}
+img#book-img.shadow-lg{
+  box-shadow: 0px 40px 24px -28px rgb(21 65 74 / 29%)!important;
+  width: 270px;
+  height: 395.05px;
+}
+h2.card-title{
+  color: var(--pink2);
+}
+
+h4#book-autor{
+  color: var(--light-primari-color);
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center
+}
+
+.rating>input {
+  display: none
+}
+
+.rating>label {
+  position: relative;
+  width: 1em;
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--purple);
+  cursor: pointer
+}
+
+.rating>label::before {
+  content: "\2605";
+  position: absolute;
+  opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+  opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+  opacity: 1
+}

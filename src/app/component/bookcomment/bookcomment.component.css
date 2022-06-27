@@ -1,0 +1,26 @@
+.container-fluid{
+  margin-top: 100px;
+  min-height: 100vh;
+}
+
+#author {
+  color: #c2185cde;
+}
+
+span {
+  margin-left: 2px;
+}
+
+#cat {
+  font-size: 20px;
+  margin: 0px;
+}
+
+#disp {
+  font-size: 20px;
+}
+
+#author {
+  color: #c2185cde;
+}
+

@@ -1,0 +1,201 @@
+<div class="container-fluid ps-5">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3 my-5 ms-5" >
+  <div class="card  my-2 book-home-t-prestamos" *ngFor="let libroValoracion of librosValoraciones; let counter=index;">
+    <img src="https://covers.openlibrary.org/b/isbn/9879879104-L.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+    <!-- <img src="{{libro.url_img}}" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="..."> -->
+    <div class="card-body mb-3">
+      <h2 class="card-title ms-2 mt-1 mb-3 ms-3">{{libroValoracion.libro.titulo}}</h2>
+      <h4 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">{{libroValoracion.libro.autor}}</h4>
+      <div class="rating">
+        <input type="radio" value='5' [disabled]="true" [checked]="libroValoracion.valoracion === 5"><label for="5">☆</label>
+        <input type="radio" value='4' [disabled]="true" [checked]="libroValoracion.valoracion === 4"><label for="4">☆</label>
+        <input type="radio" value='3' [disabled]="true" [checked]="libroValoracion.valoracion === 3"><label for="3">☆</label>
+        <input type="radio" value='2' [disabled]="true" [checked]="libroValoracion.valoracion === 2"><label for="2">☆</label>
+        <input type="radio" value='1' [disabled]="true" [checked]="libroValoracion.valoracion === 1"><label for="1">☆</label>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="card  my-2" id="book-home">
+    <img src="../../../assets/img/books/115242.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+    <div class="card-body mb-3">
+      <h2 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h2>
+      <h4 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h4>
+      <div class="rating">
+        <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+        <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+        <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+        <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+        <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+      </div>
+    </div>
+  </div> -->
+  <!-- <div class="card  my-2" id="book-home">
+    <img src="../../../assets/img/books/121568.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+    <div class="card-body mb-3">
+      <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+      <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+      <div class="rating">
+        <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+        <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+        <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+        <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+        <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+      </div>
+    </div>
+  </div>
+  <div class="card  my-2" id="book-home">
+    <img src="../../../assets/img/books/578542.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+    <div class="card-body mb-3">
+      <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+      <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+      <div class="rating">
+        <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+        <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+        <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+        <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+        <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+      </div>
+    </div>
+  </div>
+    <div class="card  my-2" id="book-home">
+      <img src="../../../assets/img/books/8425423317.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  my-2" id="book-home">
+      <img src="../../../assets/img/books/9780838641750.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  my-2" id="book-home">
+      <img src="../../../assets/img/books/9781250836441.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  my-2" id="book-home">
+      <img src="../../../assets/img/books/115242.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  my-2" id="book-home">
+      <img src="../../../assets/img/books/578542.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  m-2" id="book-home">
+      <img src="../../../assets/img/books/578542.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  my-2" id="book-home">
+      <img src="../../../assets/img/books/578542.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  my-2" id="book-home">
+      <img src="../../../assets/img/books/578542.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  m-2" id="book-home">
+      <img src="../../../assets/img/books/578542.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div>
+    <div class="card  my-2" id="book-home">
+      <img src="../../../assets/img/books/578542.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
+      <div class="card-body mb-3">
+        <h5 class="card-title ms-2 mt-1 mb-3 ms-3">Título del libro</h5>
+        <h6 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">Autor del libro</h6>
+        <div class="rating">
+          <input type="radio" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5"  >☆</label>
+          <input type="radio" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4"  >☆</label>
+          <input type="radio" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3"  >☆</label>
+          <input type="radio" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2"  >☆</label>
+          <input type="radio" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1"  >☆</label>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

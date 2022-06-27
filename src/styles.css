@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+.css-snackbar {
+  background: #ff56be;
+  z-index:2000 !important;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+:root
+{
+  --purple: #E91E63;
+  --white: #ffff;
+  --white2: rgba(235, 225, 225, 0.404);
+  --grey: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+  --purple2: rgba(110, 5, 5, 0);
+  --pink2: #ff4081;
+  --dark-primari-color: #C2185B;
+  --light-primari-color: #F8BBD0;
+}
+
+.button-t-prestamos {
+
+
+  background-color:  var(--light-primari-color)!important;
+  color: var(--purple)!important;
+  /* border-color: var(--pink2); */
+
+}
+
+.button-t-prestamos:hover {
+
+  background-color: var(--dark-primari-color)!important;
+  margin-left: 1px!important;
+  color: var(--white)!important;
+
+}
+
+.container-fluid.componente{
+  /*padding-top: 98px;*/
+  height: 100%;
+  min-height: 100%;
+  margin-bottom: 10%;
+
+  /*adri cambios */
+  /* height: 100vh;
+  min-height: 100vh; */
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
