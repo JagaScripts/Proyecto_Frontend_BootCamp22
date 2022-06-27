@@ -42,8 +42,10 @@ export class SigninComponent implements OnInit {
           window.sessionStorage.setItem("auth-token", this.token.token);
           console.log(`getItem ${window.sessionStorage.getItem("auth-token")}`);
           window.sessionStorage.setItem("auth-username", this.user.username);
+
           this.getRolFromUsuario(`${window.sessionStorage.getItem("auth-username")}`);
           this.sigInFail = false;
+
         },
         error: (resultError: Error) => {
          this.sigInFail = true;
