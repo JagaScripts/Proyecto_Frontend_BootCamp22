@@ -31,8 +31,7 @@ import { DialogbookComponent } from './component/add/dialogbook/dialogbook.compo
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
-import { ToastbookComponent } from './component/toast/toastbook/toastbook.component';
-import { HtmlComponent } from './component/toast/toastbook/html/html.component';
+import { ModalfilaborradaComponent } from './component/add/modalfilaborrada/modalfilaborrada.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,8 +56,7 @@ import { HtmlComponent } from './component/toast/toastbook/html/html.component';
     SidebarhomeComponent,
     DialogComponent,
     DialogbookComponent,
-    ToastbookComponent,
-    HtmlComponent,
+    ModalfilaborradaComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [
@@ -71,7 +69,7 @@ import { HtmlComponent } from './component/toast/toastbook/html/html.component';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
 
   ],
   providers: [

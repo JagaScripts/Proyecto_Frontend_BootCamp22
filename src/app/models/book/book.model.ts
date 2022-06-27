@@ -1,3 +1,4 @@
+import { Editorial } from "../editorial/editorial.model";
 import { Usuario } from "../usuario/usuario.model";
 
 export interface Book {
@@ -12,6 +13,7 @@ export interface Book {
    descripcion: string;
    disponible: string;
    usuario: Usuario;
+   editorial: Editorial;
 
   // constructor(data?: any) {
   //   this.id = data?.id;

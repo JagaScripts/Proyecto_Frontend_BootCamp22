@@ -4,7 +4,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 
 
-const BASEURLLIBRO = 'https://api-alquiler-de-libros-2022.herokuapp.com/api/usuario';
+const BASEURLLIBRO = 'https://api-alquiler-de-libros-2022.herokuapp.com/usuario';
 //const BASEURLLIBRO = 'http://localhost:8181/api/libro';
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class UsuarioService {
   getById(id: string){
     return this.httpClient.get<Usuario>(`${BASEURLLIBRO}/${id}`).pipe(
       catchError(this.handleError));
-      
+
   }
   getByUsername(username: string){
     return this.httpClient.get<Usuario>(`${BASEURLLIBRO}/username/${username}`).pipe(
@@ -45,11 +45,13 @@ export class UsuarioService {
       if (error.error instanceof ErrorEvent) {
         console.log('An error occurred:', error.error.message);
       } else {
-        console.log(
-          `Backend returned code ${error.status}, ` +
-          `body was: ${error.error}`);
+        //console.log(`Backend returned code ${error.status}, ` +`body was: ${error.error}`);
+        console.log(error.status);
+
       }
       return throwError(
         'Something bad happened; please try again later.');
     };
+
+ 
 }
