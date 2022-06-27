@@ -2,7 +2,7 @@
 
   <div class="card row flex-row p-4 featurette m-5 d-flex justify-content-center card">
     <div class="col-lg-3 order-lg-1 mt-2">
-      <img src="../../../assets/img/harry.jpg" id="book-img" class="card-img rounded shadow-lg" alt="">
+      <img src="{{libro.img}}" id="book-img" class="card-img rounded shadow-lg" alt="">
       <form [formGroup]="starForm" (ngSubmit)="botoSubmit();">
         <div class="rating mt-3 justify-content-center align-content-center">
           <input type="radio" formControlName="rating" name="rating" value='5' id="5" [attr.disabled]="false"><label
@@ -17,10 +17,25 @@
             for="1">☆</label>
         </div>
       </form>
+
+      <!-- <p class="clasificacion">
+        <input id="radio1" type="radio" name="estrellas" value="5">
+        <label class="fs-1" for="radio1">★</label>
+        <input id="radio2" type="radio" name="estrellas" value="4">
+        <label class="fs-1" for="radio2">★</label>
+        <input id="radio3" type="radio" name="estrellas" value="3">
+        <label class="fs-1" for="radio3">★</label>
+        <input id="radio4" type="radio" name="estrellas" value="2">
+        <label class="fs-1" for="radio4">★</label>
+        <input id="radio5" type="radio" name="estrellas" value="1">
+        <label class="fs-1" for="radio5">★</label>
+      </p> -->
+
+
     </div>
     <div class="mx-5 col-lg-8 order-lg-2">
-      <h2>Harry Potter and the Sorcers Stone</h2>
-      <h4>J.K. Rowling</h4>
+      <h2 >{{libro.titulo}}</h2>
+      <h4 >{{libro.autor}}</h4>
       <h4>978-3-16-148410-0</h4>
       <p id="cat" style="display:block">Categoria: Realismo mágico</p>
       <p id="cat" style="display:block">Edad: +5 años</p>
@@ -50,7 +65,7 @@
 
   <div class="row featurette  d-flex justify-content-center">
 
-    <div class="col-md-7">
+    <div class="col-md-7 mb-4">
 
       <div class="headings d-flex justify-content-between align-items-center mb-3">
         <h5>Sección de comentarios</h5>
@@ -80,54 +95,12 @@
         <div class="d-flex justify-content-between align-items-center">
           <div class="col-md-8 user d-flex flex-row align-items-center">
             <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
+                class="font-weight-bold">Libro 100% recasdasdasomendado!</small></span>
           </div>
           <small class="col-md-2">2 days ago</small>
         </div>
       </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
     </div>
 
   </div>
 </div>
-

@@ -69,7 +69,7 @@ import { ModalfilaborradaComponent } from './component/add/modalfilaborrada/moda
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
 
   ],
   providers: [

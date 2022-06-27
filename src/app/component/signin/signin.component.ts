@@ -3,6 +3,7 @@ import { Token } from 'src/app/models/token/token.model';
 import { User } from 'src/app/models/user/user.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { LoginService } from 'src/app/services/auth/login.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-signin',
@@ -19,7 +20,7 @@ export class SigninComponent implements OnInit {
 
   submitted: boolean = false;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private usuarioService:UsuarioService) {
     this.user = {
       username: '',
       password: ''
@@ -41,6 +42,7 @@ export class SigninComponent implements OnInit {
           window.sessionStorage.setItem("auth-token", this.token.token);
           console.log(`getItem ${window.sessionStorage.getItem("auth-token")}`);
           window.sessionStorage.setItem("auth-username", this.user.username);
+          this.getRolFromUsuario(`${window.sessionStorage.getItem("auth-username")}`);
           this.sigInFail = false;
         },
         error: (resultError: Error) => {
@@ -49,7 +51,20 @@ export class SigninComponent implements OnInit {
         }
       }
     )
+
   }
 
+  getRolFromUsuario(username: string){
+    this.usuarioService.getByUsername(username).subscribe({
+      next:(result: Usuario) =>{
+        window.sessionStorage.setItem("auth-rol", result.role);
+        console.log('rol: '+sessionStorage.getItem("auth-rol"));
+      },
+      error:(error: any) =>{
+        console.log(error+' Error rol sesion user' );
+
+      }
+    });
+  }
 
 }
