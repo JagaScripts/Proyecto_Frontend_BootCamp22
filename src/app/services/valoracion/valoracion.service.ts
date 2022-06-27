@@ -24,6 +24,14 @@ export class ValoracionService {
       catchError(this.handleError));
   }
 
+  getByBookId(data: any){
+    const bookId = {
+      id: data
+    }
+
+    return this.httpClient.post<Valoracion>(`${BASEURLLIBRO}/libro`,bookId).pipe(catchError(this.handleError));
+  }
+
   add(data: Valoracion){
     return this.httpClient.post<Valoracion>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
   }

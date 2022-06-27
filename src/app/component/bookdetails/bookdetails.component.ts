@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Book } from 'src/app/models/book/book.model';
+import { Valoracion } from 'src/app/models/valoracion/valoracion.model';
 import { BookService } from 'src/app/services/book/book.service';
+import { ValoracionService } from 'src/app/services/valoracion/valoracion.service';
+import { ValorarService } from 'src/app/services/valorar/valorar.service';
 
 @Component({
   selector: 'app-bookdetails',
@@ -10,6 +13,11 @@ import { BookService } from 'src/app/services/book/book.service';
 })
 export class BookdetailsComponent implements OnInit {
   libro: any = {};
+  allValoracion: any =[];
+  allValorar: any = [];
+  // idValoracion = {
+  //   id: this.libro.id
+  // }
   starForm = new FormGroup({
     rating: new FormControl(),
   });
@@ -44,7 +52,7 @@ export class BookdetailsComponent implements OnInit {
     console.log('valor radio ' + this.starForm.get('rating')?.value);
   }
 
-  constructor(private serviceBook: BookService) {}
+  constructor(private serviceBook: BookService, private serviceValoracion: ValoracionService, private serviceValorar: ValorarService) {}
 
   ngOnInit(): void {
     console.log('valor radio ' + this.starForm.get('rating')?.value);
@@ -61,6 +69,8 @@ export class BookdetailsComponent implements OnInit {
         //this.libro = result;
         this.libro = this.libroSimulado;
         console.log('valor libro :', this.libro);
+
+        this.getAllValoracion(this.libro.id);
       },
       error: (error: any) => {
         console.log(error);
@@ -68,7 +78,28 @@ export class BookdetailsComponent implements OnInit {
     });
   }
 
-  getAllValoracion() {}
+  getAllValoracion(data: string) {
+    this.serviceValoracion.getByBookId(data).subscribe({
+      next:(result:any) => {
+        this.allValoracion = result;
+        console.log(this.allValoracion);
+      },
+      error:(error: any) =>{
+        console.log(error+ ' :valoracion');
+      }
+    })
+  }
+  getAllValorar(){
+    this.serviceValorar.list().subscribe({
+      next:(result:any) =>{
+
+      },
+      error:(error:any) =>{
+        console.log(error+ ' :valorar');
+
+      }
+    })
+  }
 
   getValueLibroDisponible(dispponible: string): string {
     switch (dispponible) {

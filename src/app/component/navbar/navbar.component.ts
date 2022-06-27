@@ -41,8 +41,6 @@ export class NavbarComponent implements OnInit {
       {
         next: (result: Rol) => {
           // this.role = result;
-
-
         },
         error: (resultError: Error) => {
             console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
