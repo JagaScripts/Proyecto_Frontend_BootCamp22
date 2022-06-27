@@ -1,47 +1,49 @@
 <div class="container-fluid">
-  <h1 class="">Intercambio</h1>
-  <div class=" table-responsive ">
+  <h1 class="d-flex justify-content-start">Intercambio</h1>
 
-
-<table class="table table-danger table-striped table-hover">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Fecha-Solicitud</th>
-      <th>Fecha-estado-final</th>
-      <th>Estado</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>22-22-22</td>
-      <td>22-22-22</td>
-      <td>22-22-22</td>
-      <td class="col-1"><button type="button" class="btn btn-success me-2 mb-1 w-100 "><i class="bi bi-pencil-square"></i>
-        Editar</button> <button type="button" class="btn btn-danger me-2 w-100"><i
-          class="bi bi-eraser-fill"></i>Remove</button></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>22-22-22</td>
-      <td>22-22-22</td>
-      <td>22-22-22</td>
-      <td><button type="button" class="btn btn-success me-2 mt-2"><i class="bi bi-pencil-square"></i> Editar</button> <button type="button" class="btn btn-danger me-2 mt-2"><i class="bi bi-eraser-fill"></i>Remove</button></td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>22-22-22</td>
-      <td>22-22-22</td>
-      <td>22-22-22</td>
-      <td><button type="button" class="btn btn-success me-2 mt-2"><i class="bi bi-pencil-square"></i> Editar</button> <button type="button" class="btn btn-danger me-2 mt-2"><i class="bi bi-eraser-fill"></i>Remove</button></td>
-    </tr>
-  </tbody>
-
-
-</table>
-
-
+  <div class="d-flex justify-content-end mb-2">
+    <button class="btn btn-labeled btn-primary me-2"><span class="btn-label me-2"><i class="bi bi-arrow-clockwise"
+          (click)="refresh()"></i></span>Refrescar</button>
+    <!-- <button class="btn btn-labeled btn-primary" disabled (click)="openDialogNewEntry()"><span
+        class="btn-label me-2"><i class="bi bi-plus-square-fill"></i></span>Añadir</button> -->
   </div>
+
+  <!-- <button class="btn btn-labeled btn-primary" (click)="openDialogNewEntry()"><span class="btn-label me-2"><i
+          class="bi bi-plus-square-fill"></i></span>Añadir</button> -->
+
+<div class=" table-responsive ">
+
+
+  <table class="table table-danger table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="col-1">#</th>
+        <th class="col-1">Fecha-Solicitud</th>
+        <th class="col-1">Fecha-estado-final</th>
+        <th class="col-1">Estado</th>
+        <th class="col-1">Otro propietario</th>
+        <th class="col-1">Tu libro</th>
+        <th class="col-1">Su libro</th>
+        <!-- <th>Acciones</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let intercambioDelPropietarioLoggeado of intercambiosDelPropietarioLoggeado">
+        <td class="col-1" name="id"ngDefaultControl [(ngModel)]="intercambioDelPropietarioLoggeado.id">{{intercambioDelPropietarioLoggeado.id}}</td>
+        <td class="col-1" name="fecha" ngDefaultControl [(ngModel)]="intercambioDelPropietarioLoggeado.fecha_solicitud">{{intercambioDelPropietarioLoggeado.fecha_solicitud}}</td>
+        <td class="col-1">22-22-22</td>
+        <td class="col-1">22-22-22</td>
+        <td class="col-1"></td>
+        <td class="col-1"></td>
+        <td class="col-1"></td>
+
+      </tr>
+
+    </tbody>
+
+
+  </table>
+
+
+</div>
 </div>

@@ -21,7 +21,12 @@
                                       <label>Contraseña<span class="text-danger">*</span></label>
                                       <div class="input-group">
                                           <div class="input-group-text"><i class="bi input-t-prestamos"><img src="../../../assets/img/padlock.png" id="tiny" alt=""></i></div>
-                                          <input type="password" class="form-control"  id="password" placeholder="Introducir Contraseña" required [(ngModel)]="user.password" name="password">
+                                          <input type="password"  class="form-control"  id="password" placeholder="Introducir Contraseña" required [(ngModel)]="user.password" name="password">
+                                      </div>
+                                      <div *ngIf="sigInFail">
+                                        <div class="alert alert-danger p-2 mt-1" role="alert">
+                                          Password incorrecto.
+                                        </div>
                                       </div>
                                   </div>
                                   <div class="col-lg-9">

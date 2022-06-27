@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToastbookComponent } from './toastbook.component';
+import { ModalfilaborradaComponent } from './modalfilaborrada.component';
 
-describe('ToastbookComponent', () => {
-  let component: ToastbookComponent;
-  let fixture: ComponentFixture<ToastbookComponent>;
+describe('ModalfilaborradaComponent', () => {
+  let component: ModalfilaborradaComponent;
+  let fixture: ComponentFixture<ModalfilaborradaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToastbookComponent ]
+      declarations: [ ModalfilaborradaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToastbookComponent);
+    fixture = TestBed.createComponent(ModalfilaborradaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
