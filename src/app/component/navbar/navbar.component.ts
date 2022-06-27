@@ -12,12 +12,10 @@ import { RolService } from 'src/app/services/auth/rol.service';
 })
 export class NavbarComponent implements OnInit {
 
-  user!: User;
-  // role!: Rol;
   logAvailable: string = 'Sign In';
   isLoggedIn: boolean = false;
-  usuario:any = '';
-  rol: any = '';
+  usuario:any = null;
+  rol: any = null;
   constructor(private router:Router, private loginService: LoginService, private rolService: RolService) { }
 
   ngOnInit(): void {
@@ -25,11 +23,11 @@ export class NavbarComponent implements OnInit {
     this.loginService.getUser$().subscribe(
       {
         next: (result: User) => {
-          this.user = result;
+          this.usuario = result;
           this.isLoggedIn = true;
           this.logAvailable = 'Sign Out';
-          // this.usuario = sessionStorage.getItem("auth-username");
-          // this.rol = sessionStorage.getItem("auth-rol");
+          this.usuario = sessionStorage.getItem("auth-username");
+          this.rol = sessionStorage.getItem("auth-rol");
         },
         error: (resultError: Error) => {
             console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
@@ -52,10 +50,8 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     window.sessionStorage.clear();
-    // this.user.username = '';
-    // this.role = Rol;
-    // this.usuario = '';
-    // this.rol = '';
+    this.usuario = '';
+    this.rol = '';
     this.logAvailable = 'Sign In';
     this.isLoggedIn = false;
     this.router.navigate(['/signin']);
