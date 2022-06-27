@@ -45,7 +45,12 @@
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <ul class="navbar-nav me-auto mb-md-0 align-bottom">
+        <ul class="navbar-nav me-3 mb-md-0 align-bottom">
+          <div *ngIf="usuario != ''">
+          <li class="nav-item title signin-prestamo">
+            <a class="nav-link text-center text-nowrap"*ngIf="usuario != null">{{usuario}} ({{rol}}) </a>
+          </li>
+        </div>
         <li class="nav-item title signin-prestamo">
           <a class="nav-link text-center text-nowrap"*ngIf="isLoggedIn===false" routerLink="/signin">{{logAvailable}}</a>
         </li>
