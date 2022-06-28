@@ -24,9 +24,9 @@
         <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/bookcomment">!bookcomment!</a>
         </li> -->
-        <li class="nav-item title">
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/bookdetails">!bookdetails!</a>
-        </li>
+        </li> -->
         <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/exchange">!exchange!</a>
         </li>
@@ -57,8 +57,10 @@
           <a class="nav-link text-center text-nowrap" (click)="logout()" *ngIf="isLoggedIn" routerLink="/profileuser">{{logAvailable}}</a>
         </li>
         </ul>
-        <input class="form-control me-2 mt-3" type="search" id="search" placeholder="Buscar" aria-label="Search">
-        <button class="btn btn-outline-danger button-t-prestamos boton-navbar" type="submit">Buscar</button>
+
+
+        <input class="form-control me-2 mt-3" type="search" id="search" name="search" placeholder="Buscar" aria-label="Search" [(ngModel)]="dataBuscar">
+        <button class="btn btn-outline-danger button-t-prestamos boton-navbar" type="submit" (click)="buscar()">Buscar</button>
       </form>
     </div>
 

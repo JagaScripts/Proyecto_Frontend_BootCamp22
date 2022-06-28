@@ -30,7 +30,8 @@ const routes: Routes = [
   {path:'value',component: ValueComponent},
   {path:'sidebarandcontent', component: SidebarandcontentComponent},
   {path:'sidebarhome', component: SidebarhomeComponent},
-  {path:'', component: SidebarhomeComponent}
+  {path:'', component: SidebarhomeComponent},
+  {path:'bookdetails/:titulo/:id', component: BookdetailsComponent}
 ];
 
 @NgModule({
