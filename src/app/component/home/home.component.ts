@@ -7,6 +7,7 @@ import { BookService } from 'src/app/services/book/book.service';
 import { ValoracionService } from 'src/app/services/valoracion/valoracion.service';
 import { Valoracion } from 'src/app/models/valoracion/valoracion.model';
 import { Estrellas } from 'src/app/models/enum/estrellas/estrellas.model';
+import { SsesionService } from 'src/app/services/auth/ssesion.service';
 
 export interface LibroValoracion{
   libro: Book;
@@ -26,14 +27,25 @@ export class HomeComponent implements OnInit {
 
   constructor(private bookService: BookService,
               private loginService: LoginService,
-              private valoracionService: ValoracionService) {
+              private valoracionService: ValoracionService,
+              private ssesionService: SsesionService) {
 
     this.guess = {username: 'pepe', password: 'password'};
   }
 
 
   ngOnInit(): void {
-    this.loginGuess();
+    if (this.ssesionService.getToken() != null) {
+
+      this.listBooks();
+
+
+    } else {
+
+      this.loginGuess();
+
+    }
+
   }
 
   loginGuess(): void{
