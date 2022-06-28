@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { RolService } from 'src/app/services/auth/rol.service';
 import { SsesionService } from 'src/app/services/auth/ssesion.service';
@@ -17,8 +17,8 @@ export class NavbarComponent implements OnInit {
   role: any;
   // @Output() isSigned = new EventEmitter();
 
-  constructor(private router: Router, private ssesionService: SsesionService, private loginService: LoginService, private userService: RolService) {
-    this.login();
+  constructor(private router: Router, private route: ActivatedRoute, private ssesionService: SsesionService, private loginService: LoginService, private userService: RolService) {
+  
   }
 
   ngOnInit(): void {
