@@ -81,7 +81,7 @@ export class LoanComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private servicePrestar: PrestarService,
     private serviceUsuario: UsuarioService,
-    private servicePrestacion: PrestacionService
+    private servicePrestacion: PrestacionService,
   ) {
     this.libro = data;
   }
@@ -113,6 +113,7 @@ export class LoanComponent implements OnInit {
           this.resultPrestar = result;
           this.rellenarPrestacion();
           this.postPrestacion();
+          this.opensSnackBar('Solicitud enviada')
         },
         error: (error: any) => {
           console.log(error + ' postPrestar');
@@ -167,6 +168,8 @@ export class LoanComponent implements OnInit {
     //this.prestar.duracion_reserva =
   }
 
+
+
   rellenarPrestacion() {
     this.prestacion.libro_prestacion_id = this.libro.data;
     // this.prestacion.libro_prestacion_id.id = this.libro.id;
@@ -196,7 +199,7 @@ export class LoanComponent implements OnInit {
   }
 
   /**TOAST */
-  opensSnackBar(message: string, action: string) {
+  opensSnackBar(message: string, action?: string) {
     this._snackBar.open(message, action, {
       duration: this.durationInSeconds * 1000,
       panelClass: ['css-snackbar'],
