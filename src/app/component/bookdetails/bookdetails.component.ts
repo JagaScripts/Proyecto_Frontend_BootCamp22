@@ -9,6 +9,7 @@ import { ValoracionService } from 'src/app/services/valoracion/valoracion.servic
 import { ValorarService } from 'src/app/services/valorar/valorar.service';
 import { ExchangeComponent } from '../exchange/exchange.component';
 import { LoanComponent } from '../loan/loan.component';
+import { ValueComponent } from '../value/value.component';
 @Component({
   selector: 'app-bookdetails',
   templateUrl: './bookdetails.component.html',
@@ -111,13 +112,28 @@ export class BookdetailsComponent implements OnInit {
       }
     });
   }
-  openDialogReservar(data?: any): void {
+  openDialogValorar(data?: any): void {
+    console.log('abrir dialog reservar');
+
+    const dialogRef = this.dialog.open(ValueComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: { data },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != null) {
+
+      }
+    });
+  }
+
+  openDialogReservar(data?: any, usuarioLogged?: any): void {
     console.log('abrir dialog reservar');
 
     const dialogRef = this.dialog.open(LoanComponent, {
       width: 'auto',
       height: '80%',
-      data: { data },
+      data: { data, usuarioLogged },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result != null) {

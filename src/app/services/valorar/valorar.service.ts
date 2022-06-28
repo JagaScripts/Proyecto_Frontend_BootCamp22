@@ -24,7 +24,7 @@ export class ValorarService {
   }
 
   add(data: Valorar){
-    return this.httpClient.post<Valorar>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
+    return this.httpClient.post<any>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
   }
 
   update(id: any,data: any){
