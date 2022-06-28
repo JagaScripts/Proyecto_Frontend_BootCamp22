@@ -89,7 +89,7 @@ export class SigninComponent implements OnInit {
         console.log(Rol[this.usuario.role]);
         this.rolService.addRol(Rol[this.usuario.role]);
         console.log(Rol[this.usuario.role]);
-        this.router.navigate(['/sidebarhome']);
+        this.router.navigate(['/home']);
         // this.isSigned.emit(this.submitted);
 
       },
@@ -98,6 +98,10 @@ export class SigninComponent implements OnInit {
       }
     });
 
+  }
+
+  registrar(){
+    this.router.navigate(['/signup']);
   }
 
 }

@@ -1,20 +1,64 @@
 <div class="container-fluid ps-5">
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3 my-5 ms-5">
-  <div class="card  my-2 book-home-t-prestamos" *ngFor="let libroValoracion of librosValoraciones; let counter=index;">
-    <img src="https://covers.openlibrary.org/b/isbn/9879879104-L.jpg" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="...">
-    <!-- <img src="{{libro.url_img}}" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="..."> -->
-    <div class="card-body mb-3">
-      <h2 class="card-title ms-2 mt-1 mb-3 ms-3">{{libroValoracion.libro.titulo}}</h2>
-      <h4 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">{{libroValoracion.libro.autor}}</h4>
-      <div class="rating">
-        <input type="radio" value='5' [disabled]="true" [checked]="libroValoracion.valoracion === 5"><label for="5">☆</label>
-        <input type="radio" value='4' [disabled]="true" [checked]="libroValoracion.valoracion === 4"><label for="4">☆</label>
-        <input type="radio" value='3' [disabled]="true" [checked]="libroValoracion.valoracion === 3"><label for="3">☆</label>
-        <input type="radio" value='2' [disabled]="true" [checked]="libroValoracion.valoracion === 2"><label for="2">☆</label>
-        <input type="radio" value='1' [disabled]="true" [checked]="libroValoracion.valoracion === 1"><label for="1">☆</label>
+
+  <div
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3 my-5 ms-5"
+  >
+    <div
+      class="card my-2 book-home-t-prestamos"
+      *ngFor="let libroValoracion of librosValoraciones; let counter = index"
+    routerLink="/bookdetails/{{libroValoracion.libro.id}}">
+      <div *ngIf="librosValoraciones != null; else libroValoracionnull">
+        <img
+          src="https://covers.openlibrary.org/b/isbn/9879879104-L.jpg"
+          id="book-img"
+          class="shadow-lg rounded card-img-top img-fluid"
+          alt="..."
+        />
+        <!-- <img src="{{libro.url_img}}" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="..."> -->
+
+        <div class="card-body mb-3">
+          <h2 class="card-title ms-2 mt-1 mb-3 ms-3">
+            {{ libroValoracion.libro.titulo }}
+          </h2>
+          <h4 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">
+            {{ libroValoracion.libro.autor }}
+          </h4>
+          <div class="rating">
+            <input
+              type="radio"
+              value="5"
+              [disabled]="true"
+              [checked]="libroValoracion.valoracion === 5"
+            /><label for="5">☆</label>
+            <input
+              type="radio"
+              value="4"
+              [disabled]="true"
+              [checked]="libroValoracion.valoracion === 4"
+            /><label for="4">☆</label>
+            <input
+              type="radio"
+              value="3"
+              [disabled]="true"
+              [checked]="libroValoracion.valoracion === 3"
+            /><label for="3">☆</label>
+            <input
+              type="radio"
+              value="2"
+              [disabled]="true"
+              [checked]="libroValoracion.valoracion === 2"
+            /><label for="2">☆</label>
+            <input
+              type="radio"
+              value="1"
+              [disabled]="true"
+              [checked]="libroValoracion.valoracion === 1"
+            /><label for="1">☆</label>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
-
-  </div>
 </div>
+<ng-template #libroValoracionnull><mat-spinner></mat-spinner></ng-template>

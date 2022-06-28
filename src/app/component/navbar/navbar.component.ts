@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+
 import { Ssesion } from 'src/app/models/ssesion/ssesion.model';
+
 import { LoginService } from 'src/app/services/auth/login.service';
 import { RolService } from 'src/app/services/auth/rol.service';
 import { SsesionService } from 'src/app/services/auth/ssesion.service';
@@ -18,19 +22,10 @@ export class NavbarComponent implements OnInit {
   user: any;
   role: any;
 
-  dataBuscar: any;
-  libro: any;
-  durationInSeconds: number = 5;
-  // @Output() isSigned = new EventEmitter();
+  constructor(private router: Router, private route: ActivatedRoute, private ssesionService: SsesionService, private loginService: LoginService, private userService: RolService) {
+  
+  }
 
-  constructor(
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    private ssesionService: SsesionService,
-    private loginService: LoginService,
-    private userService: RolService,
-    private serviceBook: BookService
-  ) {}
 
   ngOnInit(): void {
     this.login();

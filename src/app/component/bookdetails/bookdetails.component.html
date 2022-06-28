@@ -2,9 +2,15 @@
 
   <div class="card row flex-row p-4 featurette m-5 d-flex justify-content-center card">
     <div class="col-lg-3 order-lg-1 mt-2">
-      <div >
+      <div *ngIf="libro.url_img != ''; else libroImgNull">
       <img src="{{libro.url_img}}" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px" >
     </div>
+    <ng-template #libroImgNull>
+      <div>
+
+      <img src="../../../assets/img/noimg.png" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px" >
+    </div>
+    </ng-template>
       <form [formGroup]="starForm" (ngSubmit)="botoSubmit();">
         <div class="rating mt-3 justify-content-center align-content-center">
           <input type="radio" formControlName="rating" name="rating" value='5' id="5" [attr.disabled]="false"><label
