@@ -11,7 +11,7 @@ import { Intercambiar } from 'src/app/models/intercambiar/intercambiar.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { IntercambiarService } from 'src/app/services/intercambiar/intercambiar.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
-import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-exchange',
   templateUrl: './exchange.component.html',
@@ -24,10 +24,10 @@ export class ExchangeComponent implements OnInit {
   valorSelected = 0;
   durationInSeconds = 5;
   transaccionCorrecta = false;
-  date: Date = new Date;
+  date: any = '';
 
   intercambiar = {
-    fecha_solicitud: this.date,
+    fecha_solicitud: '',
     estado: 'pendiente',
   };
   constructor(
@@ -48,11 +48,13 @@ export class ExchangeComponent implements OnInit {
   }
 
   postIntercambiar() {
+    this.intercambiar.fecha_solicitud = this.getNowDate();
     this.serviceIntercambiar.add(this.intercambiar).subscribe({
       next: (result: any) => {
         console.log(result);
         this.librosUserLogged = result;
         this.transaccionCorrecta = true;
+        this.completarTramite();
       },
       error: (error: any) => {
         console.log(error + 'postIntercambiar');
@@ -88,8 +90,6 @@ export class ExchangeComponent implements OnInit {
     this.idRowLibro = id;
   }
   completarTramite() {
-    this.date = new Date(this.getNowDate());
-    this.postIntercambiar();
     if (this.transaccionCorrecta) {
       this.opensSnackBar('Intercambio solicitado');
       this.dialogRef.close();
@@ -104,7 +104,7 @@ export class ExchangeComponent implements OnInit {
     });
   }
 
-  getNowDate() {
+  getNowDate(): string {
     //return string
     var returnDate = '';
     //get datetime now
@@ -118,19 +118,19 @@ export class ExchangeComponent implements OnInit {
     var nn = today.getMinutes();
     var ss = today.getSeconds();
     //Interpolation date
-    returnDate += yyyy+'-';
-    if (dd < 10) {
-      returnDate += `0${dd}-`;
-    } else {
-      returnDate += `${dd}-`;
-    }
+    returnDate += yyyy + '-';
 
     if (mm < 10) {
-      returnDate += `0${mm}`;
+      returnDate += `0${mm}-`;
     } else {
-      returnDate += `${mm}`;
+      returnDate += `${mm}-`;
     }
-    returnDate +=' ';
+    if (dd < 10) {
+      returnDate += `0${dd}`;
+    } else {
+      returnDate += `${dd}`;
+    }
+    returnDate += ' ';
     if (hh < 10) {
       returnDate += `0${hh}`;
     } else {

@@ -27,7 +27,9 @@ export class IntercambiarService {
       fecha_solicitud: data.fecha_solicitud,
       estado: data.estado
     }
-    return this.httpClient.post<any>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
+    console.log('atencion intercambiar post');
+    console.log(intercambiar);
+    return this.httpClient.post<any>(`${BASEURLLIBRO}`,intercambiar).pipe(catchError(this.handleError));
   }
 
   update(id: any,data: any){
