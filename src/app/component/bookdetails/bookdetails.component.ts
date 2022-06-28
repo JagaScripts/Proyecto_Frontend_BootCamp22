@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/book/book.model';
-import { Valoracion } from 'src/app/models/valoracion/valoracion.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { ValoracionService } from 'src/app/services/valoracion/valoracion.service';
-import { ValorarService } from 'src/app/services/valorar/valorar.service';
 import { ExchangeComponent } from '../exchange/exchange.component';
 import { LoanComponent } from '../loan/loan.component';
 import { ValueComponent } from '../value/value.component';
@@ -51,7 +50,7 @@ export class BookdetailsComponent implements OnInit {
       nombre: 'Nordicos',
     },
   };
-
+  id!: string;
   botoSubmit() {
     console.log('valor radio ' + this.starForm.get('rating')?.value);
   }
@@ -59,15 +58,18 @@ export class BookdetailsComponent implements OnInit {
   constructor(
     private serviceBook: BookService,
     private serviceValoracion: ValoracionService,
-    private serviceValorar: ValorarService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     console.log('valor radio ' + this.starForm.get('rating')?.value);
 
     this.starForm.setValue({ rating: '4' });
-    this.getLibroById('11');
+    let valoracion = this.route.snapshot.data;
+    console.log(valoracion);
+    console.log(this.route.snapshot.paramMap.get('id'));
+    this.getLibroById(`${this.route.snapshot.paramMap.get('id')}`);
   }
 
   getLibroById(id: string) {
@@ -75,8 +77,8 @@ export class BookdetailsComponent implements OnInit {
 
     this.serviceBook.getById(id).subscribe({
       next: (result: Book) => {
-        //this.libro = result;
-        this.libro = this.libroSimulado;
+        this.libro = result;
+        //this.libro = this.libroSimulado;
         //console.log('valor libro :', this.libro);
 
         this.getAllValoracion(this.libro.id);

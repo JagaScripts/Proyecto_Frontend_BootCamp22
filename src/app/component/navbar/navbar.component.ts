@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Ssesion } from 'src/app/models/ssesion/ssesion.model';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { RolService } from 'src/app/services/auth/rol.service';
 import { SsesionService } from 'src/app/services/auth/ssesion.service';
@@ -19,7 +18,7 @@ export class NavbarComponent implements OnInit {
   // @Output() isSigned = new EventEmitter();
 
   constructor(private router: Router, private ssesionService: SsesionService, private loginService: LoginService, private userService: RolService) {
-
+    this.login();
   }
 
   ngOnInit(): void {
