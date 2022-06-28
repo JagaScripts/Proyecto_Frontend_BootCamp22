@@ -182,3 +182,43 @@ p {
 .expcvv_text2 {
   padding: 0 1rem;
 }
+
+
+
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+
+#form p {
+  text-align: center;
+}
+
+#form label {
+  font-size: 20px;
+}
+/*
+input[type="radio"] {
+  display: none;
+} */
+
+
+
+input[type="radio"]:checked:after  {
+  color: rgb(253, 38, 181);
+  border-style: solid;
+}
+
+
+.radio-item label {
+  color: #666;
+  font-weight: normal;
+}
+[type=radio] {
+  position: absolute;
+  opacity: 100;
+  width: 10;
+  height: 10;
+  background-color: #FF4081;
+  }

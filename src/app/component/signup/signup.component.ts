@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Rol } from 'src/app/models/enum/rol/rol.model';
@@ -10,6 +11,10 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
+  starForm = new FormGroup({
+    star: new FormControl(),
+  });
+
   usuario = {
     id: 0,
     username: '',
@@ -17,7 +22,7 @@ export class SignupComponent implements OnInit {
     email: '',
     role: Rol.USER,
     edad: new Date(),
-    url_imagen: '',
+    url_imagen: this.starForm.get('star')?.value,
     activo: '1',
   };
 
@@ -34,10 +39,16 @@ export class SignupComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.starForm.setValue({ star: '../../../assets/img/avatar/avatar5.png' });
+  }
+
+  alpulsarRadioButton() {
+    console.log('valor radio: ' + this.starForm.get('star')?.value);
+  }
 
   addUsuario() {
     this.usuarioService.add(this.usuario).subscribe({
@@ -73,7 +84,7 @@ export class SignupComponent implements OnInit {
       let test1 = value.replace(/\s{2,}/g, ' ').trim();
       if (test1 === '') {
         result = false;
-        console.log(result + 'vacio');
+       // console.log(result + 'vacio');
       }
     }
 
@@ -82,7 +93,7 @@ export class SignupComponent implements OnInit {
       let regexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
       if (regexp.test(value)) {
         result = false;
-        console.log(result + ' control email');
+        //console.log(result + ' control email');
       }
     }
 
@@ -117,10 +128,12 @@ export class SignupComponent implements OnInit {
     return true;
   }
 
-  submitForm(){
+  botoSubmit() {
     this.usuario.edad = this.fecha_nacimiento;
     this.usuario.password = this.pwd1;
+    this.usuario.url_imagen = this.starForm.get('star')?.value;
     console.log(this.usuario);
+    //this.alpulsarRadioButton();
 
     this.addUsuario();
   }
