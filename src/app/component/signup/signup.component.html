@@ -14,51 +14,56 @@
                                       <div class="col-lg-6">
                                           <label for="firstName" class="form-label">Nombre</label>
                                           <input type="text" class="form-control" id="firstName"
-                                              placeholder="Nombre" value="" required>
-                                          <div class="invalid-feedback">
-                                              Introduce un nombre válido.
-                                          </div>
+                                              placeholder="Nombre" name="username" value="" required [(ngModel)]="usuario.username" (focusout)="pushed1Time('username')">
+                                              <div *ngIf="!controlForm(usuario.username, true) && pushedUsername != 0 ">
+                                                <div class="alert alert-danger p-2 mt-1" role="alert">
+                                                  Introduce un nombre válido.
+                                                </div>
+                                              </div>
+
                                       </div>
 
                                       <div class="col-lg-6">
-                                          <label for="lastName" class="form-label">Fecha nacimiento</label>
-                                          <input type="text" class="form-control" id="lastName"
-                                              placeholder="dd/mm/aaaa" value="" required>
-                                          <div class="invalid-feedback">
-                                              Introduce una fecha válida.
-                                          </div>
+                                            <label for="firstName" class="form-label">Fecha nacimiento</label>
+                                            <input type="date" class="form-control " name="exp_date" id="exp_date" required [(ngModel)]="fecha_nacimiento" (focusout)="pushed1Time('edad')" />
+
+                                          <div *ngIf="fecha_nacimiento == null && pushedEdad != 0">
+                                                <div class="alert alert-danger p-2 mt-1" role="alert">
+                                                  Introduce una fecha válida.
+                                                </div>
+                                              </div>
+
                                       </div>
 
-                                      <div class="col-md-12">
+                                      <div class="col-lg-12">
                                           <label for="email" class="form-label">Email</label>
-                                          <div class="input-group has-validation">
-                                              <span class="input-group-text t-input-bg-email">@</span>
-                                              <input type="text" class="form-control" id="email"
-                                                  placeholder="ejemplo@ejemplo.com" required>
-                                              <div class="invalid-feedback">
-                                                  Introduce un email válido.
-                                              </div>
-                                          </div>
+                                              <input type="text" class="form-control" id="email" name="email"
+                                                  placeholder="ejemplo@ejemplo.com" required [(ngModel)]="usuario.email" (focusout)="pushed1Time('email')">
+                                                  <div *ngIf=" controlEmail(usuario.email) && pushedEmail != 0">
+                                                    <div class="alert alert-danger p-2 mt-1" role="alert">
+                                                      Introduce un correo válido.
+                                                    </div>
+                                                  </div>
+
                                       </div>
 
                                       <div class="col-md-12 mb-2">
                                           <label for="password" class="form-label">Contraseña</label>
-                                          <input type="text" class="form-control" id="password"
-                                              placeholder="Contraseña" required>
-                                          <div class="invalid-feedback">
-                                              Introduce una contraseña válida.
-                                          </div>
+                                          <input type="password" class="form-control" id="password" name="pwd1"
+                                              placeholder="Contraseña" required [(ngModel)]="pwd1" (focusout)="pushed1Time('pwd1')">
                                       </div>
 
                                       <div class="col-md-12 mb-2">
                                           <label for="repeatp" class="form-label">Repetir contraseña</label>
-                                          <input type="text" class="form-control" id="repeatp"
-                                              placeholder="Repetir contraseña" required>
-                                          <div class="invalid-feedback">
-                                              Introduce una contraseña válida.
-                                          </div>
+                                          <input type="password" class="form-control" id="repeatp" name="pwd2"
+                                              placeholder="Repetir contraseña" required [(ngModel)]="pwd2" (focusout)="pushed1Time('pwd2')">
+                                              <div *ngIf="!controlPwd() && pushedPassword2 != 0 ">
+                                                <div class="alert alert-danger p-2 mt-1" role="alert">
+                                                  La password no coincide.
+                                                </div>
+                                              </div>
                                       </div>
-                                      <button class="w-100 text-white btn btn-md button-t-prestamos">Registrarse</button>
+                                      <button class="w-100 text-white btn btn-md button-t-prestamos" *ngIf="controlFormulario(); else controlFormularioFalse" (click)="submitForm()">Registrarse</button>
                                   </div>
                               </form>
                           </div>
@@ -69,3 +74,6 @@
       </div>
   </div>
 </div>
+<ng-template #controlFormularioFalse>
+  <button  class="w-100 text-white btn btn-md button-t-prestamos" disabled>Registrarse</button>
+</ng-template>

@@ -1,16 +1,150 @@
-
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Rol } from 'src/app/models/enum/rol/rol.model';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
+  usuario = {
+    id: 0,
+    username: '',
+    password: '',
+    email: '',
+    role: Rol.USER,
+    edad: new Date(),
+    url_imagen: '',
+    activo: '1',
+  };
 
-  constructor() { }
+  pushedUsername = 0;
+  pushedPassword1 = 0;
+  pushedPassword2 = 0;
+  pushedEmail = 0;
+  pushedEdad = 0;
 
-  ngOnInit(): void {
+  fecha_nacimiento: any = null;
+  pwd1 = '';
+  pwd2 = '';
+  durationInSeconds: number = 5;
+  constructor(
+    private _snackBar: MatSnackBar,
+    private usuarioService: UsuarioService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {}
+
+  addUsuario() {
+    this.usuarioService.add(this.usuario).subscribe({
+      next: (result: any) => {
+        this.opensSnackBar('Usuario creado correctamente');
+        this.router.navigate(['/signin']);
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.opensSnackBar('Error en crear el usuario ');
+      },
+    });
+  }
+  /**TOAST */
+  opensSnackBar(message: string, action?: string) {
+    this._snackBar.open(message, action, {
+      duration: this.durationInSeconds * 1000,
+      panelClass: ['css-snackbar'],
+    });
+  }
+  controlPwd(): boolean {
+    if (this.pwd1 === this.pwd2) {
+      this.usuario.password = this.pwd1;
+      return true;
+    }
+    return false;
   }
 
+  controlForm(value: string, controlEmpty: boolean, controlEmail?: boolean) {
+    let result = true;
+    if (controlEmpty) {
+      //no vacio
+      let test1 = value.replace(/\s{2,}/g, ' ').trim();
+      if (test1 === '') {
+        result = false;
+        console.log(result + 'vacio');
+      }
+    }
+
+    if (controlEmail) {
+      //correo electronico
+      let regexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      if (regexp.test(value)) {
+        result = false;
+        console.log(result + ' control email');
+      }
+    }
+
+    //console.log(result);
+
+    return result;
+  }
+
+  controlEmail(value: string): boolean {
+    let regexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (regexp.test(value)) {
+      //console.log('false');
+      return false;
+    }
+    //console.log('true');
+    return true;
+  }
+
+  controlFormulario(): boolean {
+    if (this.usuario.username == '') {
+      return false;
+    }
+    if (this.fecha_nacimiento == null) {
+      return false;
+    }
+    if (this.controlEmail(this.usuario.email)) {
+      return false;
+    }
+    if (!this.controlPwd()) {
+      return false;
+    }
+    return true;
+  }
+
+  submitForm(){
+    this.usuario.edad = this.fecha_nacimiento;
+    this.usuario.password = this.pwd1;
+    console.log(this.usuario);
+
+    this.addUsuario();
+  }
+
+  pushed1Time(key: string) {
+    switch (key) {
+      case 'username':
+        this.pushedUsername++;
+        break;
+      case 'pwd1':
+        this.pushedPassword1++;
+        break;
+      case 'pwd2':
+        this.pushedPassword2++;
+        break;
+      case 'edad':
+        this.pushedEdad++;
+        break;
+      case 'email':
+        this.pushedEmail++;
+        break;
+      default:
+        break;
+    }
+    //console.log(this.pushedAutor);
+  }
 }
