@@ -4,10 +4,14 @@
       <h1 class="d-flex justify-content-start">Libros</h1>
 
       <div class="d-flex justify-content-end mb-2" *ngIf="IsEditing == true ">
+        <button class="btn btn-labeled btn-primary me-2"  ><span
+          class="btn-label me-2"><i class="bi bi-arrow-clockwise" (click)="refresh()"></i></span>Refrescar</button>
         <button class="btn btn-labeled btn-primary" disabled (click)="openDialogNewEntry()"><span
             class="btn-label me-2"><i class="bi bi-plus-square-fill"></i></span>Añadir</button>
       </div>
       <div class="d-flex justify-content-end mb-2" *ngIf="IsEditing == false ">
+        <button class="btn btn-labeled btn-primary me-2" (click)="refresh()"><span
+          class="btn-label me-2"><i class="bi bi-arrow-clockwise"></i></span>Refrescar</button>
         <button class="btn btn-labeled btn-primary" (click)="openDialogNewEntry()"><span class="btn-label me-2"><i
               class="bi bi-plus-square-fill"></i></span>Añadir</button>
       </div>
@@ -16,19 +20,20 @@
 
     <div class=" table-responsive ">
 
-      <table class="table table-danger table-striped table-hover">
+      <table matSort (matSortChange)="sortData($event)" class="table table-danger table-striped table-hover">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Autor</th>
-            <th>Tiulo</th>
-            <th>Isbn</th>
-            <th>Edad</th>
-            <th>Categoria</th>
-            <th>C.Reservado</th>
+            <th mat-sort-header="id">#</th>
+            <th mat-sort-header="autor">Autor</th>
+            <th mat-sort-header="titulo">Tiulo</th>
+            <th mat-sort-header="isbn">Isbn</th>
+            <th mat-sort-header="edad">Edad</th>
+            <th mat-sort-header="categoria">Categoria</th>
+            <th mat-sort-header="cantidad_veces_reservado">C.Reservado</th>
             <th>Url_Imagen</th>
             <th>Descripcion</th>
             <th>Estado</th>
+            <th>Editorial</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -51,15 +56,18 @@
               (click)="openDialog(libro.cantidad_veces_reservado,'cantidad_veces_reservado',counter)">
               {{libro.cantidad_veces_reservado}}</td>
             <td class="col-1" name="url_img" ngDefaultControl [(ngModel)]="libro.url_img"
-              (click)="openDialog(libro.url_img,'url_img',counter)"><img src="{{libro.url_img}}" width="50px"></td>
+              (click)="openDialog(libro.url_img,'url_img',counter)"><div *ngIf="libro.url_img !== '' else noimg"><img src="{{libro.url_img}}" width="50px"></div><ng-template #noimg><img src="../../../assets/img/noimg.png"  width="70px"></ng-template></td>
             <td class="col-1" name="descripcion" ngDefaultControl [(ngModel)]="libro.descripcion"
               (click)="openDialog(libro.descripcion,'descripcion',counter)">{{controlDescription(libro.descripcion,1)}}
             </td>
             <td class="col-1" name="disponible" ngDefaultControl [(ngModel)]="libro.disponible"
               (click)="openDialog(libro.disponible,'disponible',counter)">{{controlDisponibilidad(libro.disponible)}}
             </td>
-            <td class="col-1">
+            <td class="col-1" name="editorial" ngDefaultControl [(ngModel)]="libro.editorial.nombre"
+            (click)="openDialog(libro.editorial.nombre,'editorial',counter)">{{libro.editorial.nombre}}
+          </td>
 
+            <td class="col-1">
               <div *ngIf="IsEditing == false ">
                 <!--btn editar normal-->
                 <button type="button" class="btn btn-labeled btn-success mb-1 w-100" (click)="clickEdit(counter)"><span
@@ -76,7 +84,7 @@
 
               <div *ngIf="IsEditing == true && counter == idRow">
                 <!--btn editar seleccionado con el mismo id-->
-                <button #imgElement type="button" class="btn btn-success  mb-1 w-50" (click)="acceptEdit(counter)"><i
+                <button #imgElement type="button" class="btn btn-success  mb-1 w-50" (click)="acceptEdit(counter, libro.id)"><i
                     class="bi bi-check-lg"></i></button>
                 <button type="button" class="btn btn-danger  mb-1 w-50" (click)="cancelEdit(counter)"><i
                     class="bi bi-x-lg"></i></button>
@@ -85,7 +93,7 @@
 
               <div *ngIf="IsEditing == false ">
                 <!--btn remove normal-->
-                <button type="button" class="btn btn-labeled btn-danger me-2 w-100" (click)="removeRow(libro.id)"><span
+                <button type="button" class="btn btn-labeled btn-danger me-2 w-100" (click)="openDialogBorrarRow(libro.id)"><span
                     class="btn-label  me-2"><i class="bi bi-eraser-fill"></i></span>Borrar</button>
               </div>
               <div *ngIf="IsEditing == true && counter != idRow">

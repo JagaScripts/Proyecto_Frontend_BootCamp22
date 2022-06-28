@@ -1,8 +1,9 @@
 .container-fluid{
   margin-top: 100px;
+  /* height: 100vh; */
 }
 
-#book-home{
+.book-home-t-prestamos{
   width: 18rem;
   /* background-color: #fff2f2!important; */
   border: none;

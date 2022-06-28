@@ -19,7 +19,17 @@
     </div>
   </div>
 
-  <div *ngIf="data.key != 'disponible' && data.key != 'descripcion'">
+<div *ngIf="data.key == 'editorial'">
+  <select id="form_categoria" name="categoria" class="form-control" required="required"
+   [(ngModel)]="data.data">
+  <option value="" selected disabled>{{data.data}}</option>
+  <option *ngFor="let editorial of editoriales">{{editorial.nombre}}</option>
+
+</select>
+</div>
+
+
+  <div *ngIf="data.key != 'disponible' && data.key != 'descripcion' && data.key != 'editorial'">
     <input class="w-100" matInput [(ngModel)]="data.data">
 </div>
 

@@ -31,8 +31,13 @@ import { DialogbookComponent } from './component/add/dialogbook/dialogbook.compo
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
-import { ToastbookComponent } from './component/toast/toastbook/toastbook.component';
-import { HtmlComponent } from './component/toast/toastbook/html/html.component';
+import { ModalfilaborradaComponent } from './component/add/modalfilaborrada/modalfilaborrada.component';
+import { DialogintercambiarsolicitudComponent } from './component/add/dialogintercambiarsolicitud/dialogintercambiarsolicitud.component';
+import { DialogintercambiargestionComponent } from './component/add/dialogintercambiargestion/dialogintercambiargestion.component';
+import { DialogreservasolicitudComponent } from './component/add/dialogreservasolicitud/dialogreservasolicitud.component';
+import { DialogreservagestionComponent } from './component/add/dialogreservagestion/dialogreservagestion.component';
+import { DialogvalorarComponent } from './component/add/dialogvalorar/dialogvalorar.component';
+import {MatSortModule} from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,8 +62,13 @@ import { HtmlComponent } from './component/toast/toastbook/html/html.component';
     SidebarhomeComponent,
     DialogComponent,
     DialogbookComponent,
-    ToastbookComponent,
-    HtmlComponent,
+    ModalfilaborradaComponent,
+    DialogintercambiarsolicitudComponent,
+    DialogintercambiargestionComponent,
+    DialogreservasolicitudComponent,
+    DialogreservagestionComponent,
+    DialogvalorarComponent,
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [
@@ -71,7 +81,9 @@ import { HtmlComponent } from './component/toast/toastbook/html/html.component';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSortModule,
+
 
   ],
   providers: [

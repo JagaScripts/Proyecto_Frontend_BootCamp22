@@ -1,7 +1,7 @@
-<div class="container-fluid ">
+<div class="index container-fluid ">
 <nav class="navbar navbar-expand-md navbar-dark fixed-top shadow-lg text-white pt-0  px-4">
 
-    <a class="navbar-brand nav-link py-0" routerLink="/sidebarhome">
+    <a class="navbar-brand nav-link py-0" routerLink="/home">
         <img src="../../../assets/img/logo-l.png" alt="T-Prestamos logo" class="img-brand">
       </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,24 +10,24 @@
     <div class="collapse navbar-collapse " id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-md-0 align-bottom">
         <li class="nav-item title">
-          <a class="nav-link text-center " aria-current="page" routerLink="/sidebarhome">Home</a>
+          <a class="nav-link text-center " aria-current="page" routerLink="/home">Home</a>
         </li>
-        <li class="nav-item title">
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center text-nowrap"  routerLink="/signup">Sign Up</a>
-        </li>
+        </li> -->
         <li class="nav-item title">
-          <a class="nav-link text-center" routerLink="/sidebarandcontent">Perfil</a>
+          <a class="nav-link text-center" *ngIf="user!=undefined" routerLink="/sidebarandcontent">Perfil</a>
         </li>
-        <li class="nav-item title">
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/profileuser">!profileUser!</a>
-        </li>
-        <li class="nav-item title">
+        </li> -->
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/bookcomment">!bookcomment!</a>
-        </li>
-        <li class="nav-item title">
+        </li> -->
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/bookdetails">!bookdetails!</a>
-        </li>
-        <li class="nav-item title">
+        </li> -->
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/exchange">!exchange!</a>
         </li>
         <li class="nav-item title">
@@ -35,26 +35,32 @@
         </li>
         <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/value">!value!</a>
-        </li>
+        </li> -->
 
-        <li class="nav-item title">
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/sidebar">!sidebar!</a>
         </li>
         <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/sidebarandcontent">!sidecontent!</a>
-        </li>
+        </li> -->
       </ul>
       <form class="d-flex" role="search">
-        <ul class="navbar-nav me-auto mb-md-0 align-bottom">
+        <ul class="navbar-nav me-3 mb-md-0 align-bottom">
+
+          <li class="nav-item title signin-prestamo">
+            <a class="nav-link text-center text-nowrap" *ngIf="user!=undefined"> {{user.username}} ({{role}}) </a>
+          </li>
         <li class="nav-item title signin-prestamo">
-          <a class="nav-link text-center text-nowrap"*ngIf="isLoggedIn===false" routerLink="/signin">{{logAvailable}}</a>
+          <a class="nav-link text-center text-nowrap" *ngIf="!isLoggedIn" routerLink="/signin">{{logAvailable}}</a>
         </li>
-        <li class="nav-item title signin-prestamo">
-          <a class="nav-link text-center text-nowrap" (click)="logout()" *ngIf="isLoggedIn===true">{{logAvailable}}</a>
+        <li class="nav-item title signin-prestamo me-2">
+          <a class="nav-link text-center text-nowrap" (click)="logout()" *ngIf="isLoggedIn" routerLink="/profileuser">{{logAvailable}}</a>
         </li>
         </ul>
-        <input class="form-control me-2 mt-3" type="search" id="search" placeholder="Buscar" aria-label="Search">
-        <button class="btn btn-outline-danger button-t-prestamos boton-navbar" type="submit">Buscar</button>
+
+
+        <input class="form-control me-2 mt-3" type="search" id="search" name="search" placeholder="Buscar" aria-label="Search" [(ngModel)]="dataBuscar">
+        <button class="btn btn-outline-danger button-t-prestamos boton-navbar" type="submit" (click)="buscar()">Buscar</button>
       </form>
     </div>
 

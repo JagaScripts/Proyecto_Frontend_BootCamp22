@@ -1,5 +1,5 @@
 export enum Estado {
-  pendiente,
-  aceptado,
-  cancelado
+  pendiente = 'pendiente',
+  aceptado = 'aceptado',
+  cancelado = 'cancelado'
 }

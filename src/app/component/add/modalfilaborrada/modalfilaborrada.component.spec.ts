@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HtmlComponent } from './html.component';
+import { ModalfilaborradaComponent } from './modalfilaborrada.component';
 
-describe('HtmlComponent', () => {
-  let component: HtmlComponent;
-  let fixture: ComponentFixture<HtmlComponent>;
+describe('ModalfilaborradaComponent', () => {
+  let component: ModalfilaborradaComponent;
+  let fixture: ComponentFixture<ModalfilaborradaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HtmlComponent ]
+      declarations: [ ModalfilaborradaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HtmlComponent);
+    fixture = TestBed.createComponent(ModalfilaborradaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

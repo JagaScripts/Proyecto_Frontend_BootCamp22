@@ -2,7 +2,15 @@
 
   <div class="card row flex-row p-4 featurette m-5 d-flex justify-content-center card">
     <div class="col-lg-3 order-lg-1 mt-2">
-      <img src="../../../assets/img/harry.jpg" id="book-img" class="card-img rounded shadow-lg" alt="">
+      <div *ngIf="libro.url_img != ''; else libroImgNull">
+      <img src="{{libro.url_img}}" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px" >
+    </div>
+    <ng-template #libroImgNull>
+      <div>
+
+      <img src="../../../assets/img/noimg.png" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px" >
+    </div>
+    </ng-template>
       <form [formGroup]="starForm" (ngSubmit)="botoSubmit();">
         <div class="rating mt-3 justify-content-center align-content-center">
           <input type="radio" formControlName="rating" name="rating" value='5' id="5" [attr.disabled]="false"><label
@@ -17,112 +25,81 @@
             for="1">☆</label>
         </div>
       </form>
+
+      <!-- <p class="clasificacion">
+        <input id="radio1" type="radio" name="estrellas" value="5">
+        <label class="fs-1" for="radio1">★</label>
+        <input id="radio2" type="radio" name="estrellas" value="4">
+        <label class="fs-1" for="radio2">★</label>
+        <input id="radio3" type="radio" name="estrellas" value="3">
+        <label class="fs-1" for="radio3">★</label>
+        <input id="radio4" type="radio" name="estrellas" value="2">
+        <label class="fs-1" for="radio4">★</label>
+        <input id="radio5" type="radio" name="estrellas" value="1">
+        <label class="fs-1" for="radio5">★</label>
+      </p> -->
+
+
     </div>
     <div class="mx-5 col-lg-8 order-lg-2">
-      <h2>Harry Potter and the Sorcers Stone</h2>
-      <h4>J.K. Rowling</h4>
+      <h2>{{libro.titulo}}</h2>
+      <h4>{{libro.autor}}</h4>
       <h4>978-3-16-148410-0</h4>
-      <p id="cat" style="display:block">Categoria: Realismo mágico</p>
-      <p id="cat" style="display:block">Edad: +5 años</p>
-      <p id="cat" style="display:block">20 veces usado!</p>
-      <p id="disp" style="display:block">Disponible: Si / NO</p>
+      <p id="cat" style="display:block">Categoria: {{libro.categoria}}</p>
+      <p id="cat" style="display:block">Edad: +{{libro.edad}} años</p>
+      <p id="cat" style="display:block">{{libro.cantidad_veces_reservado}} veces reservado!</p>
+      <p id="disp" style="display:block">Estado: {{getValueLibroDisponible(libro.disponible)}}</p>
       <div class="col-md-2 d-flex">
-        <button type="submit" class="btn px-4 button-t-prestamos">Intercambiar</button>
-        <span><span><span></span></span></span>
-        <button type="submit" class="btn px-4 button-t-prestamos">Reservar</button>
+
+        <div *ngIf="libro.disponible == 1; else disabledDisponible" class="d-flex">
+          <button type="submit" class="btn px-4 button-t-prestamos me-2" (click)="openDialogIntercambiar(libro)">Intercambiar</button>
+          <button type="submit" class="btn px-4 button-t-prestamos" (click)="openDialogReservar(libro)">Reservar</button>
+        </div>
+        <ng-template #disabledDisponible>
+          <div class="d-flex">
+            <button type="submit" disabled class="btn px-4 button-t-prestamos me-2" >Intercambiar</button>
+            <button type="submit" disabled class="btn px-4 button-t-prestamos" >Reservar</button>
+          </div>
+        </ng-template>
       </div>
       <span>
         <h4>Descripción:</h4>
-        <p style="border:2px; border-style:solid; border-color:#F8BBd0; padding: 1em; text-align: justify;">
-          A dazzling new edition of J.K. Rowling's Harry Potter and the Sorcerer's Stone, fully
-          illustrated in brilliant color and featuring exclusive interactive paper craft elements,
-          including a foldout Hogwarts letter and more!
-          In this stunning new edition of Harry Potter and the Sorcerer's Stone, experience the story as
-          never before. J.K. Rowling's complete and unabridged text is accompanied by full-color
-          illustrations on nearly every page and eight exclusive, interactive paper craft elements:
-          Readers will open Harry's Hogwarts letter.</p>
+        <p *ngIf="libro.descripcion != ''; else nodescripcion"
+          style="border:2px; border-style:solid; border-color:#F8BBd0; padding: 1em; text-align: justify;">
+          {{libro.descripcion}}</p>
+        <ng-template #nodescripcion>
+          <p> Descripcion no disponible</p>
+        </ng-template>
       </span>
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn px-4 button-t-prestamos">Valorar</button>
+      <div class="d-flex justify-content-center" *ngIf="libro.disponible == 1; else disabledDisponibleValorar">
+        <button type="submit" class="btn px-4 button-t-prestamos" (click)="openDialogValorar(libro)">Valorar</button>
       </div>
+      <ng-template #disabledDisponibleValorar>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn px-4 button-t-prestamos" disabled >Valorar</button>
+      </div>
+      </ng-template>
     </div>
   </div>
 
-  <div class="row featurette  d-flex justify-content-center">
+  <div class="row featurette  d-flex justify-content-center" *ngIf="allValorar != null">
 
-    <div class="col-md-7">
+    <div class="col-md-7 mb-4">
 
       <div class="headings d-flex justify-content-between align-items-center mb-3">
         <h5>Sección de comentarios</h5>
       </div>
 
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
+      <!-- NG FOR-->
+      <div *ngFor="let valoracion of allValoracion; let counter=index; ">
+        <div class="card p-3 mt-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="col-md-8 user d-flex flex-row align-items-center">
+              <span><small class="col-md-2 font-weight-bold" id="author">{{valoracion.usuario.username}}: </small>
+                <small class="font-weight-bold ">{{valoracion.valorar.comentario}}</small></span>
+            </div>
+            <small class="col-md-2"><!--{{difBetweenDate(valoracion.valorar,counter)}}-->  {{valoracion.valorar.fecha | date: 'dd/MM/yyyy HH:mm:ss'}}</small>
           </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
-        </div>
-      </div>
-
-      <div class="card p-3 mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="col-md-8 user d-flex flex-row align-items-center">
-            <span><small class="col-md-2 font-weight-bold" id="author">Adrià Queralt</small> <small
-                class="font-weight-bold">Libro 100% recomendado!</small></span>
-          </div>
-          <small class="col-md-2">2 days ago</small>
         </div>
       </div>
 
@@ -130,4 +107,3 @@
 
   </div>
 </div>
-

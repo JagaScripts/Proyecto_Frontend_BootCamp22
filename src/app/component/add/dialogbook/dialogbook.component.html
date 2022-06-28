@@ -21,38 +21,63 @@
                   <div class="controls">
 
                     <div class="row">
+
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_name">Autor *</label>
                           <input id="form_name" type="text" name="name" class="form-control"
                             placeholder="Porfavor introduce un autor*" required="required"
-                            data-error="Firstname is required."[(ngModel)]="newEntry.autor">
-
+                            data-error="Firstname is required." [(ngModel)]="newEntry.autor"
+                            (focusout)="pushed1Time('autor')">
+                          <div *ngIf="!controlForm(newEntry.autor, true) && pushedAutor != 0 ">
+                            <div class="alert alert-danger p-2 mt-1" role="alert">
+                              Campo obligatorio
+                            </div>
+                          </div>
                         </div>
                       </div>
+
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_lastname">Titulo *</label>
                           <input id="form_lastname" type="text" name="surname" class="form-control"
                             placeholder="Porfavor introduce un titulo*" required="required"
-                            data-error="Lastname is required." [(ngModel)]="newEntry.titulo">
+                            data-error="Lastname is required." [(ngModel)]="newEntry.titulo"
+                            (focusout)="pushed1Time('titulo')">
+                          <div *ngIf="!controlForm(newEntry.titulo, true) && pushedTitulo != 0 ">
+                            <div class="alert alert-danger p-2 mt-1" role="alert">
+                              Campo obligatorio
+                            </div>
+                          </div>
                         </div>
                       </div>
+
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_lastname">Isbn *</label>
                           <input id="form_lastname" type="text" name="surname" class="form-control"
                             placeholder="Porfavor introduce un Isbn *" required="required"
-                            data-error="Lastname is required." [(ngModel)]="newEntry.isbn">
+                            data-error="Lastname is required." [(ngModel)]="newEntry.isbn"
+                            (focusout)="pushed1Time('isbn')">
+                          <div *ngIf="!controlForm(newEntry.isbn, true) && pushedIsbn != 0 ">
+                            <div class="alert alert-danger p-2 mt-1" role="alert">
+                              Campo obligatorio
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_email">Edad Recomendada *</label>
-                          <input id="form_email" type="number" name="email" class="form-control"
-                           required="required" data-error="Valid email is required." [(ngModel)]="newEntry.edad">
+                          <input id="form_email" type="number" name="email" class="form-control" required="required"
+                            data-error="Valid email is required." [(ngModel)]="newEntry.edad"
+                            (focusout)="pushed1Time('edad')">
                         </div>
-
+                        <!-- <div *ngIf="!controlForm(newEntry.autor, true) && pushedIsbn != 0 ">
+                          <div class="alert alert-danger p-2 mt-1" role="alert">
+                            Campo obligatorio
+                          </div>
+                        </div> -->
 
                       </div>
                     </div>
@@ -61,8 +86,9 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="form_email">Categoria *</label>
-                          <select id="form_need" name="need" class="form-control" required="required"
-                            data-error="Please specify your need." [(ngModel)]="newEntry.categoria">
+                          <select id="form_categoria" name="categoria" class="form-control" required="required"
+                            data-error="Please specify your need." [(ngModel)]="newEntry.categoria"
+                            (focusout)="pushed1Time('categoria')">
                             <option value="" selected disabled>--Selecciona una opcion--</option>
                             <option>Terror</option>
                             <option>Drama</option>
@@ -71,46 +97,85 @@
                             <option>Aventura</option>
                             <option>Comedia</option>
                           </select>
-
+                          <div *ngIf="!controlForm(newEntry.categoria, true) && pushedCategoria != 0 ">
+                            <div class="alert alert-danger p-2 mt-1" role="alert">
+                              Campo obligatorio
+                            </div>
+                          </div>
                         </div>
-
-
                       </div>
+
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="form_need">Estado *</label>
-                          <select id="form_need" name="need" class="form-control" required="required"
-                            data-error="Please specify your need." [(ngModel)]="newEntry.disponible">
+                          <label for="form_email">Disponible *</label>
+                          <select id="form_disponible" name="disponible" class="form-control" required="required"
+                            data-error="Please specify your need." [(ngModel)]="newEntry.disponible"
+                            (focusout)="pushed1Time('disponible')">
                             <option value="" selected disabled>--Selecciona una opcion--</option>
-                            <option>Disponible</option>
-                            <option>No Disponible</option>
+                            <option value="1">Disponible</option>
+                            <option value="0">No Disponible</option>
 
                           </select>
-
+                          <div *ngIf="!controlForm(newEntry.disponible, true) && pushedDisponible != 0 ">
+                            <div class="alert alert-danger p-2 mt-1" role="alert">
+                              Campo obligatorio
+                            </div>
+                          </div>
                         </div>
                       </div>
+
                     </div>
                     <div class="row">
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="form_email">Editorial *</label>
+                          <select id="form_editorial" name="editorial" class="form-control" required="required"
+                            data-error="Please specify your need." [(ngModel)]="newEntry.editorial.nombre"
+                            (focusout)="pushed1Time('editorial')">
+                            <option value="" selected disabled>--Selecciona una opcion--</option>
+                            <option *ngFor="let editorial of editoriales">{{editorial.nombre}}</option>
+                          </select>
+                          <div *ngIf="!controlForm(newEntry.editorial.nombre, true) && pushedEditorial != 0 ">
+                            <div class="alert alert-danger p-2 mt-1" role="alert">
+                              Campo obligatorio
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label for="form_name">Crear Editorial *</label>
+                          <input id="form_name" type="text" name="name" class="form-control"
+                            placeholder="Porfavor introduce un autor*" required="required"
+                            data-error="Firstname is required." [(ngModel)]="addNombreEditorial">
+                        </div>
+
+                      </div>
+                      <div class="col-md-1 text-center ">
+                        <label for="form_message">Añadir</label>
+                        <button class="btn btn-info form-control" (click)="controlAddEditorial(addNombreEditorial)"><i class="bi bi-bookmark-plus"></i></button>
+                      </div>
+                    </div>
+
+                    <div class="row">
+
                       <div class="col-md-12">
                         <div class="form-group">
                           <label for="form_message">Descripción *</label>
                           <textarea id="form_message" name="message" class="form-control"
                             placeholder="Escribe aqui tu mensaje" rows="4" required="required"
-                            data-error="Please, leave us a message." [(ngModel)]="newEntry.descripcion"></textarea>
+                            data-error="Please, leave us a message." [(ngModel)]="newEntry.descripcion"
+                            (focusout)="pushed1Time('descripcion')"></textarea>
+                          <div *ngIf="!controlForm(newEntry.descripcion, true) && pushedDescripcion != 0 ">
+                            <div class="alert alert-danger p-2 mt-1" role="alert">
+                              Campo obligatorio
+                            </div>
+                          </div>
                         </div>
-
                       </div>
-
-
-                      <div class="col-md-12">
-                        <!--
-                       <input type="submit" class="btn btn-success btn-send  pt-2 btn-block
-                          " value="Send Message"> -->
-
-                      </div>
-
                     </div>
-
 
                   </div>
                 </form>
@@ -132,28 +197,7 @@
 </div>
 
 <div mat-dialog-actions class="modal-footer">
-  <button class="btn btn-primary me-3" mat-button (click)="onYesClick()" cdkFocusInitial>Guardar cambios</button>
+  <button  *ngIf="controlDefinitivo() else btndisabled" class="btn btn-primary me-3" mat-button (click)="onYesClick()" cdkFocusInitial>Guardar cambios</button>
+  <ng-template #btndisabled> <button disabled class="btn btn-primary me-3" mat-button (click)="onYesClick()" cdkFocusInitial>Guardar cambios</button></ng-template>
   <button class="btn btn-secondary " mat-button (click)="onNoClick()">Cancelar</button>
 </div>
-
-<!-- añadir nuevo campo-->
-<!-- <table>
-
-      <td class="col-1" name="id" ngDefaultControl (click)="openDialog()">id</td>
-      <td class="col-1" name="autor" ngDefaultControl (click)="openDialog()">autor</td>
-      <td class="col-1" name="titulo" ngDefaultControl (click)="openDialog()">titulo</td>
-      <td class="col-1" name="isbn" ngDefaultControl (click)="openDialog()">isbn</td>
-      <td class="col-1" name="edad" ngDefaultControl (click)="openDialog()">edad</td>
-      <td class="col-1" name="categoria" ngDefaultControl (click)="openDialog()"></td>
-      <td class="col-1" name="cantidad_veces_reservado" ngDefaultControl (click)="openDialog()"></td>
-      <td class="col-1" name="url_img" ngDefaultControl (click)="openDialog()"></td>
-      <td class="col-1" name="descripcion" ngDefaultControl (click)="openDialog()"></td>
-      <td class="col-1" name="disponible" ngDefaultControl (click)="openDialog()"></td>
-      <td class="col-1">
-        <div *ngIf="IsEditing == false ">
-
-          <button type="button" class="btn btn-labeled btn-success mb-1 w-100"><span class="btn-label  me-2"><i
-                class="bi bi-pencil-square"></i></span>Editar</button>
-        </div>
-      </td>
-    </table> -->

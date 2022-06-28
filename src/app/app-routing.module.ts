@@ -17,7 +17,7 @@ import { ValueComponent } from './component/value/value.component';
 
 const routes: Routes = [
   {path:'bookcomment',component: BookcommentComponent},
-  {path:'bookdetails',component: BookdetailsComponent},
+  {path:'bookdetails/:id',component: BookdetailsComponent},
   {path:'exchange',component: ExchangeComponent},
   {path:'footer',component: FooterComponent},
   {path:'home',component: HomeComponent},
@@ -30,7 +30,8 @@ const routes: Routes = [
   {path:'value',component: ValueComponent},
   {path:'sidebarandcontent', component: SidebarandcontentComponent},
   {path:'sidebarhome', component: SidebarhomeComponent},
-  {path:'', component: SidebarhomeComponent}
+  {path:'', component: HomeComponent}
+
 ];
 
 @NgModule({

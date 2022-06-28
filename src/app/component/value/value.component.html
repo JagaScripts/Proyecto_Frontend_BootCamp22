@@ -1,51 +1,55 @@
 <!-- valorador estrellas-->
-<div class="container-fluid componente">
-<div class="d-flex flex-row align-items-center m-5" >
+<div class="container-fluid ">
+  <div class="d-flex flex-row align-items-center">
 
-  <form [formGroup]="starForm" (ngSubmit)="botoSubmit();">
-  <div class="card text-center">
+    <form [formGroup]="starForm" (ngSubmit)="botoSubmit();">
+      <div class="card text-center   align-items-center  ">
 
-    <div class="mt-4">
-      <img src="https://images-na.ssl-images-amazon.com/images/I/51jyI6lYi1L._SX342_BO1,204,203,200_.jpg" id="book-img" class="rounded shadow-lg">
-    </div>
+        <div class="w-75 md-form">
+          <label for="form7">Comentario</label>
+          <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" mdbInput></textarea>
+        </div>
 
-    <span class="name mb-1 mt-3 fw-500">J.K. Rowling</span>
-    <small class="text-black-50">Dueño: Pepe</small>
-    <small class="text-black-50 font-weight-bold">ISBN: QP09AA9090</small>
+        <span class="name mb-1 mt-3 fw-500">{{data.data.titulo}}</span>
+        <small class="text-black-50">Dueño: {{data.data.usuario.username}}</small>
+        <small class="text-black-50 font-weight-bold">ISBN: {{data.data.isbn}}</small>
 
-    <div class="rate py-3 text-white mt-3" style="background-color: #c2185cde;">
+        <div class="rate w-100 py-3 text-white mt-3" style="background-color: #c2185cde;">
 
-      <h6 class="mb-0">Valora el libro</h6>
+          <h6 class="mb-0">Valora el libro</h6>
 
-      <div class="rating">
-          <input type="radio" formControlName="rating" name="rating" value='5' id="5" [attr.disabled]="false"><label for="5">☆</label>
-          <input type="radio" formControlName="rating" name="rating" value='4' id="4" [attr.disabled]="false"><label for="4">☆</label>
-          <input type="radio" formControlName="rating" name="rating" value='3' id="3" [attr.disabled]="false"><label for="3">☆</label>
-          <input type="radio" formControlName="rating" name="rating" value='2' id="2" [attr.disabled]="false"><label for="2">☆</label>
-          <input type="radio" formControlName="rating" name="rating" value='1' id="1" [attr.disabled]="false"><label for="1">☆</label>
+          <!-- <div class="rating">
+            <input type="radio" formControlName="rating" name="rating" value='5' id="5" (click)="btn1()"><label for="5">☆</label>
+            <input type="radio" formControlName="rating" name="rating" value='4' id="4" (click)="btn2()"><label for="4">☆</label>
+            <input type="radio" formControlName="rating" name="rating" value='3' id="3" (click)="btn3()"><label for="3">☆</label>
+            <input type="radio" formControlName="rating" name="rating" value='2' id="2" (click)="btn4()"><label for="2">☆</label>
+            <input type="radio" formControlName="rating" name="rating" value='1' id="1" (click)="btn5()"><label for="1">☆</label>
+          </div> -->
+          <p class="clasificacion">
+            <input id="radio1" formControlName="estrellas" type="radio" name="estrellas" value="5">
+            <label class="fs-1"  for="radio1">★</label>
+            <input id="radio2" formControlName="estrellas" type="radio" name="estrellas" value="4">
+            <label class="fs-1" for="radio2">★</label>
+            <input id="radio3"  formControlName="estrellas"type="radio" name="estrellas" value="3">
+            <label class="fs-1" for="radio3">★</label>
+            <input id="radio4" formControlName="estrellas" type="radio" name="estrellas" value="2">
+            <label class="fs-1" for="radio4">★</label>
+            <input id="radio5" formControlName="estrellas" type="radio" name="estrellas" value="1">
+            <label class="fs-1" for="radio5">★</label>
+          </p>
+
+          <div class="buttons px-4 mt-0 ">
+
+            <button class="btn rating-submit text-white button-t-prestamos" (click)="botoSubmit()">Enviar</button>
+
+          </div>
+        </div>
+
+
+
       </div>
 
-
-      <div class="buttons px-4 mt-0 ">
-
-        <button class="btn rating-submit text-white button-t-prestamos" (click)="botoSubmit()">Enviar</button>
-
-      </div>
-    </div>
+    </form>
 
   </div>
-
-
-
-</form>
-
-
-<div class="w-50 ms-5 md-form">
-  <label for="form7">Comentario</label>
-  <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" mdbInput></textarea>
-
-</div>
-
-
-</div>
 </div>

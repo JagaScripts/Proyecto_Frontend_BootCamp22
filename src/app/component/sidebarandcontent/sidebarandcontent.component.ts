@@ -9,7 +9,11 @@ export class SidebarandcontentComponent implements OnInit {
   valorSidebarSelected: any;
 
   constructor() {
-
+    if(sessionStorage.getItem('valueSideBarAndContent') == null){
+      this.valorSidebarSelected = 0;
+    }else{
+      this.valorSidebarSelected= sessionStorage.getItem('valueSideBarAndContent');
+    }
   }
 
   ngOnInit(): void {

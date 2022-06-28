@@ -1,6 +1,7 @@
+
 .css-snackbar {
   background: #ff56be;
-  z-index:2000 !important;
+  z-index:2000;
   position: fixed;
   bottom: 0;
   right: 0;
