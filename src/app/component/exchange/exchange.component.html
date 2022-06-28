@@ -1,4 +1,4 @@
-<div class="container-fluid  align-item-center">
+<div class="container-fluid  align-item-center " *ngIf="librosUserLogged[valorSelected] != null; else librosUserLoggedNull">
   <div class="d-flex flex-row justify-content-center align-content-center">
 
     <!-- select-->
@@ -13,9 +13,9 @@
 
 
   <!-- libro que quieres-->
-  <div class="d-flex flex-row justify-content-center align-content-center">
+  <div class="d-flex flex-row justify-content-center align-content-center" >
 
-    <div class="card text-center m-4">
+    <div class="card text-center m-4"  >
 
       <div class="mt-3" *ngIf="librosUserLogged[valorSelected].url_img != ''; else noimg">
         <img src="{{librosUserLogged[valorSelected].url_img}}"
@@ -39,7 +39,7 @@
     </div>
     <!-- img-->
     <div class="text-center">
-      <button class="btn"> <img src="../../assets/img/flechas.png" id="flechas" class="img-fluid"></button>
+      <button class="btn btn-info" (click)="completarTramite()" > <img src="../../assets/img/flechas.png" id="flechas" class="img-fluid"></button>
     </div>
     <!-- tu escogido-->
     <div class="card text-center m-4">
@@ -63,3 +63,6 @@
   </div>
 
 </div>
+<ng-template #librosUserLoggedNull class="justify-content-center align-item-center align-middle">
+  <mat-spinner class="mt-5"></mat-spinner>
+</ng-template>

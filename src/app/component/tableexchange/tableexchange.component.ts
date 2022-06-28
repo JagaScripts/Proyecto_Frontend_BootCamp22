@@ -22,10 +22,10 @@ export class TableexchangeComponent implements OnInit {
   libro2: any;
   usuarioLoggeado: any = '';
 
+
   //idUsuario = {id: `${this.usuarioLoggeado.id}`};
 
-  constructor(
-    private serviceIntercambiar: IntercambiarService,
+  constructor(   private serviceIntercambiar: IntercambiarService,
     private serviceIntercambio: IntercambioService,
     private serviceLibro: BookService,
     private serviceUsuario: UsuarioService
@@ -116,4 +116,5 @@ export class TableexchangeComponent implements OnInit {
       console.log('intercambios es null/vacio');
     }
   }
+
 }

@@ -67,6 +67,7 @@ import { DialogvalorarComponent } from './component/add/dialogvalorar/dialogvalo
     DialogreservasolicitudComponent,
     DialogreservagestionComponent,
     DialogvalorarComponent,
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //necesario para las tablas
   imports: [

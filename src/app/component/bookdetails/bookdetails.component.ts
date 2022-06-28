@@ -8,6 +8,7 @@ import { BookService } from 'src/app/services/book/book.service';
 import { ValoracionService } from 'src/app/services/valoracion/valoracion.service';
 import { ValorarService } from 'src/app/services/valorar/valorar.service';
 import { ExchangeComponent } from '../exchange/exchange.component';
+import { LoanComponent } from '../loan/loan.component';
 @Component({
   selector: 'app-bookdetails',
   templateUrl: './bookdetails.component.html',
@@ -58,7 +59,6 @@ export class BookdetailsComponent implements OnInit {
     private serviceBook: BookService,
     private serviceValoracion: ValoracionService,
     private serviceValorar: ValorarService,
-    private _snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {}
 
@@ -111,13 +111,27 @@ export class BookdetailsComponent implements OnInit {
       }
     });
   }
+  openDialogReservar(data?: any): void {
+    console.log('abrir dialog reservar');
 
-  difBetweenDate(date: Date): string {
-    //console.log('DATE');
-    let v = new Date(date);
-    let text = v.getMonth() + '-' + v.getDay() + '-' + v.getFullYear();
-    return text;
+    const dialogRef = this.dialog.open(LoanComponent, {
+      width: 'auto',
+      height: '80%',
+      data: { data },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != null) {
+
+      }
+    });
   }
+
+  // difBetweenDate(date: Date): string {
+  //   //console.log('DATE');
+  //   let v = new Date(date);
+  //   let text = v.getMonth() + '-' + v.getDay() + '-' + v.getFullYear();
+  //   return text;
+  // }
 
   getValueLibroDisponible(dispponible: string): string {
     switch (dispponible) {

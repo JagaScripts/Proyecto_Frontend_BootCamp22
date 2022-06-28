@@ -47,7 +47,7 @@
 
         <div *ngIf="libro.disponible == 1; else disabledDisponible" class="d-flex">
           <button type="submit" class="btn px-4 button-t-prestamos me-2" (click)="openDialogIntercambiar(libro)">Intercambiar</button>
-          <button type="submit" class="btn px-4 button-t-prestamos">Reservar</button>
+          <button type="submit" class="btn px-4 button-t-prestamos" (click)="openDialogReservar(libro)">Reservar</button>
         </div>
         <ng-template #disabledDisponible>
           <div class="d-flex">
@@ -87,7 +87,7 @@
               <span><small class="col-md-2 font-weight-bold" id="author">{{valoracion.usuario.username}}: </small>
                 <small class="font-weight-bold ">{{valoracion.valorar.comentario}}</small></span>
             </div>
-            <small class="col-md-2"><!--{{difBetweenDate(valoracion.valorar,counter)}}-->  {{difBetweenDate(valoracion.valorar.fecha)}}</small>
+            <small class="col-md-2"><!--{{difBetweenDate(valoracion.valorar,counter)}}-->  {{valoracion.valorar.fecha | date: 'dd/MM/yyyy HH:mm:ss'}}</small>
           </div>
         </div>
       </div>
