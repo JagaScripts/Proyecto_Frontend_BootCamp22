@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/models/book/book.model';
 import { Valoracion } from 'src/app/models/valoracion/valoracion.model';
 import { BookService } from 'src/app/services/book/book.service';
@@ -60,23 +61,32 @@ export class BookdetailsComponent implements OnInit {
     private serviceBook: BookService,
     private serviceValoracion: ValoracionService,
     private serviceValorar: ValorarService,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+  ) {
+    route.params.subscribe(val => {
+      // console.log('valor radio ' + this.starForm.get('rating')?.value);
+      this.starForm.setValue({ rating: '4' });
+      // console.log('route');
+      // let valoracion = this.route.snapshot.data;
+      // console.log(valoracion);
+      // console.log(this.route.snapshot.paramMap.get('id'));
+
+      this.getLibroById(`${this.route.snapshot.paramMap.get('id')}`);
+      // put the code from `ngOnInit` here
+    });
+  }
 
   ngOnInit(): void {
-    console.log('valor radio ' + this.starForm.get('rating')?.value);
 
-    this.starForm.setValue({ rating: '4' });
-    this.getLibroById('11');
   }
 
   getLibroById(id: string) {
     console.log('libroid');
-
     this.serviceBook.getById(id).subscribe({
       next: (result: Book) => {
-        //this.libro = result;
-        this.libro = this.libroSimulado;
+        this.libro = result;
+        //this.libro = this.libroSimulado;
         //console.log('valor libro :', this.libro);
 
         this.getAllValoracion(this.libro.id);
