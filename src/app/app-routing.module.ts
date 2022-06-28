@@ -31,6 +31,7 @@ const routes: Routes = [
   {path:'sidebarandcontent', component: SidebarandcontentComponent},
   {path:'sidebarhome', component: SidebarhomeComponent},
   {path:'', component: HomeComponent}
+
 ];
 
 @NgModule({

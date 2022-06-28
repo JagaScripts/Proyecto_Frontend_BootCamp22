@@ -20,6 +20,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { DialogbookComponent } from '../add/dialogbook/dialogbook.component';
 import { ModalfilaborradaComponent } from '../add/modalfilaborrada/modalfilaborrada.component';
 import { DialogComponent } from '../dialog/dialog.component';
+import {Sort} from '@angular/material/sort';
 
 export interface DialogData {}
 
@@ -40,17 +41,50 @@ export class TablebooksComponent implements OnInit {
   usuarioLogged!: Usuario;
   bookTemp!: Book;
 
+
+  sortedData: Book[];
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     private bookService: BookService,
     private usuarioService: UsuarioService
-  ) {}
+  ) {
+    this.sortedData = this.libros.slice();
+  }
 
   ngOnInit(): void {
     this.buscarUsuarioLogged();
     this.listBooks();
   }
+
+  sortData(sort: Sort) {
+    const data = this.libros.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a:any, b:any) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id':
+          return compare(a.id, b.id, isAsc);
+        case 'autor':
+          return compare(a.autor, b.autor, isAsc);
+        case 'titulo':
+          return compare(a.titulo, b.titulo, isAsc);
+        case 'isbn':
+          return compare(a.isbn, b.isbn, isAsc);
+        case 'protein':
+          return compare(a.edad, b.edad, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+
+
+
 
   /**DIALOGS**/
 
@@ -297,4 +331,7 @@ export class TablebooksComponent implements OnInit {
   refresh(): void {
     window.location.reload();
   }
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

@@ -24,6 +24,16 @@ export class BookService {
       catchError(this.handleError));
   }
 
+  getByTitulo(titulo:string){
+    return this.httpClient.get<any>(`${BASEURLLIBRO}/titulo/${titulo}`).pipe(
+      catchError(this.handleError));
+  }
+
+  getByIsbn(isbn:string){
+    return this.httpClient.get<any>(`${BASEURLLIBRO}/isbn/${isbn}`).pipe(
+      catchError(this.handleError));
+  }
+
   add(data: Book){
     return this.httpClient.post<Book>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
   }

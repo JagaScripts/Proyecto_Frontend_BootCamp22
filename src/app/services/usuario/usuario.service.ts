@@ -29,8 +29,8 @@ export class UsuarioService {
       catchError(this.handleError));
   }
 
-  add(data: Usuario){
-    return this.httpClient.post<Usuario>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
+  add(data: any){
+    return this.httpClient.post<any>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
   }
 
   update(id: any,data: any){
@@ -53,5 +53,5 @@ export class UsuarioService {
         'Something bad happened; please try again later.');
     };
 
- 
+
 }

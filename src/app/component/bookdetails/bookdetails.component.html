@@ -71,9 +71,14 @@
           <p> Descripcion no disponible</p>
         </ng-template>
       </span>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center" *ngIf="libro.disponible == 1; else disabledDisponibleValorar">
         <button type="submit" class="btn px-4 button-t-prestamos" (click)="openDialogValorar(libro)">Valorar</button>
       </div>
+      <ng-template #disabledDisponibleValorar>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn px-4 button-t-prestamos" disabled >Valorar</button>
+      </div>
+      </ng-template>
     </div>
   </div>
 
