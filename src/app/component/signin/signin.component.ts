@@ -1,29 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Ssesion } from 'src/app/models/ssesion/ssesion.model';
 import { Token } from 'src/app/models/token/token.model';
 import { User } from 'src/app/models/user/user.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { SsesionService } from 'src/app/services/auth/ssesion.service';
+import { RolService } from 'src/app/services/auth/rol.service';
+import { Router } from '@angular/router';
+import { Rol } from 'src/app/models/enum/rol/rol.model';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
+
 export class SigninComponent implements OnInit {
 
-  token!: Token;
 
-  user!: User;
+  user!: any;
+
+  role: any;
+
+  usuario!: Usuario;
+
+  ssesion: Ssesion;
 
   sigInFail = false;
 
   submitted: boolean = false;
 
-  constructor(private loginService: LoginService, private usuarioService:UsuarioService) {
+  // @Output() isSigned = new EventEmitter();
+
+  constructor(private loginService: LoginService, private usuarioService:UsuarioService, private ssesionService: SsesionService, private rolService: RolService, private router: Router) {
     this.user = {
       username: '',
       password: ''
+    }
+    this.ssesion = {
+      username: '',
+      token: '',
+      rol: ''
     }
   }
 
@@ -37,14 +55,12 @@ export class SigninComponent implements OnInit {
     .subscribe(
       {
         next: (result: Token) => {
-          this.token = result;
-          this.submitted = true
-          window.sessionStorage.setItem("auth-token", this.token.token);
-          console.log(`getItem ${window.sessionStorage.getItem("auth-token")}`);
-          window.sessionStorage.setItem("auth-username", this.user.username);
+          this.ssesion.token = result.token;
+          this.ssesionService.setToken(this.ssesion.token);
+          this.ssesion.username = this.user.username;
+          this.ssesionService.setUsername(this.ssesion.username)
+          this.getUsuario(this.user.username);
 
-          this.getRolFromUsuario(`${window.sessionStorage.getItem("auth-username")}`);
-          this.sigInFail = false;
 
         },
         error: (resultError: Error) => {
@@ -56,17 +72,32 @@ export class SigninComponent implements OnInit {
 
   }
 
-  getRolFromUsuario(username: string){
+  getUsuario(username: string){
+    console.log(username + " gerUsuario");
     this.usuarioService.getByUsername(username).subscribe({
       next:(result: Usuario) =>{
-        window.sessionStorage.setItem("auth-rol", result.role);
-        console.log('rol: '+sessionStorage.getItem("auth-rol"));
+        console.log(result);
+        this.usuario = result;
+        this.ssesion.rol = this.usuario.role;
+        this.ssesionService.setRol(this.ssesion.rol);
+        this.sigInFail = false;
+        this.submitted = true;
+        console.log(this.usuario);
+        console.log(" usuario");
+        this.loginService.setUser(this.user);
+        this.loginService.setUser$();
+        console.log(Rol[this.usuario.role]);
+        this.rolService.addRol(Rol[this.usuario.role]);
+        console.log(Rol[this.usuario.role]);
+        this.router.navigate(['/sidebarhome']);
+        // this.isSigned.emit(this.submitted);
+
       },
       error:(error: any) =>{
-        console.log(error+' Error rol sesion user' );
-
+        console.log(error + ' Error rol sesion user' );
       }
     });
+
   }
 
 }

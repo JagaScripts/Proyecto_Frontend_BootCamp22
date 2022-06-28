@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Rol } from 'src/app/models/enum/rol/rol.model';
-import { User } from 'src/app/models/user/user.model';
+import { Ssesion } from 'src/app/models/ssesion/ssesion.model';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { RolService } from 'src/app/services/auth/rol.service';
+import { SsesionService } from 'src/app/services/auth/ssesion.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,52 +12,42 @@ import { RolService } from 'src/app/services/auth/rol.service';
 })
 export class NavbarComponent implements OnInit {
 
-  user!: User;
-  // role!: Rol;
   logAvailable: string = 'Sign In';
-  isLoggedIn: boolean = false;
-  usuario:any = '';
-  rol: any = '';
-  constructor(private router:Router, private loginService: LoginService, private rolService: RolService) { }
+  isLoggedIn!: boolean; //@Input()
+  user: any;
+  role: any;
+  // @Output() isSigned = new EventEmitter();
+
+  constructor(private router: Router, private ssesionService: SsesionService, private loginService: LoginService, private userService: RolService) {
+
+  }
 
   ngOnInit(): void {
+    this.login();
+  }
 
-    this.loginService.getUser$().subscribe(
-      {
-        next: (result: User) => {
-          this.user = result;
-          this.isLoggedIn = true;
-          this.logAvailable = 'Sign Out';
-          // this.usuario = sessionStorage.getItem("auth-username");
-          // this.rol = sessionStorage.getItem("auth-rol");
-        },
-        error: (resultError: Error) => {
-            console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
-        }
-      }
-    );
+  login():void {
 
-    this.rolService.getRol$().subscribe(
-      {
-        next: (result: Rol) => {
-          // this.role = result;
-        },
-        error: (resultError: Error) => {
-            console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
-        }
-      }
-    );
+      this.loginService.getUser$().subscribe(user => {
+        this.user = user;
+      });
+
+      this.userService.getRol$().subscribe(data => {
+        this.role = data;
+        console.log('navbar ---->' + data);
+        this.isLoggedIn = true;
+        this.logAvailable = 'Sign Out';
+      });
 
   }
 
   logout(): void {
-    window.sessionStorage.clear();
-    // this.user.username = '';
-    // this.role = Rol;
-    // this.usuario = '';
-    // this.rol = '';
+    this.ssesionService.signOut();
+    this.user = undefined;
+    this.role = undefined;
     this.logAvailable = 'Sign In';
     this.isLoggedIn = false;
+    // this.isSigned.emit(this.isLoggedIn);
     this.router.navigate(['/signin']);
   }
 

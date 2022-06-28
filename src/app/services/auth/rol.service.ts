@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Rol } from 'src/app/models/enum/rol/rol.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RolService {
 
-  private rol!: Rol;
-  private rol$!: Subject<Rol>;
+  private rol: any;
+  private rol$: Subject<any>;
 
   constructor() {
     this.rol$ = new Subject();
   }
 
-  addUser(rol: Rol){
+  addRol(rol: any){
     this.rol = rol;
     this.rol$.next(this.rol);
   }
 
-  getRol$(): Observable<Rol> {
+  getRol$(): Observable<any> {
     return this.rol$.asObservable();
   }
 

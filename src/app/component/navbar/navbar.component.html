@@ -21,13 +21,13 @@
         <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/profileuser">!profileUser!</a>
         </li>
-        <li class="nav-item title">
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/bookcomment">!bookcomment!</a>
-        </li>
+        </li> -->
         <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/bookdetails">!bookdetails!</a>
         </li>
-        <li class="nav-item title">
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/exchange">!exchange!</a>
         </li>
         <li class="nav-item title">
@@ -35,27 +35,26 @@
         </li>
         <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/value">!value!</a>
-        </li>
+        </li> -->
 
-        <li class="nav-item title">
+        <!-- <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/sidebar">!sidebar!</a>
         </li>
         <li class="nav-item title">
           <a class="nav-link text-center" routerLink="/sidebarandcontent">!sidecontent!</a>
-        </li>
+        </li> -->
       </ul>
       <form class="d-flex" role="search">
         <ul class="navbar-nav me-3 mb-md-0 align-bottom">
-          <div *ngIf="usuario != ''">
+
           <li class="nav-item title signin-prestamo">
-            <a class="nav-link text-center text-nowrap"*ngIf="usuario != null">{{usuario}} ({{rol}}) </a>
+            <a class="nav-link text-center text-nowrap" *ngIf="user!=undefined"> {{user.username}} ({{role}}) </a>
           </li>
-        </div>
         <li class="nav-item title signin-prestamo">
-          <a class="nav-link text-center text-nowrap" *ngIf="isLoggedIn===false" routerLink="/signin">{{logAvailable}}</a>
+          <a class="nav-link text-center text-nowrap" *ngIf="!isLoggedIn" routerLink="/signin">{{logAvailable}}</a>
         </li>
         <li class="nav-item title signin-prestamo me-2">
-          <a class="nav-link text-center text-nowrap" (click)="logout()" *ngIf="isLoggedIn===true">{{logAvailable}}</a>
+          <a class="nav-link text-center text-nowrap" (click)="logout()" *ngIf="isLoggedIn" routerLink="/profileuser">{{logAvailable}}</a>
         </li>
         </ul>
         <input class="form-control me-2 mt-3" type="search" id="search" placeholder="Buscar" aria-label="Search">

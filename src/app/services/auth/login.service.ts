@@ -12,16 +12,14 @@ const baseUrl = 'https://api-alquiler-de-libros-2022.herokuapp.com/';
 })
 export class LoginService {
 
-  private user!: User;
-  private user$!: Subject<User>;
+  private user!: any;
+  private user$!: Subject<any>;
 
   constructor(private httpClient: HttpClient) {
     this.user$ = new Subject();
   }
 
-  login(usuario: User): Observable<Token> {
-    this.user = usuario;
-    this.user$.next(this.user);
+  login(usuario: any): Observable<Token> {
     return this.httpClient.post<Token>(`${baseUrl}login`, usuario).pipe(
       catchError(this.handleError)
     );
@@ -55,4 +53,16 @@ export class LoginService {
     return this.user$.asObservable();
   }
 
+  setUser$(){
+    this.user$.next(this.user);
+  }
+
+
+  setUser(usuario: any) {
+    this.user = usuario;
+  }
+
+  getUser(): any {
+    return this.user;
+  }
 }
