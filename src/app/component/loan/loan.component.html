@@ -1,27 +1,34 @@
-
-<div class="container-fluid componente">
-  <div class="card row flex-row p-4 featurette m-5 d-flex justify-content-center card">
-    <div class="col-lg-3 order-lg-1 mt-2">
-      <img src="https://images-na.ssl-images-amazon.com/images/I/51ySFm9ZVvL._SX313_BO1,204,203,200_.jpg"
-        class="card-img rounded shadow-lg" id="book-img" width="200px" alt="">
+<div class="container-fluid">
+  <div class="card row flex-row p-4 featurette d-flex justify-content-center card">
+    <div class="col-lg-3 order-lg-1 mt-2 d-flex">
+      <img src="{{data.data.url_img}}"
+        class="card-img rounded shadow-lg" id="book-img" alt="">
     </div>
+
     <div class="mx-5 col-lg-8 order-lg-2">
       <h2>Reservar</h2>
-      <h4>Harry Potter and the Sorcers Stone</h4>
-      <hr class="mt-4">
-      <div class="form-outline mb-4">
-        <p id="cat" style="display:block">Comentario para el propietario...</p>
+      <h4>{{data.data.titulo}}</h4>
+      <hr class="">
+      <!-- <div class="form-outline ">
+        <p id="cat" style="display:block" [(ngModel)]="comentarioPrestamo">Comentario para el propietario...</p>
         <div class="mt-2">
-          <textarea class="form-control" rows="3"></textarea>
+          <textarea class="form-control" rows="2"></textarea>
         </div>
-      </div>
-      <div class="expcvv d-flex justify-content-center">
+      </div> -->
 
-          <p class="expcvv_text">Fecha final del préstamo:</p>
-          <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
-        </div>
+      <div class="d-flex">
+      <div class="expcvv d-flex justify-content-center">
+        <p class="expcvv_text">Fecha inicio: </p>
+        <input type="date" class="inputbox ms-3 me-3" name="exp_date" id="exp_date" required [(ngModel)]="fechaInicioPrestamo" />
+      </div>
+      <div class="expcvv d-flex justify-content-center ">
+        <p class="expcvv_text">Fecha final: </p>
+        <input type="date" class="inputbox ms-3 me-3 " name="exp_date" id="exp_date" required [(ngModel)]="fechaFinPrestamo" />
+      </div>
+    </div>
+
       <div class="d-flex justify-content-center mt-3">
-        <button type="submit" class="btn px-4 text-white button-t-prestamos">¡Enviar reserva!</button>
+        <button type="submit" class="btn px-4 text-white button-t-prestamos" (click)="postPrestar()">¡Enviar reserva!</button>
       </div>
     </div>
   </div>

@@ -22,8 +22,14 @@ export class IntercambiarService {
       catchError(this.handleError));
   }
 
-  add(data: Intercambiar){
-    return this.httpClient.post<Intercambiar>(`${BASEURLLIBRO}`,data).pipe(catchError(this.handleError));
+  add(data: any){
+    const intercambiar = {
+      fecha_solicitud: data.fecha_solicitud,
+      estado: data.estado
+    }
+    console.log('atencion intercambiar post');
+    console.log(intercambiar);
+    return this.httpClient.post<any>(`${BASEURLLIBRO}`,intercambiar).pipe(catchError(this.handleError));
   }
 
   update(id: any,data: any){
@@ -41,6 +47,8 @@ export class IntercambiarService {
         console.log(
           `Backend returned code ${error.status}, ` +
           `body was: ${error.error}`);
+          console.log(Object.values(error.error));
+
       }
       return throwError(
         'Something bad happened; please try again later.');

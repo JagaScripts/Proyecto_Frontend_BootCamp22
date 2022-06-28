@@ -22,10 +22,10 @@ export class TableexchangeComponent implements OnInit {
   libro2: any;
   usuarioLoggeado: any = '';
 
+
   //idUsuario = {id: `${this.usuarioLoggeado.id}`};
 
-  constructor(
-    private serviceIntercambiar: IntercambiarService,
+  constructor(   private serviceIntercambiar: IntercambiarService,
     private serviceIntercambio: IntercambioService,
     private serviceLibro: BookService,
     private serviceUsuario: UsuarioService
@@ -45,6 +45,8 @@ export class TableexchangeComponent implements OnInit {
     this.serviceLibro.buscarPropietarioLibro(id).subscribe({
       next: (result: any) => {
         this.librosTodos = result;
+        console.log(this.librosTodos);
+
         this.getAllIntercambios();
       },
       error: (error: any) => {
@@ -80,10 +82,11 @@ export class TableexchangeComponent implements OnInit {
       .getByUsername(`${window.sessionStorage.getItem('auth-username')}`)
       .subscribe({
         next: (result: any) => {
-          console.log('usuario logueado: ' + result.username);
+          console.log('usuario logueadoee: ' + result.username);
           this.usuarioLoggeado = result;
           console.log(this.usuarioLoggeado);
           this.getLibrosUsuarioLoggeado(this.usuarioLoggeado);
+
         },
         error: (error: Error) => {
           console.log('Error, usuario no encontrado');
@@ -113,4 +116,5 @@ export class TableexchangeComponent implements OnInit {
       console.log('intercambios es null/vacio');
     }
   }
+
 }
