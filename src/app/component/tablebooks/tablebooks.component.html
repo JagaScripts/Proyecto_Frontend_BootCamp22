@@ -20,16 +20,16 @@
 
     <div class=" table-responsive ">
 
-      <table class="table table-danger table-striped table-hover">
+      <table matSort (matSortChange)="sortData($event)" class="table table-danger table-striped table-hover">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Autor</th>
-            <th>Tiulo</th>
-            <th>Isbn</th>
-            <th>Edad</th>
-            <th>Categoria</th>
-            <th>C.Reservado</th>
+            <th mat-sort-header="id">#</th>
+            <th mat-sort-header="autor">Autor</th>
+            <th mat-sort-header="titulo">Tiulo</th>
+            <th mat-sort-header="isbn">Isbn</th>
+            <th mat-sort-header="edad">Edad</th>
+            <th mat-sort-header="categoria">Categoria</th>
+            <th mat-sort-header="cantidad_veces_reservado">C.Reservado</th>
             <th>Url_Imagen</th>
             <th>Descripcion</th>
             <th>Estado</th>

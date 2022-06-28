@@ -37,6 +37,7 @@ import { DialogintercambiargestionComponent } from './component/add/dialoginterc
 import { DialogreservasolicitudComponent } from './component/add/dialogreservasolicitud/dialogreservasolicitud.component';
 import { DialogreservagestionComponent } from './component/add/dialogreservagestion/dialogreservagestion.component';
 import { DialogvalorarComponent } from './component/add/dialogvalorar/dialogvalorar.component';
+import {MatSortModule} from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +82,7 @@ import { DialogvalorarComponent } from './component/add/dialogvalorar/dialogvalo
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    MatSortModule,
 
 
   ],
