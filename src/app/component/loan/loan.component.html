@@ -9,12 +9,12 @@
       <h2>Reservar</h2>
       <h4>{{data.data.titulo}}</h4>
       <hr class="">
-      <div class="form-outline ">
+      <!-- <div class="form-outline ">
         <p id="cat" style="display:block" [(ngModel)]="comentarioPrestamo">Comentario para el propietario...</p>
         <div class="mt-2">
           <textarea class="form-control" rows="2"></textarea>
         </div>
-      </div>
+      </div> -->
 
       <div class="d-flex">
       <div class="expcvv d-flex justify-content-center">
@@ -28,7 +28,7 @@
     </div>
 
       <div class="d-flex justify-content-center mt-3">
-        <button type="submit" class="btn px-4 text-white button-t-prestamos">¡Enviar reserva!</button>
+        <button type="submit" class="btn px-4 text-white button-t-prestamos" (click)="postPrestar()">¡Enviar reserva!</button>
       </div>
     </div>
   </div>
