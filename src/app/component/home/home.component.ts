@@ -30,25 +30,24 @@ export class HomeComponent implements OnInit {
               private valoracionService: ValoracionService,
               private ssesionService: SsesionService) {
 
-    this.guess = {username: 'pepe', password: 'password'};
+    this.guess = {username: 'guess', password: 'password'};
   }
 
 
   ngOnInit(): void {
+    console.log('atencion token');
+    console.log(this.ssesionService.getToken());
+
     if (this.ssesionService.getToken() != null) {
-
       this.listBooks();
-
-
     } else {
-
       this.loginGuess();
-
     }
-
   }
 
   loginGuess(): void{
+    console.log('atencion guess');
+    console.log(this.guess);
     this.loginService.login(this.guess)
     .subscribe(
       {
@@ -131,5 +130,3 @@ export class HomeComponent implements OnInit {
   }
 
 }
-
-

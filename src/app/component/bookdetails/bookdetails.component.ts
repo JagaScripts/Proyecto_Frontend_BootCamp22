@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/book/book.model';
 import { BookService } from 'src/app/services/book/book.service';
 import { ValoracionService } from 'src/app/services/valoracion/valoracion.service';
+import { ValorarService } from 'src/app/services/valorar/valorar.service';
 import { ExchangeComponent } from '../exchange/exchange.component';
 import { LoanComponent } from '../loan/loan.component';
 import { ValueComponent } from '../value/value.component';

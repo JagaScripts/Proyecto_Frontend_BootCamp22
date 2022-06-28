@@ -1,8 +1,16 @@
 <div class="container-fluid">
   <div class="card row flex-row p-4 featurette d-flex justify-content-center card">
     <div class="col-lg-3 order-lg-1 mt-2 d-flex">
+      <div  *ngIf="data.data.url_img != ''; else noimg2">
       <img src="{{data.data.url_img}}"
         class="card-img rounded shadow-lg" id="book-img" alt="">
+      </div>
+      <ng-template #noimg2>
+        <div class="mt-3">
+          <img src="../../../assets/img/noimg.png"
+            id="book-img" class="img-fluid rounded shadow-lg" width="200">
+        </div>
+      </ng-template>
     </div>
 
     <div class="mx-5 col-lg-8 order-lg-2">

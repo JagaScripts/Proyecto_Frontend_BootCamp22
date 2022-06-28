@@ -22,10 +22,18 @@ export class NavbarComponent implements OnInit {
   user: any;
   role: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private ssesionService: SsesionService, private loginService: LoginService, private userService: RolService) {
-  
-  }
-
+  dataBuscar: any;
+  libro: any;
+  durationInSeconds: number = 5;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private ssesionService: SsesionService,
+    private loginService: LoginService,
+    private userService: RolService,
+    private serviceBook: BookService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.login();
@@ -108,12 +116,10 @@ export class NavbarComponent implements OnInit {
   }
 
   routerLink(id: string, titulo: string) {
-
     this.router.navigate(['/bookdetails/' + titulo + '/' + id]);
-  //this.refresh();
+    //this.refresh();
   }
   refresh(): void {
     window.location.reload();
-}
-
+  }
 }
