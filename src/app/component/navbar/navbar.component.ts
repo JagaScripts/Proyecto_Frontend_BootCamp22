@@ -116,6 +116,7 @@ export class NavbarComponent implements OnInit {
   }
 
   routerLink(id: string, titulo?: string) {
+
     this.router.navigate(['/bookdetails/' + id]);
     //this.refresh();
   }

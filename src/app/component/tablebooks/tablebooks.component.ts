@@ -147,7 +147,7 @@ export class TablebooksComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result != null) {
         this.addNewBook(result);
-        this.listBooks();
+       // this.listBooks();
         console.log(result);
       }
     });
@@ -223,6 +223,7 @@ export class TablebooksComponent implements OnInit {
     this.bookService.add(data).subscribe({
       next: (result: any) => {
         this.opensSnackBar('Libro ' + data.autor + ' añadido', '');
+        this.listBooks();
       },
       error: (error: any) => {
         console.log(error);
@@ -235,6 +236,7 @@ export class TablebooksComponent implements OnInit {
       /**Borrar row **/
       this.bookService.delete(id).subscribe({
         next: (result: any) => {
+          this.listBooks();
           console.log('delete ok');
           this.opensSnackBar('Borrado libro ' + id, 'Ok');
         },
@@ -261,7 +263,7 @@ export class TablebooksComponent implements OnInit {
           historialLibrosPropietario.push(element);
         }
       }else{
-        this._snackBar.open('Warning: Libros sin dueño','Ok');
+       // this._snackBar.open('Warning: Libros sin dueño','Ok');
       }
     }
 

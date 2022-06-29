@@ -3,14 +3,14 @@
   <div class="card row flex-row p-4 featurette m-5 d-flex justify-content-center card">
     <div class="col-lg-3 order-lg-1 mt-2">
       <div *ngIf="libro.url_img != ''; else libroImgNull">
-      <img src="{{libro.url_img}}" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px" >
-    </div>
-    <ng-template #libroImgNull>
-      <div>
+        <img src="{{libro.url_img}}" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px">
+      </div>
+      <ng-template #libroImgNull>
+        <div>
 
-      <img src="../../../assets/img/noimg.png" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px" >
-    </div>
-    </ng-template>
+          <img src="../../../assets/img/noimg.png" id="book-img" class="card-img rounded shadow-lg" alt="" width="70px">
+        </div>
+      </ng-template>
       <form [formGroup]="starForm" (ngSubmit)="botoSubmit();">
         <div class="rating mt-3 justify-content-center align-content-center">
           <input type="radio" formControlName="rating" name="rating" value='5' id="5" [attr.disabled]="false"><label
@@ -44,21 +44,27 @@
     <div class="mx-5 col-lg-8 order-lg-2">
       <h2>{{libro.titulo}}</h2>
       <h4>{{libro.autor}}</h4>
+      <h4></h4>
       <h4>978-3-16-148410-0</h4>
       <p id="cat" style="display:block">Categoria: {{libro.categoria}}</p>
       <p id="cat" style="display:block">Edad: +{{libro.edad}} años</p>
       <p id="cat" style="display:block">{{libro.cantidad_veces_reservado}} veces reservado!</p>
       <p id="disp" style="display:block">Estado: {{getValueLibroDisponible(libro.disponible)}}</p>
+      <p></p>
+      <p id="cat" style="display:block"> Propietario: {{libro.usuario.username}}</p>
+      <p></p>
       <div class="col-md-2 d-flex">
 
         <div *ngIf="libro.disponible == 1; else disabledDisponible" class="d-flex">
-          <button type="submit" class="btn px-4 button-t-prestamos me-2" (click)="openDialogIntercambiar(libro)">Intercambiar</button>
-          <button type="submit" class="btn px-4 button-t-prestamos" (click)="openDialogReservar(libro)">Reservar</button>
+          <button type="submit" class="btn px-4 button-t-prestamos me-2"
+            (click)="openDialogIntercambiar(libro)">Intercambiar</button>
+          <button type="submit" class="btn px-4 button-t-prestamos"
+            (click)="openDialogReservar(libro)">Reservar</button>
         </div>
         <ng-template #disabledDisponible>
           <div class="d-flex">
-            <button type="submit" disabled class="btn px-4 button-t-prestamos me-2" >Intercambiar</button>
-            <button type="submit" disabled class="btn px-4 button-t-prestamos" >Reservar</button>
+            <button type="submit" disabled class="btn px-4 button-t-prestamos me-2">Intercambiar</button>
+            <button type="submit" disabled class="btn px-4 button-t-prestamos">Reservar</button>
           </div>
         </ng-template>
       </div>
@@ -75,9 +81,9 @@
         <button type="submit" class="btn px-4 button-t-prestamos" (click)="openDialogValorar(libro)">Valorar</button>
       </div>
       <ng-template #disabledDisponibleValorar>
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn px-4 button-t-prestamos" disabled >Valorar</button>
-      </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn px-4 button-t-prestamos" disabled>Valorar</button>
+        </div>
       </ng-template>
     </div>
   </div>
@@ -98,7 +104,10 @@
               <span><small class="col-md-2 font-weight-bold" id="author">{{valoracion.usuario.username}}: </small>
                 <small class="font-weight-bold ">{{valoracion.valorar.comentario}}</small></span>
             </div>
-            <small class="col-md-2"><!--{{difBetweenDate(valoracion.valorar,counter)}}-->  {{valoracion.valorar.fecha | date: 'dd/MM/yyyy HH:mm:ss'}}</small>
+            <small class="col-md-2">
+              <!--{{difBetweenDate(valoracion.valorar,counter)}}--> {{valoracion.valorar.fecha | date: 'dd/MM/yyyy
+              HH:mm:ss'}}
+            </small>
           </div>
         </div>
       </div>

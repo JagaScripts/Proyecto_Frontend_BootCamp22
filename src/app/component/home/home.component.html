@@ -7,17 +7,20 @@
       class="card my-2 book-home-t-prestamos"
       *ngFor="let libroValoracion of librosValoraciones; let counter = index"
     routerLink="/bookdetails/{{libroValoracion.libro.id}}">
-      <div *ngIf="librosValoraciones != null; else libroValoracionnull">
+      <div *ngIf="libroValoracion.libro.url_img != ''; else libroValoracionnull">
+
         <img
-          src="https://covers.openlibrary.org/b/isbn/9879879104-L.jpg"
+          src="{{libroValoracion.libro.url_img}}"
           id="book-img"
           class="shadow-lg rounded card-img-top img-fluid"
           alt="..."
         />
+      </div>
+        <ng-template #libroValoracionnull> <img src="../../../assets/img/noimg.png" > </ng-template>
         <!-- <img src="{{libro.url_img}}" id="book-img" class="shadow-lg rounded card-img-top img-fluid" alt="..."> -->
 
         <div class="card-body mb-3">
-          <h2 class="card-title ms-2 mt-1 mb-3 ms-3">
+          <h2 class="card-title ms-2 mt-1 mb-3 ms-3 text-nowrap">
             {{ libroValoracion.libro.titulo }}
           </h2>
           <h4 id="book-autor" class="ms-2 mt-1 mb-3 ms-3">
@@ -57,8 +60,10 @@
           </div>
         </div>
 
-      </div>
+
+
     </div>
   </div>
 </div>
-<ng-template #libroValoracionnull><mat-spinner></mat-spinner></ng-template>
+<!-- <mat-spinner></mat-spinner> -->
+
