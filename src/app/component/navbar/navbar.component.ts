@@ -115,8 +115,8 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/signin']);
   }
 
-  routerLink(id: string, titulo: string) {
-    this.router.navigate(['/bookdetails/' + titulo + '/' + id]);
+  routerLink(id: string, titulo?: string) {
+    this.router.navigate(['/bookdetails/' + id]);
     //this.refresh();
   }
   refresh(): void {
