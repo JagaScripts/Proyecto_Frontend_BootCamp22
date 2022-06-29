@@ -78,7 +78,7 @@ export class BookdetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.starForm.setValue({ rating: '4' });
+    this.starForm.setValue({ rating: '0' });
     let valoracion = this.route.snapshot.data;
     console.log(valoracion);
     console.log(this.route.snapshot.paramMap.get('id'));
