@@ -1,8 +1,13 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Rol } from 'src/app/models/enum/rol/rol.model';
+import { Token } from 'src/app/models/token/token.model';
+import { User } from 'src/app/models/user/user.model';
+import { LoginService } from 'src/app/services/auth/login.service';
+import { SsesionService } from 'src/app/services/auth/ssesion.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
@@ -32,6 +37,8 @@ export class SignupComponent implements OnInit {
   pushedEmail = 0;
   pushedEdad = 0;
 
+  guess: User;
+
   fecha_nacimiento: any = null;
   pwd1 = '';
   pwd2 = '';
@@ -40,10 +47,37 @@ export class SignupComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private usuarioService: UsuarioService,
     private router: Router,
-  ) {}
+    private ssesionService: SsesionService,
+    private loginService: LoginService
+  ) {
+    this.guess = {username: 'guess', password: 'password'};
+  }
 
   ngOnInit(): void {
     this.starForm.setValue({ star: '../../../assets/img/avatar/avatar5.png' });
+
+    console.log(this.ssesionService.getToken());
+    if (this.ssesionService.getToken() != null) {
+    } else {
+      this.loginGuess();
+    }
+  }
+
+  loginGuess(): void{
+    console.log('atencion guess');
+    console.log(this.guess);
+    this.loginService.login(this.guess)
+    .subscribe(
+      {
+      next: (token: Token) => {
+        window.sessionStorage.setItem('auth-token', token.token);
+
+      },
+      error: (resultError: Error) => {
+        console.log(`Nombre del error: ${resultError.name}, Mensaje del error: ${resultError.message}, Pila del error: ${resultError.stack}`);
+      }
+    }
+    );
   }
 
   alpulsarRadioButton() {
