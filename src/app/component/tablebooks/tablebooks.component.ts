@@ -236,6 +236,7 @@ export class TablebooksComponent implements OnInit {
       /**Borrar row **/
       this.bookService.delete(id).subscribe({
         next: (result: any) => {
+          this.listBooks();
           console.log('delete ok');
           this.opensSnackBar('Borrado libro ' + id, 'Ok');
         },
